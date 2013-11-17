@@ -11,7 +11,7 @@ use QtGui4;
 use QtCore4::isa qw( Qt::MainWindow );
 
 sub NEW {
-   shift->SUPER::NEW( @_ ); # wtf????
+   shift->SUPER::NEW( @_ );
 }
 
 1;

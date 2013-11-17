@@ -27,7 +27,7 @@ sub main {
        'splash/splash.png'
    );
    #
-   say $splashImagePath;
+#   say $splashImagePath;
    my $splashPixmap = Qt::Pixmap( $splashImagePath );
 
    my $splash = Qt::SplashScreen( $splashPixmap );
