@@ -1,0 +1,47 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use 5.010;
+use QtCore4;
+use QtGui4;
+use MainWindow;
+
+use FindBin;
+use File::Spec ();
+# TODO activate next line if CPAN distribution
+# use File::ShareDir;
+
+sub main {
+   my $app     = Qt::Application( \@ARGV );
+
+   my $shareDir = File::Spec->catdir(
+       $FindBin::Bin,
+       'share',
+   );
+   # TODO
+   # use File::ShareDir::dist_dir if CPAN distribution
+   my $splashImagePath = File::Spec->catdir(
+       $shareDir,
+       'splash/splash.png'
+   );
+   #
+   say $splashImagePath;
+   my $splashPixmap = Qt::Pixmap( $splashImagePath );
+
+   my $splash = Qt::SplashScreen( $splashPixmap );
+   $splash->show();
+   $splash->showMessage( '' );
+   sleep 5;
+
+   my $mainWindow = MainWindow();
+   $mainWindow->show();
+
+   $splash->finish( $mainWindow );
+
+   exit $app->exec();
+}
+
+main();
+
