@@ -9,3 +9,4 @@ Dependencies:
 
 Tested with
    qt 4.8.5
+   qt 4.8.1
