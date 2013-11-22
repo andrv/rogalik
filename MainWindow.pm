@@ -18,22 +18,22 @@ sub NEW {
     my ( $class ) = @_;
     $class->SUPER::NEW();
     my $widget = Qt::Widget();
-    this->setCentralWidget($widget);
+    this->setCentralWidget( $widget );
 
     this->createActions();
     this->createMenus();
 }
 
 sub createActions() {
-    my $exitAct = this->{exitAct} = Qt::Action(this->tr('E&xit'), this);
-    $exitAct->setShortcut(Qt::KeySequence(this->tr('Ctrl+X')));
-    $exitAct->setStatusTip(this->tr('Exit the application'));
-    this->connect($exitAct, SIGNAL 'triggered()', this, SLOT 'close()');
+    my $exitAct = this->{exitAct} = Qt::Action( this->tr('E&xit'), this );
+    $exitAct->setShortcut(Qt::KeySequence( this->tr('Ctrl+X') ) );
+    $exitAct->setStatusTip( this->tr('Exit the application') );
+    this->connect( $exitAct, SIGNAL 'triggered()', this, SLOT 'close()' );
 }
 
 sub createMenus {
-    my $fileMenu = this->{fileMenu} = this->menuBar()->addMenu(this->tr('&File'));
-    $fileMenu->addAction(this->getExitAct);
+    my $fileMenu = this->{fileMenu} = this->menuBar()->addMenu( this->tr('&File') );
+    $fileMenu->addAction( this->getExitAct() );
 }
 
 1;
