@@ -19,6 +19,7 @@ sub NEW {
     $sex->addItem( this->tr('Female') );
     $sex->addItem( this->tr('Male') );
     $sex->addItem( this->tr('Neuter') );
+    $sex->setToolTip( this->tr("Your 'sex' does not have any significant gameplay effects") );
 
     my $layout = Qt::GridLayout();
     $layout->addWidget( this->{sexComboBox}, 0, 0 );
