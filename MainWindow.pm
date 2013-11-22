@@ -26,7 +26,7 @@ sub NEW {
 
 sub createActions() {
     my $exitAct = this->{exitAct} = Qt::Action( this->tr('E&xit'), this );
-    $exitAct->setShortcut(Qt::KeySequence( this->tr('Ctrl+X') ) );
+    $exitAct->setShortcut(Qt::KeySequence( this->tr('Ctrl+Q') ) );
     $exitAct->setStatusTip( this->tr('Exit the application') );
     this->connect( $exitAct, SIGNAL 'triggered()', this, SLOT 'close()' );
 }
