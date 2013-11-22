@@ -10,6 +10,8 @@ use QtCore4;
 use QtGui4;
 use QtCore4::isa qw( Qt::MainWindow );
 
+use CentralWidget;
+
 sub getExitAct() {
     return this->{exitAct};
 }
@@ -18,7 +20,7 @@ sub NEW {
     my ( $class ) = @_;
     $class->SUPER::NEW();
     my $widget = Qt::Widget();
-    this->setCentralWidget( $widget );
+    this->setCentralWidget( CentralWidget() );
 
     this->createActions();
     this->createMenus();
