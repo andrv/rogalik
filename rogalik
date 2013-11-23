@@ -33,7 +33,7 @@ sub main {
    my $splash = Qt::SplashScreen( $splashPixmap );
    $splash->show();
    $splash->showMessage( '' );
-   sleep 5;
+   sleep 2;
 
    my $mainWindow = MainWindow();
    $mainWindow->show();
