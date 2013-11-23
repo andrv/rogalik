@@ -40,9 +40,13 @@ sub NEW {
 
     $race->setToolTip( this->tr("Your 'race' determines various intrinsic factors and bonuses") );
 
+    my $strengthLabel = Qt::Label( this->tr('Str:') );
+    this->{strengthLabel} = $strengthLabel;
+
     my $layout = Qt::GridLayout();
     $layout->addWidget( this->{sexComboBox}, 0, 0 );
     $layout->addWidget( this->{raceComboBox}, 1, 0 );
+    $layout->addWidget( this->{strengthLabel}, 1, 1 );
 
     this->setLayout( $layout );
 }
