@@ -48,30 +48,34 @@ sub NEW {
     my $charBasicFactors = Qt::GridLayout();
     this->{charBasicFactorsLayout} = $charBasicFactors;
 
-    my $strengthLabel = Qt::Label( this->tr('Str:') );
-    this->{strengthLabel} = $strengthLabel;
+    my ( $row, $column, $count ) = ( 0, 0, 0 );
 
-    my $strengthData = Qt::Label( this->tr('data') );
-    this->{strengthDataLabel} = $strengthData;
+    foreach my $charFactor( qw( str dex int con wis chr ) ) {
+        # Strength Dexterity Intelligence Constitution Wisdom Charisma
+        my $childnameLabel = $charFactor.'Label';
+        my $childnameData  = $charFactor.'Data';
+        my $labelTxt       = ucfirst $charFactor;
 
-    my $dexterityLabel = Qt::Label( this->tr('Dex:') );
-    this->{dexterityLabel} = $dexterityLabel;
+        this->{$childnameLabel} = Qt::Label( this->tr( "$labelTxt:" ) );
+        this->{$childnameData}  = Qt::Label( this->tr( 'data' ) );
 
-    my $dexterityData = Qt::Label( this->tr('data') );
-    this->{dexterityDataLabel} = $dexterityData;
+        $charBasicFactors->addWidget(
+            this->{$childnameLabel},
+            $row,
+            $column,
+        );
+        $charBasicFactors->addWidget(
+            this->{$childnameData},
+            $row,
+            $column + 1,
+        );
 
-    my $intelligenceLabel = Qt::Label( this->tr('Int:') );
-    this->{intelligenceLabel} = $intelligenceLabel;
-
-    my $intelligenceData = Qt::Label( this->tr('data') );
-    this->{intelligenceDataLabel} = $intelligenceData;
-
-    $charBasicFactors->addWidget( this->{strengthLabel}, 0, 0 );
-    $charBasicFactors->addWidget( this->{strengthDataLabel}, 0, 1 );
-    $charBasicFactors->addWidget( this->{dexterityLabel}, 0, 2 );
-    $charBasicFactors->addWidget( this->{dexterityDataLabel}, 0, 3 );
-    $charBasicFactors->addWidget( this->{intelligenceLabel}, 1, 0 );
-    $charBasicFactors->addWidget( this->{intelligenceDataLabel}, 1, 1 );
+        say $charFactor, $count, $row;
+        $count++;
+        $row++ unless $count % 2;
+        $column += 2;
+        $column = 0 unless $count % 2;
+    }
 
     $charFactors->addLayout( this->{charBasicFactorsLayout}, 0, 0 );
 
