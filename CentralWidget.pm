@@ -70,7 +70,6 @@ sub NEW {
             $column + 1,
         );
 
-        say $charFactor, $count, $row;
         $count++;
         $row++ unless $count % 2;
         $column += 2;
