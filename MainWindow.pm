@@ -22,6 +22,9 @@ sub NEW {
     my $widget = Qt::Widget();
     this->setCentralWidget( CentralWidget() );
 
+    # initial
+    this->setGeometry( 100, 100, 800, 600 );
+
     this->createActions();
     this->createMenus();
 }
