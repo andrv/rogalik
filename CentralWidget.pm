@@ -17,6 +17,7 @@ sub NEW {
     my $sex = Qt::ComboBox();
     this->{sexComboBox} = $sex;
 
+    $sex->addItem( this->tr('Choose sex...') );
     $sex->addItem( this->tr('Female') );
     $sex->addItem( this->tr('Male') );
     $sex->addItem( this->tr('Neuter') );
@@ -26,6 +27,7 @@ sub NEW {
     my $race = Qt::ComboBox();
     this->{raceComboBox} = $race;
 
+    $race->addItem( this->tr('Choose race...') );
     $race->addItem( this->tr('Human') );
     $race->addItem( this->tr('Half-elf') );
     $race->addItem( this->tr('Elf') );
