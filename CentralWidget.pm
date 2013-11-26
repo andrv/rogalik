@@ -24,6 +24,8 @@ sub NEW {
     this->{sexComboBox} = this->createSexCombo();
     this->{raceComboBox} = this->createRaceCombo();
 
+    my $groupBox = Qt::GroupBox( this->tr( 'Race factors and bonuses' ) );
+    
     my $charFactors = Qt::GridLayout();
     this->{charFactorsLayout} = $charFactors;
 
@@ -50,8 +52,11 @@ sub NEW {
     # show bonuses
     $charFactors->addWidget( this->{raceBonus}, 4, 0 );
 
+    $groupBox->setLayout( this->{charFactorsLayout} );
+    this->{charFactorsGroupBox} = $groupBox;
+
     # initial hide character factors
-    this->hideCharFactors();
+    $groupBox->hide();
 
     # main layout
     my $layout = Qt::GridLayout();
@@ -75,7 +80,7 @@ sub NEW {
     $layout->setColumnMinimumWidth( 2, 20 );
 
     # show character factors and bonuses table
-    $layout->addLayout( this->{charFactorsLayout}, 2, 3 );
+    $layout->addWidget( this->{charFactorsGroupBox}, 2, 3 );
 
     this->setLayout( $layout );
 }
@@ -243,19 +248,6 @@ sub createAdditionalFactors {
     );
 
     return $addFactors;
-}
-
-sub hideCharFactors {
-
-    foreach my $child ( @{ this->{charFactorsLayout}->children() } ) {
-        print Dumper $child->metaObject()->className();
-
-        if( $child->metaObject()->className() eq 'QGridLayout' ) {
-            foreach my $layoutChild( @{ $child->children() } ) {
-                say $layoutChild->metaObject()->className();
-            }
-        }
-    }
 }
 
 1;
