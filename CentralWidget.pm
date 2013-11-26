@@ -21,36 +21,7 @@ sub NEW {
     this->{charFactorsLayout} = $charFactors;
 
     # create basic character factors table
-    my $charBasicFactors = Qt::GridLayout();
-    this->{charBasicFactorsLayout} = $charBasicFactors;
-
-    my ( $row, $column, $count ) = ( 0, 0, 0 );
-
-    foreach my $charFactor( qw( str dex int con wis chr ) ) {
-        # Strength Dexterity Intelligence Constitution Wisdom Charisma
-        my $childnameLabel = $charFactor.'Label';
-        my $childnameData  = $charFactor.'Data';
-        my $labelTxt       = ucfirst $charFactor;
-
-        this->{$childnameLabel} = Qt::Label( this->tr( "$labelTxt:" ) );
-        this->{$childnameData}  = Qt::Label( this->tr( 'data' ) );
-
-        $charBasicFactors->addWidget(
-            this->{$childnameLabel},
-            $row,
-            $column,
-        );
-        $charBasicFactors->addWidget(
-            this->{$childnameData},
-            $row,
-            $column + 1,
-        );
-
-        $count++;
-        $row++ unless $count % 2;
-        $column += 2;
-        $column = 0 unless $count % 2;
-    }
+    this->{charBasicFactorsLayout} = this->createBasicFactors();
 
     $charFactors->addLayout( this->{charBasicFactorsLayout}, 0, 0 );
 
@@ -110,6 +81,40 @@ sub raceCombo {
     $race->setToolTip( this->tr("Your 'race' determines various intrinsic factors and bonuses") );
 
     return $race;
+}
+
+sub createBasicFactors {
+    my $basicFactors = Qt::GridLayout();
+
+    my ( $row, $column, $count ) = ( 0, 0, 0 );
+
+    foreach my $charFactor( qw( str dex int con wis chr ) ) {
+        # Strength Dexterity Intelligence Constitution Wisdom Charisma
+        my $childnameLabel = $charFactor.'Label';
+        my $childnameData  = $charFactor.'Data';
+        my $labelTxt       = ucfirst $charFactor;
+
+        this->{$childnameLabel} = Qt::Label( this->tr( "$labelTxt:" ) );
+        this->{$childnameData}  = Qt::Label( this->tr( 'data' ) );
+
+        $basicFactors->addWidget(
+            this->{$childnameLabel},
+            $row,
+            $column,
+        );
+        $basicFactors->addWidget(
+            this->{$childnameData},
+            $row,
+            $column + 1,
+        );
+
+        $count++;
+        $row++ unless $count % 2;
+        $column += 2;
+        $column = 0 unless $count % 2;
+    }
+
+    return $basicFactors;
 }
 
 1;
