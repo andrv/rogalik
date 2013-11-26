@@ -20,6 +20,7 @@ sub NEW {
     my $charFactors = Qt::GridLayout();
     this->{charFactorsLayout} = $charFactors;
 
+    # create basic character factors table
     my $charBasicFactors = Qt::GridLayout();
     this->{charBasicFactorsLayout} = $charBasicFactors;
 
@@ -53,12 +54,25 @@ sub NEW {
 
     $charFactors->addLayout( this->{charBasicFactorsLayout}, 0, 0 );
 
+    # placeholder between basic and additional character factors
+    $charFactors->setRowMinimumHeight( 1, 20 );
+
+    # create additional character factors table
+
+    # main layout
     my $layout = Qt::GridLayout();
+
+    # left placeholder
     $layout->setColumnMinimumWidth( 0, 20 );
+
+    # show menus
     $layout->addWidget( this->{sexComboBox}, 0, 1 );
     $layout->addWidget( this->{raceComboBox}, 1, 1 );
 
+    # placeholder between menus and tables
     $layout->setColumnMinimumWidth( 2, 20 );
+
+    # show character factors and bonuses table
     $layout->addLayout( this->{charFactorsLayout}, 1, 3 );
 
     this->setLayout( $layout );
