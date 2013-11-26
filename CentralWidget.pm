@@ -23,12 +23,20 @@ sub NEW {
     # create basic character factors table
     this->{charBasicFactorsLayout} = this->createBasicFactors();
 
+    # show basic character factors
     $charFactors->addLayout( this->{charBasicFactorsLayout}, 0, 0 );
 
     # placeholder between basic and additional character factors
     $charFactors->setRowMinimumHeight( 1, 20 );
 
     # create additional character factors table
+    this->{charAddFactorsLayout} = this->createAdditionalFactors();
+
+    # show additional character factors
+    $charFactors->addLayout( this->{charAddFactorsLayout}, 2, 0 );
+
+    # placeholder between additional and bonuses character factors
+    $charFactors->setRowMinimumHeight( 3, 20 );
 
     # main layout
     my $layout = Qt::GridLayout();
@@ -115,6 +123,103 @@ sub createBasicFactors {
     }
 
     return $basicFactors;
+}
+
+sub createAdditionalFactors {
+    my $addFactors = Qt::GridLayout();
+
+    $addFactors->addWidget(
+        Qt::Label( this->tr( 'Hit/Shoot/Throw:' ) ),
+        0, 0,  # row,      column
+        1, 2,  # row span, column span
+    );
+
+    this->{hitShootRow} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{hitShootRow},
+        0, 2,
+        1, 2,
+    );
+
+    $addFactors->addWidget( Qt::Label( this->tr( 'Hit die:' ) ), 1, 0 );
+    this->{hitDie} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{hitDie},
+        1, 1,
+    );
+
+    $addFactors->addWidget( Qt::Label( this->tr( 'XP mod:' ) ), 1, 2 );
+    this->{XPMod} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{XPMod},
+        1, 3,
+    );
+
+    $addFactors->addWidget( Qt::Label( this->tr( 'Disarm:' ) ), 2, 0 );
+    this->{disarm} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{disarm},
+        2, 1,
+    );
+
+    $addFactors->addWidget( Qt::Label( this->tr( 'Devices:' ) ), 2, 2 );
+    this->{devices} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{devices},
+        2, 3,
+    );
+
+    $addFactors->addWidget( Qt::Label( this->tr( 'Save:' ) ), 3, 0 );
+    this->{save} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{save},
+        3, 1,
+    );
+
+    $addFactors->addWidget( Qt::Label( this->tr( 'Stealth:' ) ), 3, 2 );
+    this->{stealth} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{stealth},
+        3, 3,
+    );
+
+    $addFactors->addWidget(
+        Qt::Label( this->tr( 'Infravision:' ) ),
+        4, 0,
+        1, 2,
+    );
+    this->{infravision} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{infravision},
+        4, 2,
+        1, 2,
+    );
+
+    $addFactors->addWidget(
+        Qt::Label( this->tr( 'Digging:' ) ),
+        5, 0,
+        1, 2,
+    );
+    this->{digging} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{digging},
+        5, 2,
+        1, 2,
+    );
+
+    $addFactors->addWidget(
+        Qt::Label( this->tr( 'Search:' ) ),
+        6, 0,
+        1, 2,
+    );
+    this->{search} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{search},
+        6, 2,
+        1, 2,
+    );
+
+    return $addFactors;
 }
 
 1;
