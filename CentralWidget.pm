@@ -15,24 +15,7 @@ sub NEW {
     $class->SUPER::NEW();
 
     this->{sexComboBox} = this->sexCombo();
-
-    my $race = Qt::ComboBox();
-    this->{raceComboBox} = $race;
-
-    $race->addItem( this->tr('Choose race...') );
-    $race->addItem( this->tr('Human') );
-    $race->addItem( this->tr('Half-elf') );
-    $race->addItem( this->tr('Elf') );
-    $race->addItem( this->tr('Hobbit') );
-    $race->addItem( this->tr('Gnome') );
-    $race->addItem( this->tr('Dwarf') );
-    $race->addItem( this->tr('Half-Orc') );
-    $race->addItem( this->tr('Half-Troll') );
-    $race->addItem( this->tr('Dunadan') );
-    $race->addItem( this->tr('High-Elf') );
-    $race->addItem( this->tr('Kobold') );
-
-    $race->setToolTip( this->tr("Your 'race' determines various intrinsic factors and bonuses") );
+    this->{raceComboBox} = this->raceCombo();
 
     my $charFactors = Qt::GridLayout();
     this->{charFactorsLayout} = $charFactors;
@@ -90,6 +73,27 @@ sub sexCombo {
     $sex->setToolTip( this->tr("Your 'sex' does not have any significant gameplay effects") );
 
     return $sex;
+}
+
+sub raceCombo {
+    my $race = Qt::ComboBox();
+
+    $race->addItem( this->tr('Choose race...') );
+    $race->addItem( this->tr('Human') );
+    $race->addItem( this->tr('Half-elf') );
+    $race->addItem( this->tr('Elf') );
+    $race->addItem( this->tr('Hobbit') );
+    $race->addItem( this->tr('Gnome') );
+    $race->addItem( this->tr('Dwarf') );
+    $race->addItem( this->tr('Half-Orc') );
+    $race->addItem( this->tr('Half-Troll') );
+    $race->addItem( this->tr('Dunadan') );
+    $race->addItem( this->tr('High-Elf') );
+    $race->addItem( this->tr('Kobold') );
+
+    $race->setToolTip( this->tr("Your 'race' determines various intrinsic factors and bonuses") );
+
+    return $race;
 }
 
 1;
