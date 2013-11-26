@@ -14,7 +14,16 @@ use QtCore4::slots
     sexChoosen => [];
 
 sub sexChoosen {
-    #
+#    say this->{sexComboBox}->currentText();
+
+    if( this->{sexComboBox}->currentIndex() ) {
+        this->{charFactorsGroupBox}->show();
+        this->{raceComboBox}->show();
+    }
+    else {
+        this->{charFactorsGroupBox}->hide();
+        this->{raceComboBox}->hide();
+    }
 }
 
 sub NEW {
@@ -23,6 +32,13 @@ sub NEW {
 
     this->{sexComboBox} = this->createSexCombo();
     this->{raceComboBox} = this->createRaceCombo();
+
+    this->connect(
+        this->{sexComboBox},
+        SIGNAL 'currentIndexChanged(int)',
+        this,
+        SLOT 'sexChoosen()',
+    );
 
     my $groupBox = Qt::GroupBox( this->tr( 'Race factors and bonuses' ) );
     
