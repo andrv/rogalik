@@ -98,15 +98,13 @@ sub createBasicFactors {
 
     foreach my $charFactor( qw( str dex int con wis chr ) ) {
         # Strength Dexterity Intelligence Constitution Wisdom Charisma
-        my $childnameLabel = $charFactor.'Label';
         my $childnameData  = $charFactor.'Data';
         my $labelTxt       = ucfirst $charFactor;
 
-        this->{$childnameLabel} = Qt::Label( this->tr( "$labelTxt:" ) );
         this->{$childnameData}  = Qt::Label( this->tr( 'data' ) );
 
         $basicFactors->addWidget(
-            this->{$childnameLabel},
+            Qt::Label( this->tr( "$labelTxt:" ) ),
             $row,
             $column,
         );
