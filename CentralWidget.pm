@@ -14,15 +14,7 @@ sub NEW {
     my ( $class ) = @_;
     $class->SUPER::NEW();
 
-    my $sex = Qt::ComboBox();
-    this->{sexComboBox} = $sex;
-
-    $sex->addItem( this->tr('Choose sex...') );
-    $sex->addItem( this->tr('Female') );
-    $sex->addItem( this->tr('Male') );
-    $sex->addItem( this->tr('Neuter') );
-
-    $sex->setToolTip( this->tr("Your 'sex' does not have any significant gameplay effects") );
+    this->{sexComboBox} = this->sexCombo();
 
     my $race = Qt::ComboBox();
     this->{raceComboBox} = $race;
@@ -85,6 +77,19 @@ sub NEW {
     $layout->addLayout( this->{charFactorsLayout}, 1, 1 );
 
     this->setLayout( $layout );
+}
+
+sub sexCombo {
+    my $sex = Qt::ComboBox();
+
+    $sex->addItem( this->tr('Choose sex...') );
+    $sex->addItem( this->tr('Female') );
+    $sex->addItem( this->tr('Male') );
+    $sex->addItem( this->tr('Neuter') );
+
+    $sex->setToolTip( this->tr("Your 'sex' does not have any significant gameplay effects") );
+
+    return $sex;
 }
 
 1;
