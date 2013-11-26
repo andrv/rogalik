@@ -54,10 +54,12 @@ sub NEW {
     $charFactors->addLayout( this->{charBasicFactorsLayout}, 0, 0 );
 
     my $layout = Qt::GridLayout();
-    $layout->addWidget( this->{sexComboBox}, 0, 0 );
-    $layout->addWidget( this->{raceComboBox}, 1, 0 );
+    $layout->setColumnMinimumWidth( 0, 20 );
+    $layout->addWidget( this->{sexComboBox}, 0, 1 );
+    $layout->addWidget( this->{raceComboBox}, 1, 1 );
 
-    $layout->addLayout( this->{charFactorsLayout}, 1, 1 );
+    $layout->setColumnMinimumWidth( 2, 20 );
+    $layout->addLayout( this->{charFactorsLayout}, 1, 3 );
 
     this->setLayout( $layout );
 }
