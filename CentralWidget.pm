@@ -14,8 +14,8 @@ sub NEW {
     my ( $class ) = @_;
     $class->SUPER::NEW();
 
-    this->{sexComboBox} = this->sexCombo();
-    this->{raceComboBox} = this->raceCombo();
+    this->{sexComboBox} = this->createSexCombo();
+    this->{raceComboBox} = this->createRaceCombo();
 
     my $charFactors = Qt::GridLayout();
     this->{charFactorsLayout} = $charFactors;
@@ -49,7 +49,7 @@ sub NEW {
     this->setLayout( $layout );
 }
 
-sub sexCombo {
+sub createSexCombo {
     my $sex = Qt::ComboBox();
 
     $sex->addItem( this->tr('Choose sex...') );
@@ -62,7 +62,7 @@ sub sexCombo {
     return $sex;
 }
 
-sub raceCombo {
+sub createRaceCombo {
     my $race = Qt::ComboBox();
 
     $race->addItem( this->tr('Choose race...') );
