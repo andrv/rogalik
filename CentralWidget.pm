@@ -35,8 +35,13 @@ sub NEW {
     # show additional character factors
     $charFactors->addLayout( this->{charAddFactorsLayout}, 2, 0 );
 
-    # placeholder between additional and bonuses character factors
+    # placeholder between additional character factors and bonuses
     $charFactors->setRowMinimumHeight( 3, 20 );
+
+    # create bonuses
+    this->{raceBonus} = Qt::Label( this->tr( 'Sustains/Resists...' ) );
+    # show bonuses
+    $charFactors->addWidget( this->{raceBonus}, 4, 0 );
 
     # main layout
     my $layout = Qt::GridLayout();
