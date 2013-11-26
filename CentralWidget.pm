@@ -10,6 +10,13 @@ use QtCore4;
 use QtGui4;
 use QtCore4::isa qw( Qt::Widget );
 
+use QtCore4::slots
+    sexChoosen => [];
+
+sub sexChoosen {
+    #
+}
+
 sub NEW {
     my ( $class ) = @_;
     $class->SUPER::NEW();
@@ -42,6 +49,9 @@ sub NEW {
     this->{raceBonus} = Qt::Label( this->tr( 'Sustains/Resists...' ) );
     # show bonuses
     $charFactors->addWidget( this->{raceBonus}, 4, 0 );
+
+    # initial hide character factors
+    this->hideCharFactors();
 
     # main layout
     my $layout = Qt::GridLayout();
@@ -100,6 +110,8 @@ sub createRaceCombo {
     $race->addItem( this->tr('Kobold') );
 
     $race->setToolTip( this->tr("Your 'race' determines various intrinsic factors and bonuses") );
+
+    $race->hide();
 
     return $race;
 }
@@ -231,6 +243,19 @@ sub createAdditionalFactors {
     );
 
     return $addFactors;
+}
+
+sub hideCharFactors {
+
+    foreach my $child ( @{ this->{charFactorsLayout}->children() } ) {
+        print Dumper $child->metaObject()->className();
+
+        if( $child->metaObject()->className() eq 'QGridLayout' ) {
+            foreach my $layoutChild( @{ $child->children() } ) {
+                say $layoutChild->metaObject()->className();
+            }
+        }
+    }
 }
 
 1;
