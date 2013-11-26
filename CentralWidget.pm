@@ -49,11 +49,12 @@ sub NEW {
         Qt::Label( this->tr( 'Plese select your character from the menu below:' ) ),
         0, 1,
         1, 3,
+        Qt::AlignHCenter() | Qt::AlignBottom(),
     );
 
     # show menus
-    $layout->addWidget( this->{sexComboBox}, 1, 1 );
-    $layout->addWidget( this->{raceComboBox}, 2, 1 );
+    $layout->addWidget( this->{sexComboBox}, 1, 1, Qt::AlignTop() );
+    $layout->addWidget( this->{raceComboBox}, 2, 1, Qt::AlignTop() );
 
     # placeholder between menus and tables
     $layout->setColumnMinimumWidth( 2, 20 );
