@@ -44,15 +44,22 @@ sub NEW {
     # left placeholder
     $layout->setColumnMinimumWidth( 0, 20 );
 
+    # show character create invitation
+    $layout->addWidget(
+        Qt::Label( this->tr( 'Plese select your character from the menu below:' ) ),
+        0, 1,
+        1, 3,
+    );
+
     # show menus
-    $layout->addWidget( this->{sexComboBox}, 0, 1 );
-    $layout->addWidget( this->{raceComboBox}, 1, 1 );
+    $layout->addWidget( this->{sexComboBox}, 1, 1 );
+    $layout->addWidget( this->{raceComboBox}, 2, 1 );
 
     # placeholder between menus and tables
     $layout->setColumnMinimumWidth( 2, 20 );
 
     # show character factors and bonuses table
-    $layout->addLayout( this->{charFactorsLayout}, 1, 3 );
+    $layout->addLayout( this->{charFactorsLayout}, 2, 3 );
 
     this->setLayout( $layout );
 }
