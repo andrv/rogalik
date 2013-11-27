@@ -17,12 +17,12 @@ sub sexChoosen {
 #    say this->{sexComboBox}->currentText();
 
     if( this->{sexComboBox}->currentIndex() ) {
-        this->{charFactorsGroupBox}->show();
-        this->{raceComboBox}->show();
+        this->{charFactorsGroupBox}->setEnabled( 1 );
+        this->{raceComboBox}->setEnabled( 1 );
     }
     else {
-        this->{charFactorsGroupBox}->hide();
-        this->{raceComboBox}->hide();
+        this->{charFactorsGroupBox}->setDisabled( 1 );
+        this->{raceComboBox}->setDisabled( 1 );
     }
 }
 
@@ -72,7 +72,7 @@ sub NEW {
     this->{charFactorsGroupBox} = $groupBox;
 
     # initial hide character factors
-    $groupBox->hide();
+    $groupBox->setDisabled( 1 );
 
     # main layout
     my $layout = Qt::GridLayout( this );
@@ -130,7 +130,7 @@ sub createRaceCombo {
 
     $race->setToolTip( this->tr("Your 'race' determines various intrinsic factors and bonuses") );
 
-    $race->hide();
+    $race->setDisabled( 1 );
 
     return $race;
 }
