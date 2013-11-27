@@ -78,7 +78,7 @@ sub NEW {
     $charFactors->setRowMinimumHeight( 3, 20 );
 
     # create bonuses
-    this->{raceBonus} = Qt::Label( this->tr( 'Sustains/Resists...' ) );
+    this->{raceBonus} = Qt::Label( this->tr( '' ) );
     # show bonuses
     $charFactors->addWidget( this->{raceBonus}, 4, 0 );
 
@@ -159,7 +159,7 @@ sub createBasicFactors {
         my $childnameData  = $charFactor.'Data';
         my $labelTxt       = ucfirst $charFactor;
 
-        this->{$childnameData}  = Qt::Label( this->tr( 'data' ) );
+        this->{$childnameData}  = Qt::Label( this->tr( '' ) );
 
         $basicFactors->addWidget(
             Qt::Label( this->tr( "$labelTxt:" ) ),
@@ -190,7 +190,7 @@ sub createAdditionalFactors {
         1, 2,  # row span, column span
     );
 
-    this->{hitShootRow} = Qt::Label( this->tr( 'data' ) );
+    this->{hitShootRow} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{hitShootRow},
         0, 2,
@@ -198,42 +198,42 @@ sub createAdditionalFactors {
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Hit die:' ) ), 1, 0 );
-    this->{hitDie} = Qt::Label( this->tr( 'data' ) );
+    this->{hitDie} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{hitDie},
         1, 1,
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'XP mod:' ) ), 1, 2 );
-    this->{XPMod} = Qt::Label( this->tr( 'data' ) );
+    this->{XPMod} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{XPMod},
         1, 3,
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Disarm:' ) ), 2, 0 );
-    this->{disarm} = Qt::Label( this->tr( 'data' ) );
+    this->{disarm} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{disarm},
         2, 1,
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Devices:' ) ), 2, 2 );
-    this->{devices} = Qt::Label( this->tr( 'data' ) );
+    this->{devices} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{devices},
         2, 3,
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Save:' ) ), 3, 0 );
-    this->{save} = Qt::Label( this->tr( 'data' ) );
+    this->{save} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{save},
         3, 1,
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Stealth:' ) ), 3, 2 );
-    this->{stealth} = Qt::Label( this->tr( 'data' ) );
+    this->{stealth} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{stealth},
         3, 3,
@@ -244,7 +244,7 @@ sub createAdditionalFactors {
         4, 0,
         1, 2,
     );
-    this->{infravision} = Qt::Label( this->tr( 'data' ) );
+    this->{infravision} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{infravision},
         4, 2,
@@ -256,7 +256,7 @@ sub createAdditionalFactors {
         5, 0,
         1, 2,
     );
-    this->{digging} = Qt::Label( this->tr( 'data' ) );
+    this->{digging} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{digging},
         5, 2,
@@ -268,7 +268,7 @@ sub createAdditionalFactors {
         6, 0,
         1, 2,
     );
-    this->{search} = Qt::Label( this->tr( 'data' ) );
+    this->{search} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{search},
         6, 2,
