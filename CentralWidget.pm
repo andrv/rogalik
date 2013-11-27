@@ -11,9 +11,9 @@ use QtGui4;
 use QtCore4::isa qw( Qt::Widget );
 
 use QtCore4::slots
-    sexSelected => [];
+    sexChanged => [];
 
-sub sexSelected {
+sub sexChanged {
 #    say this->{sexComboBox}->currentText();
 
     if( this->{sexComboBox}->currentIndex() ) {
@@ -37,7 +37,7 @@ sub NEW {
         this->{sexComboBox},
         SIGNAL 'currentIndexChanged(int)',
         this,
-        SLOT 'sexSelected()',
+        SLOT 'sexChanged()',
     );
 
     my $groupBox = Qt::GroupBox( this->tr( 'Race factors and bonuses' ) );
