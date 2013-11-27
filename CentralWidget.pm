@@ -75,7 +75,7 @@ sub NEW {
     $groupBox->hide();
 
     # main layout
-    my $layout = Qt::GridLayout();
+    my $layout = Qt::GridLayout( this );
 
     # left placeholder
     $layout->setColumnMinimumWidth( 0, 20 );
@@ -97,8 +97,6 @@ sub NEW {
 
     # show character factors and bonuses table
     $layout->addWidget( this->{charFactorsGroupBox}, 2, 3 );
-
-    this->setLayout( $layout );
 }
 
 sub createSexCombo {
