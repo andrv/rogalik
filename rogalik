@@ -13,6 +13,12 @@ use File::Spec ();
 # TODO activate next line if CPAN distribution
 # use File::ShareDir;
 
+use Rogalik::Config;
+
+sub init {
+    # check if db file exists
+}
+
 sub main {
    my $app     = Qt::Application( \@ARGV );
 
