@@ -11,18 +11,26 @@ use QtGui4;
 use QtCore4::isa qw( Qt::Widget );
 
 use QtCore4::slots
-    sexChanged => [];
+    sexChanged  => [],
+    raceChanged => [];
 
 sub sexChanged {
 #    say this->{sexComboBox}->currentText();
 
     if( this->{sexComboBox}->currentIndex() ) {
-#        this->{charFactorsGroupBox}->setEnabled( 1 );
         this->{raceComboBox}->setEnabled( 1 );
     }
     else {
-#        this->{charFactorsGroupBox}->setDisabled( 1 );
         this->{raceComboBox}->setDisabled( 1 );
+    }
+}
+
+sub raceChanged {
+    if( this->{raceComboBox}->currentIndex() ) {
+        this->{charFactorsGroupBox}->setEnabled( 1 );
+    }
+    else {
+        this->{charFactorsGroupBox}->setDisabled( 1 );
     }
 }
 
@@ -38,6 +46,12 @@ sub NEW {
         SIGNAL 'currentIndexChanged(int)',
         this,
         SLOT 'sexChanged()',
+    );
+    this->connect(
+        this->{raceComboBox},
+        SIGNAL 'currentIndexChanged(int)',
+        this,
+        SLOT 'raceChanged()',
     );
 
     my $groupBox = Qt::GroupBox( this->tr( 'Race factors and bonuses' ) );
