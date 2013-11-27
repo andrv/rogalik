@@ -10,200 +10,258 @@ use QtCore4;
 use QtGui4;
 use QtCore4::isa qw( Qt::Widget );
 
-use QtCore4::slots sexSelected => [];
+use QtCore4::slots
+    sexSelected => [];
 
 sub sexSelected {
+#    say this->{sexComboBox}->currentText();
 
-   #    say this->{sexComboBox}->currentText();
-
-   if ( this->{sexComboBox}->currentIndex() ) {
-
-      #        this->{charFactorsGroupBox}->setEnabled( 1 );
-      this->{raceComboBox}->setEnabled(1);
-   } else {
-
-      #        this->{charFactorsGroupBox}->setDisabled( 1 );
-      this->{raceComboBox}->setDisabled(1);
-   }
+    if( this->{sexComboBox}->currentIndex() ) {
+#        this->{charFactorsGroupBox}->setEnabled( 1 );
+        this->{raceComboBox}->setEnabled( 1 );
+    }
+    else {
+#        this->{charFactorsGroupBox}->setDisabled( 1 );
+        this->{raceComboBox}->setDisabled( 1 );
+    }
 }
 
 sub NEW {
-   my ($class) = @_;
-   $class->SUPER::NEW();
+    my ( $class ) = @_;
+    $class->SUPER::NEW();
 
-   this->{sexComboBox}  = this->createSexCombo();
-   this->{raceComboBox} = this->createRaceCombo();
+    this->{sexComboBox} = this->createSexCombo();
+    this->{raceComboBox} = this->createRaceCombo();
 
-   this->connect( this->{sexComboBox}, SIGNAL 'currentIndexChanged(int)', this, SLOT 'sexSelected()', );
+    this->connect(
+        this->{sexComboBox},
+        SIGNAL 'currentIndexChanged(int)',
+        this,
+        SLOT 'sexSelected()',
+    );
 
-   my $groupBox = Qt::GroupBox( this->tr('Race factors and bonuses') );
+    my $groupBox = Qt::GroupBox( this->tr( 'Race factors and bonuses' ) );
+    
+    my $charFactors = Qt::GridLayout();
+    this->{charFactorsLayout} = $charFactors;
 
-   my $charFactors = Qt::GridLayout();
-   this->{charFactorsLayout} = $charFactors;
+    # create basic character factors table
+    this->{charBasicFactorsLayout} = this->createBasicFactors();
 
-   # create basic character factors table
-   this->{charBasicFactorsLayout} = this->createBasicFactors();
+    # show basic character factors
+    $charFactors->addLayout( this->{charBasicFactorsLayout}, 0, 0 );
 
-   # show basic character factors
-   $charFactors->addLayout( this->{charBasicFactorsLayout}, 0, 0 );
+    # placeholder between basic and additional character factors
+    $charFactors->setRowMinimumHeight( 1, 20 );
 
-   # placeholder between basic and additional character factors
-   $charFactors->setRowMinimumHeight( 1, 20 );
+    # create additional character factors table
+    this->{charAddFactorsLayout} = this->createAdditionalFactors();
 
-   # create additional character factors table
-   this->{charAddFactorsLayout} = this->createAdditionalFactors();
+    # show additional character factors
+    $charFactors->addLayout( this->{charAddFactorsLayout}, 2, 0 );
 
-   # show additional character factors
-   $charFactors->addLayout( this->{charAddFactorsLayout}, 2, 0 );
+    # placeholder between additional character factors and bonuses
+    $charFactors->setRowMinimumHeight( 3, 20 );
 
-   # placeholder between additional character factors and bonuses
-   $charFactors->setRowMinimumHeight( 3, 20 );
+    # create bonuses
+    this->{raceBonus} = Qt::Label( this->tr( 'Sustains/Resists...' ) );
+    # show bonuses
+    $charFactors->addWidget( this->{raceBonus}, 4, 0 );
 
-   # create bonuses
-   this->{raceBonus} = Qt::Label( this->tr('Sustains/Resists...') );
+    $groupBox->setLayout( this->{charFactorsLayout} );
+    this->{charFactorsGroupBox} = $groupBox;
 
-   # show bonuses
-   $charFactors->addWidget( this->{raceBonus}, 4, 0 );
+    # initial hide character factors
+    $groupBox->setDisabled( 1 );
 
-   $groupBox->setLayout( this->{charFactorsLayout} );
-   this->{charFactorsGroupBox} = $groupBox;
+    # main layout
+    my $layout = Qt::GridLayout( this );
 
-   # initial hide character factors
-   $groupBox->setDisabled(1);
+    # left placeholder
+    $layout->setColumnMinimumWidth( 0, 20 );
 
-   # main layout
-   my $layout = Qt::GridLayout(this);
+    # show character create invitation
+    $layout->addWidget(
+        Qt::Label( this->tr( 'Plese select your character from the menu below:' ) ),
+        0, 1,
+        1, 3,
+        Qt::AlignHCenter() | Qt::AlignBottom(),
+    );
 
-   # left placeholder
-   $layout->setColumnMinimumWidth( 0, 20 );
+    # show menus
+    $layout->addWidget( this->{sexComboBox}, 1, 1, Qt::AlignTop() );
+    $layout->addWidget( this->{raceComboBox}, 2, 1, Qt::AlignTop() );
 
-   # show character create invitation
-   $layout->addWidget(
-      Qt::Label( this->tr('Plese select your character from the menu below:') ),
-      0, 1, 1, 3, Qt::AlignHCenter() | Qt::AlignBottom(),
-   );
+    # placeholder between menus and tables
+    $layout->setColumnMinimumWidth( 2, 20 );
 
-   # show menus
-   $layout->addWidget( this->{sexComboBox},  1, 1, Qt::AlignTop() );
-   $layout->addWidget( this->{raceComboBox}, 2, 1, Qt::AlignTop() );
-
-   # placeholder between menus and tables
-   $layout->setColumnMinimumWidth( 2, 20 );
-
-   # show character factors and bonuses table
-   $layout->addWidget( this->{charFactorsGroupBox}, 2, 3 );
+    # show character factors and bonuses table
+    $layout->addWidget( this->{charFactorsGroupBox}, 2, 3 );
 }
 
 sub createSexCombo {
-   my $sex = Qt::ComboBox();
+    my $sex = Qt::ComboBox();
 
-   $sex->addItem( this->tr('Choose sex...') );
-   $sex->addItem( this->tr('Female') );
-   $sex->addItem( this->tr('Male') );
-   $sex->addItem( this->tr('Neuter') );
+    $sex->addItem( this->tr('Choose sex...') );
+    $sex->addItem( this->tr('Female') );
+    $sex->addItem( this->tr('Male') );
+    $sex->addItem( this->tr('Neuter') );
 
-   $sex->setToolTip( this->tr("Your 'sex' does not have any significant gameplay effects") );
+    $sex->setToolTip( this->tr("Your 'sex' does not have any significant gameplay effects") );
 
-   return $sex;
+    return $sex;
 }
 
 sub createRaceCombo {
-   my $race = Qt::ComboBox();
+    my $race = Qt::ComboBox();
 
-   $race->addItem( this->tr('Choose race...') );
-   $race->addItem( this->tr('Human') );
-   $race->addItem( this->tr('Half-elf') );
-   $race->addItem( this->tr('Elf') );
-   $race->addItem( this->tr('Hobbit') );
-   $race->addItem( this->tr('Gnome') );
-   $race->addItem( this->tr('Dwarf') );
-   $race->addItem( this->tr('Half-Orc') );
-   $race->addItem( this->tr('Half-Troll') );
-   $race->addItem( this->tr('Dunadan') );
-   $race->addItem( this->tr('High-Elf') );
-   $race->addItem( this->tr('Kobold') );
+    $race->addItem( this->tr('Choose race...') );
+    $race->addItem( this->tr('Human') );
+    $race->addItem( this->tr('Half-elf') );
+    $race->addItem( this->tr('Elf') );
+    $race->addItem( this->tr('Hobbit') );
+    $race->addItem( this->tr('Gnome') );
+    $race->addItem( this->tr('Dwarf') );
+    $race->addItem( this->tr('Half-Orc') );
+    $race->addItem( this->tr('Half-Troll') );
+    $race->addItem( this->tr('Dunadan') );
+    $race->addItem( this->tr('High-Elf') );
+    $race->addItem( this->tr('Kobold') );
 
-   $race->setToolTip( this->tr("Your 'race' determines various intrinsic factors and bonuses") );
+    $race->setToolTip( this->tr("Your 'race' determines various intrinsic factors and bonuses") );
 
-   $race->setDisabled(1);
+    $race->setDisabled( 1 );
 
-   return $race;
+    return $race;
 }
 
 sub createBasicFactors {
-   my $basicFactors = Qt::GridLayout();
+    my $basicFactors = Qt::GridLayout();
 
-   my ( $row, $column, $count ) = ( 0, 0, 0 );
+    my ( $row, $column, $count ) = ( 0, 0, 0 );
 
-   foreach my $charFactor (qw( str dex int con wis chr )) {
+    foreach my $charFactor( qw( str dex int con wis chr ) ) {
+        # Strength Dexterity Intelligence Constitution Wisdom Charisma
+        my $childnameData  = $charFactor.'Data';
+        my $labelTxt       = ucfirst $charFactor;
 
-      # Strength Dexterity Intelligence Constitution Wisdom Charisma
-      my $childnameData = $charFactor . 'Data';
-      my $labelTxt      = ucfirst $charFactor;
+        this->{$childnameData}  = Qt::Label( this->tr( 'data' ) );
 
-      this->{$childnameData} = Qt::Label( this->tr('data') );
+        $basicFactors->addWidget(
+            Qt::Label( this->tr( "$labelTxt:" ) ),
+            $row,
+            $column,
+        );
+        $basicFactors->addWidget(
+            this->{$childnameData},
+            $row,
+            $column + 1,
+        );
 
-      $basicFactors->addWidget( Qt::Label( this->tr("$labelTxt:") ), $row, $column, );
-      $basicFactors->addWidget( this->{$childnameData},              $row, $column + 1, );
+        $count++;
+        $row++ unless $count % 2;
+        $column += 2;
+        $column = 0 unless $count % 2;
+    }
 
-      $count++;
-      $row++ unless $count % 2;
-      $column += 2;
-      $column = 0 unless $count % 2;
-   }
-
-   return $basicFactors;
+    return $basicFactors;
 }
 
 sub createAdditionalFactors {
-   my $addFactors = Qt::GridLayout();
+    my $addFactors = Qt::GridLayout();
 
-   $addFactors->addWidget(
-      Qt::Label( this->tr('Hit/Shoot/Throw:') ),
-      0, 0,    # row,      column
-      1, 2,    # row span, column span
-   );
+    $addFactors->addWidget(
+        Qt::Label( this->tr( 'Hit/Shoot/Throw:' ) ),
+        0, 0,  # row,      column
+        1, 2,  # row span, column span
+    );
 
-   this->{hitShootRow} = Qt::Label( this->tr('data') );
-   $addFactors->addWidget( this->{hitShootRow}, 0, 2, 1, 2, );
+    this->{hitShootRow} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{hitShootRow},
+        0, 2,
+        1, 2,
+    );
 
-   $addFactors->addWidget( Qt::Label( this->tr('Hit die:') ), 1, 0 );
-   this->{hitDie} = Qt::Label( this->tr('data') );
-   $addFactors->addWidget( this->{hitDie}, 1, 1, );
+    $addFactors->addWidget( Qt::Label( this->tr( 'Hit die:' ) ), 1, 0 );
+    this->{hitDie} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{hitDie},
+        1, 1,
+    );
 
-   $addFactors->addWidget( Qt::Label( this->tr('XP mod:') ), 1, 2 );
-   this->{XPMod} = Qt::Label( this->tr('data') );
-   $addFactors->addWidget( this->{XPMod}, 1, 3, );
+    $addFactors->addWidget( Qt::Label( this->tr( 'XP mod:' ) ), 1, 2 );
+    this->{XPMod} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{XPMod},
+        1, 3,
+    );
 
-   $addFactors->addWidget( Qt::Label( this->tr('Disarm:') ), 2, 0 );
-   this->{disarm} = Qt::Label( this->tr('data') );
-   $addFactors->addWidget( this->{disarm}, 2, 1, );
+    $addFactors->addWidget( Qt::Label( this->tr( 'Disarm:' ) ), 2, 0 );
+    this->{disarm} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{disarm},
+        2, 1,
+    );
 
-   $addFactors->addWidget( Qt::Label( this->tr('Devices:') ), 2, 2 );
-   this->{devices} = Qt::Label( this->tr('data') );
-   $addFactors->addWidget( this->{devices}, 2, 3, );
+    $addFactors->addWidget( Qt::Label( this->tr( 'Devices:' ) ), 2, 2 );
+    this->{devices} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{devices},
+        2, 3,
+    );
 
-   $addFactors->addWidget( Qt::Label( this->tr('Save:') ), 3, 0 );
-   this->{save} = Qt::Label( this->tr('data') );
-   $addFactors->addWidget( this->{save}, 3, 1, );
+    $addFactors->addWidget( Qt::Label( this->tr( 'Save:' ) ), 3, 0 );
+    this->{save} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{save},
+        3, 1,
+    );
 
-   $addFactors->addWidget( Qt::Label( this->tr('Stealth:') ), 3, 2 );
-   this->{stealth} = Qt::Label( this->tr('data') );
-   $addFactors->addWidget( this->{stealth}, 3, 3, );
+    $addFactors->addWidget( Qt::Label( this->tr( 'Stealth:' ) ), 3, 2 );
+    this->{stealth} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{stealth},
+        3, 3,
+    );
 
-   $addFactors->addWidget( Qt::Label( this->tr('Infravision:') ), 4, 0, 1, 2, );
-   this->{infravision} = Qt::Label( this->tr('data') );
-   $addFactors->addWidget( this->{infravision}, 4, 2, 1, 2, );
+    $addFactors->addWidget(
+        Qt::Label( this->tr( 'Infravision:' ) ),
+        4, 0,
+        1, 2,
+    );
+    this->{infravision} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{infravision},
+        4, 2,
+        1, 2,
+    );
 
-   $addFactors->addWidget( Qt::Label( this->tr('Digging:') ), 5, 0, 1, 2, );
-   this->{digging} = Qt::Label( this->tr('data') );
-   $addFactors->addWidget( this->{digging}, 5, 2, 1, 2, );
+    $addFactors->addWidget(
+        Qt::Label( this->tr( 'Digging:' ) ),
+        5, 0,
+        1, 2,
+    );
+    this->{digging} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{digging},
+        5, 2,
+        1, 2,
+    );
 
-   $addFactors->addWidget( Qt::Label( this->tr('Search:') ), 6, 0, 1, 2, );
-   this->{search} = Qt::Label( this->tr('data') );
-   $addFactors->addWidget( this->{search}, 6, 2, 1, 2, );
+    $addFactors->addWidget(
+        Qt::Label( this->tr( 'Search:' ) ),
+        6, 0,
+        1, 2,
+    );
+    this->{search} = Qt::Label( this->tr( 'data' ) );
+    $addFactors->addWidget(
+        this->{search},
+        6, 2,
+        1, 2,
+    );
 
-   return $addFactors;
+    return $addFactors;
 }
 
 1;
