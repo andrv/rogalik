@@ -6,6 +6,7 @@ use warnings;
 use 5.010;
 
 use FindBin;
+use File::Spec ();
 
 ### initial config ###
 # enviroment
@@ -22,6 +23,7 @@ my $dbPath = File::Spec->catdir(
 );
 
 use constant DBFILE => File::Spec->catdir( $dbPath, 'db' );
+
 # TODO
 # place the db into $HOME unless DEV
 
