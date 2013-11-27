@@ -4,6 +4,8 @@ rogalik
 the try to write a rogue like game
 
 Dependencies:
+   DBD::SQLite
+   File::Spec
    qt
    perlqt
 
