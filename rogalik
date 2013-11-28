@@ -13,12 +13,13 @@ use File::Spec ();
 # TODO activate next line if CPAN distribution
 # use File::ShareDir;
 
+use lib 'lib';
 use Rogalik::Config;
 use Rogalik::DB;
 
 sub init {
     # check if db file exists
-    Rogalik::DB->setupDb() unless -e Rogalik::Config::DBFILE;
+    Rogalik::DB->setupDb( Rogalik::Config::DBFILE ) unless -e Rogalik::Config::DBFILE;
 }
 
 sub main {
