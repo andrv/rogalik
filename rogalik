@@ -14,9 +14,11 @@ use File::Spec ();
 # use File::ShareDir;
 
 use Rogalik::Config;
+use Rogalik::DB;
 
 sub init {
     # check if db file exists
+    Rogalik::DB->setupDb() unless -e Rogalik::Config::DBFILE;
 }
 
 sub main {
@@ -39,6 +41,9 @@ sub main {
    my $splash = Qt::SplashScreen( $splashPixmap );
    $splash->show();
    $splash->showMessage( '' );
+
+   init();
+
    sleep 2;
 
    my $mainWindow = MainWindow();
