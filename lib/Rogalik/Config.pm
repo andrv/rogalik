@@ -17,15 +17,14 @@ use constant DEV => (
 );
 
 # db file (SQLite)
-my $dbPath = File::Spec->catdir(
-    $FindBin::Bin,
-    'sqlite',
+use constant DBFILE => File::Spec->catfile(
+    File::Spec->catdir(
+        $FindBin::Bin,
+        'sqlite'
+    ),
+    'db'
 );
-say "\$dbPath: $dbPath";
-use constant DBFILE => File::Spec->catfile( $dbPath, 'db' );
-say 'DBFILE: '. DBFILE;
-#my $DBFILE = File::Spec->catfile( $dbPath, 'db' );
-#say '$DBFILE: '. $DBFILE;
+
 # TODO
 # place the db into $HOME unless DEV
 
