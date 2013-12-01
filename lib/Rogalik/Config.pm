@@ -17,12 +17,16 @@ use constant DEV => (
 );
 
 # db file (SQLite)
-use constant DBFILE => File::Spec->catfile(
-    File::Spec->catdir(
-        $FindBin::Bin,
-        'sqlite'
-    ),
-    'db'
+use constant DBFILE => (
+    DEV                     ?
+    ':memory:'              :
+    File::Spec->catfile(
+        File::Spec->catdir(
+            $FindBin::Bin,
+            'sqlite'
+        ),
+        'db'
+    )
 );
 
 # TODO
