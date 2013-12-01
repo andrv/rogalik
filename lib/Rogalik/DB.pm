@@ -38,6 +38,16 @@ sub setupDb {
     my( $result, $rv ) = $self->execute( $sql );
 
     say "$result, $rv";
+
+    ( $result, $rv ) = $self->execute(
+        "INSERT INTO sex ( guiId, guiText ) VALUES ( 1, 'Female' )"
+    );
+    ( $result, $rv ) = $self->execute(
+        "INSERT INTO sex ( guiId, guiText ) VALUES ( 2, 'Male' )"
+    );
+    ( $result, $rv ) = $self->execute(
+        "INSERT INTO sex ( guiId, guiText ) VALUES ( 3, 'Neuter' )"
+    );
 }
 
 sub execute {
