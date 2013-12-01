@@ -51,12 +51,12 @@ sub execute {
         $dbh->do( $sql );
 
         my $rc = $dbh->err ?
-            $dbh->err :
-            0;
+                 $dbh->err :
+                 0;
 
-        my $rv = $dbh->err ?
-            $dbh->errstr :
-            'successful';
+        my $rv = $dbh->err    ?
+                 $dbh->errstr :
+                 'successful';
 
         return ( $sql, $rv, $rc );
 #        say '$dbh->err: '.$dbh->err;
