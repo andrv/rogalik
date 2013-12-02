@@ -18,7 +18,7 @@ use Rogalik::Config;
 use Rogalik::DB;
 
 sub init {
-    # check if db file exists
+    # check database
     Rogalik::DB->setupDb( Rogalik::Config::DBFILE ) unless -e Rogalik::Config::DBFILE;
 }
 
