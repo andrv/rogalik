@@ -30,22 +30,6 @@ sub checkDb {
 
 #    my %drivers = DBI->installed_drivers;
 
-#    my $sql = 'CREATE TABLE IF NOT EXISTS sex (
-#        id      INTEGER,
-#        guiId   INTEGER,
-#        guiText TEXT,
-#        PRIMARY KEY( id ASC ) )';
-#    my( $result, $rv ) = $self->execute( $sql );
-#
-#    ( $result, $rv ) = $self->execute(
-#        "INSERT INTO sex ( guiId, guiText ) VALUES ( 1, 'Female' )"
-#    );
-#    ( $result, $rv ) = $self->execute(
-#        "INSERT INTO sex ( guiId, guiText ) VALUES ( 2, 'Male' )"
-#    );
-#    ( $result, $rv ) = $self->execute(
-#        "INSERT INTO sex ( guiId, guiText ) VALUES ( 3, 'Neuter' )"
-#    );
 }
 
 sub execute {
