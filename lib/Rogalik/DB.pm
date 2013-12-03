@@ -21,7 +21,7 @@ sub connect {
     return $dbh;
 }
 
-sub setupDb {
+sub checkDb {
     my $self = ref $_[0] ? ref shift : shift;
 
     my $dbfile = shift;
