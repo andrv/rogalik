@@ -16,14 +16,10 @@ use constant DEV => (
     0
 );
 
+use constant BASEDIR => File::Spec->rel2abs( File::Spec->curdir() );
+
 # db file (SQLite)
-use constant DBFILE => File::Spec->catfile(
-    File::Spec->catdir(
-        $FindBin::Bin,
-        'sqlite'
-    ),
-    'db'
-);
+use constant DBFILE => File::Spec->catfile( BASEDIR, 'sqlite/db' );
 
 # TODO
 # place the db into $HOME unless DEV
