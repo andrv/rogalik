@@ -9,7 +9,7 @@ use DBI;
 
 use FindBin;
 use File::Spec ();
-use lib File::Spec->catdir( $FindBin::Bin.'/../../lib' );
+use lib File::Spec->catdir( $FindBin::Bin, '../../lib' );
 use Rogalik::Config;
 
 my $dbh;
@@ -19,6 +19,7 @@ sub connect {
     my $self = ref $_[0] ? ref shift : shift;
 
     $dbh = DBI->connect( 'dbi:SQLite:dbname='.Rogalik::Config::DBFILE, "", "" ) unless $dbh;
+    $dbh->do("PRAGMA foreign_keys = ON");
 
     return $dbh;
 }
