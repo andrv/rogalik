@@ -8,35 +8,34 @@ use QtCore4;
 use QtGui4;
 use MainWindow;
 
-use FindBin;
 use File::Spec ();
 # TODO activate next line if CPAN distribution
 # use File::ShareDir;
 
 use lib 'lib';
 use Rogalik::Config;
-use Rogalik::DB;
+#use Rogalik::DB; # not yet
 
 sub init {
-    # check database
-    Rogalik::DB->checkDb( Rogalik::Config::DBFILE ) unless -e Rogalik::Config::DBFILE;
+    # I don't know what can I do in init at the moment
 }
 
 sub main {
    my $app     = Qt::Application( \@ARGV );
 
    my $shareDir = File::Spec->catdir(
-       $FindBin::Bin,
+       Rogalik::Config::BASEDIR,
        'share',
    );
    # TODO
    # use File::ShareDir::dist_dir if CPAN distribution
+
    my $splashImagePath = File::Spec->catdir(
        $shareDir,
        'splash/splash.png'
    );
-   #
 #   say $splashImagePath;
+
    my $splashPixmap = Qt::Pixmap( $splashImagePath );
 
    my $splash = Qt::SplashScreen( $splashPixmap );
@@ -56,4 +55,3 @@ sub main {
 }
 
 main();
-
