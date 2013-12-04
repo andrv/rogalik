@@ -10,3 +10,39 @@ use File::Spec ();
 use lib File::Spec->catdir( $FindBin::Bin, '../../lib' );
 
 use Rogalik::DB;
+
+# race
+my ( $rc, $rv, $sql ) = Rogalik::DB->execute (
+    "create table if not exists race (
+        id           INTEGER,
+        guiId        INTEGER,
+        name         TEXT,
+        strenght     INTEGER,
+        dexterity    INTEGER,
+        intelligence INTEGER,
+        constitution INTEGER,
+        wisdom       INTEGER,
+        charisma     INTEGER,
+        hit          INTEGER,
+        shoot        INTEGER,
+        throw        INTEGER,
+        hitDie       INTEGER,
+        XPmod        INTEGER,
+        disarm       INTEGER,
+        devices      INTEGER,
+        save         INTEGER,
+        stealth      INTEGER,
+        infravision  INTEGER,
+        diggig       INTEGER,
+        search       TEXT,
+        primary key( id asc ) )"
+);
+
+( $rc, $rv, $sql ) = Rogalik::DB->execute(
+    "create table if not exists raceBonus (
+        id       INTEGER,
+        sustains TEXT,
+        resists  TEXT,
+        extra    TEXT,
+        primary key( id asc ) )"
+);
