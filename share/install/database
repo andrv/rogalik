@@ -7,7 +7,6 @@ use 5.010;
 use FindBin;
 use File::Spec ();
 
-say File::Spec->catdir( $FindBin::Bin );
-use lib '../../lib';
+use lib File::Spec->catdir( $FindBin::Bin, '../../lib' );
 
 use Rogalik::DB;
