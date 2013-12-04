@@ -7,7 +7,9 @@ use 5.010;
 use Data::Dumper;
 use DBI;
 
-use lib '../lib';
+use FindBin;
+use File::Spec ();
+use lib File::Spec->catdir( $FindBin::Bin.'/../../lib' );
 use Rogalik::Config;
 
 my $dbh;
@@ -43,7 +45,7 @@ sub execute {
         $dbh->do( $sql );
 
         my $rc = $dbh->err ?
-                 $dbh->err :
+                 $dbh->state :
                  0;
 
         my $rv = $dbh->err    ?
