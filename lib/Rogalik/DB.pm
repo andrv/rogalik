@@ -66,7 +66,7 @@ sub execute {
 
     my $sth = $dbh->prepare( $sql );
     my $rv  = $sth->execute() unless $sth->err;
-    say "\$rv: $rv" if $rv;
+#    say "\$rv: $rv" if $rv;
 
     unless( $sth->err ) {
         my $rows   = $sth->rows;
