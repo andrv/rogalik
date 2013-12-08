@@ -14,6 +14,9 @@ use QtCore4::slots
     sexChanged  => [],
     raceChanged => [];
 
+use lib 'lib';
+use Rogalik::DB;
+
 sub sexChanged {
 #    say this->{sexComboBox}->currentText();
 
@@ -26,8 +29,13 @@ sub sexChanged {
 }
 
 sub raceChanged {
-    if( this->{raceComboBox}->currentIndex() ) {
+    if( my $raceIndex = this->{raceComboBox}->currentIndex() ) {
         this->{charFactorsGroupBox}->setEnabled( 1 );
+
+        # update basic factors
+        foreach my $factor( qw( str dex int con wis chr ) ) {
+            this->{$factor.'Data'}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
+        }
     }
     else {
         this->{charFactorsGroupBox}->setDisabled( 1 );
@@ -276,6 +284,20 @@ sub createAdditionalFactors {
     );
 
     return $addFactors;
+}
+
+sub getFactor {
+    my $factor    = shift;
+    my $raceIndex = shift;
+
+    my ( $result, $rows, $rv ) = Rogalik::DB->execute(
+        "select $factor from race where guiId = $raceIndex"
+    );
+
+#    say 'getFactor, $rows: '.$rows;
+#    say "getFactor, \$rv: $rv";
+
+    return $result->[0]->{$factor};
 }
 
 1;
