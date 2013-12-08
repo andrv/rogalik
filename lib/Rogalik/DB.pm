@@ -43,13 +43,13 @@ sub execute {
     my $dbh = $self->connect;
 
     unless( $sql =~ m/^select/i ) {
-        $dbh->do( $sql );
+        my $rv = $dbh->do( $sql );
 
         my $rc = $dbh->err ?
                  $dbh->state :
                  0;
 
-        my $rv = $dbh->err    ?
+        $rv  ||= $dbh->err    ?
                  $dbh->errstr :
                  'successful';
 
@@ -63,6 +63,23 @@ sub execute {
 #$dbh->errstr: table sex has no column named x
 #$dbh->state: S1000
     }
+
+    my $sth = $dbh->prepare( $sql );
+    my $rv  = $sth->execute() unless $sth->err;
+    say "\$rv: $rv" if $rv;
+
+    unless( $sth->err ) {
+        my $rows   = $sth->rows;
+        my $result = [];
+
+        while( my $row = $sth->fetchrow_hashref ) {
+            push @$result, $row;
+        }
+
+        return ( $result, $rows, ($rv ? $rv : undef) );
+    }
+
+    return ( undef, undef, $sth->errstr );
 }
 
 1;
