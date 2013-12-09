@@ -226,42 +226,42 @@ sub createAdditionalFactors {
     this->{hitDie} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{hitDie},
-        1, 1,
+        1, 1, Qt::AlignRight(),
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'XP mod:' ) ), 1, 2 );
     this->{XPmod} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{XPmod},
-        1, 3,
+        1, 3, Qt::AlignRight(),
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Disarm:' ) ), 2, 0 );
     this->{disarm} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{disarm},
-        2, 1,
+        2, 1, Qt::AlignRight(),
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Devices:' ) ), 2, 2 );
     this->{devices} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{devices},
-        2, 3,
+        2, 3, Qt::AlignRight(),
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Save:' ) ), 3, 0 );
     this->{save} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{save},
-        3, 1,
+        3, 1, Qt::AlignRight(),
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Stealth:' ) ), 3, 2 );
     this->{stealth} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{stealth},
-        3, 3,
+        3, 3, Qt::AlignRight(),
     );
 
     $addFactors->addWidget(
