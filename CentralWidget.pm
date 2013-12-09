@@ -49,10 +49,14 @@ sub raceChanged {
 
         this->{hitDie}->setText( this->tr( this->getFactor( 'hitDie', $raceIndex ) ) );
         this->{XPmod}->setText( this->tr( this->getFactor( 'XPmod', $raceIndex ) . '%' ) );
+
+        foreach my $factor( qw( disarm devices save stealth ) ) {
+            this->{$factor}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
+        }
     }
     else {
         # do not show data if nothing choosen
-        foreach my $factor( qw ( str dex int con wis chr hitShootThrow hitDie XPmod ) ) {
+        foreach my $factor( qw ( str dex int con wis chr hitShootThrow hitDie XPmod disarm devices save stealth ) ) {
             this->{$factor}->setText( this->tr( '' ) );
         }
 
