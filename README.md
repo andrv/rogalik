@@ -7,10 +7,7 @@ Dependencies
 ------------
 
 - perl, at least v5.10
-- Data::Dumper  # for debug/development
-- FindBin
 - DBD::SQLite
-- File::Spec
 - qt
 - perlqt
 
