@@ -26,7 +26,7 @@ sub NEW {
     this->setGeometry( 100, 100, 800, 600 );
 
     this->createActions();
-    this->createMenus();
+#    this->createMenus();
 }
 
 sub createActions() {
@@ -34,6 +34,8 @@ sub createActions() {
     $exitAct->setShortcut(Qt::KeySequence( this->tr('Ctrl+Q') ) );
     $exitAct->setStatusTip( this->tr('Exit the application') );
     this->connect( $exitAct, SIGNAL 'triggered()', this, SLOT 'close()' );
+
+    this->addAction( this->getExitAct() );
 }
 
 sub createMenus {
