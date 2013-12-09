@@ -169,16 +169,8 @@ sub createBasicFactors {
 
         this->{$childnameData}  = Qt::Label( this->tr( '' ) );
 
-        $basicFactors->addWidget(
-            Qt::Label( this->tr( "$labelTxt:" ) ),
-            $row,
-            $column,
-        );
-        $basicFactors->addWidget(
-            this->{$childnameData},
-            $row,
-            $column + 1,
-        );
+        $basicFactors->addWidget( Qt::Label( this->tr( "$labelTxt:" ) ), $row, $column );
+        $basicFactors->addWidget( this->{$childnameData}, $row, $column + 1, Qt::AlignRight() );
 
         $count++;
         $row++ unless $count % 2;
