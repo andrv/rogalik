@@ -36,12 +36,23 @@ sub raceChanged {
         foreach my $factor( qw( str dex int con wis chr ) ) {
             this->{$factor.'Data'}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
         }
+
+        # update and show rest
+        my $data = '';
+
+        ## hit/shoot/throw
+        foreach my $factor( qw( hit shoot throw ) ) {
+            $data .= this->getFactor( $factor, $raceIndex ) . '/';
+        }
+        $data =~ s|/$||;
+        this->{hitShootRow}->setText( this->tr( $data ) );
     }
     else {
         # do not show if nothing choosen
         foreach my $factor( qw ( str dex int con wis chr ) ) {
             this->{$factor.'Data'}->setText( this->tr( '' ) );
         }
+        this->{hitShootRow}->setText( this->tr( '' ) );
 
         this->{charFactorsGroupBox}->setDisabled( 1 );
     }
