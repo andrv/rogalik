@@ -18,7 +18,7 @@ create table if not exists race (
   save        INTEGER,
   stealth     INTEGER,
   infravision INTEGER,
-  digging      INTEGER,
+  digging     INTEGER,
   search      TEXT,
   sustains    TEXT,
   resists     TEXT,
@@ -43,7 +43,7 @@ replace into race (
 values ( 5, 'Gnome', -1, 2, 2, 1, 0, -2, -8, 12, 12, 8, 125, 10, 22, 12, 3, 40, 0, '+6/13', 'paralysis', 'Identifies magic devices' );
 replace into race (
   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, resists, extra )
-values ( 6, 'Dwarf', 2, -2, -3, 2, 2, -3, 15, 0, 0, 11, 120, 2, 9, 9, -1, 50, 50, '+7/10', 'blindness', 'Senses ore/minerals' );
+values ( 6, 'Dwarf', 2, -2, -3, 2, 2, -3, 15, 0, 0, 11, 120, 2, 9, 9, -1, 50, 40, '+7/10', 'blindness', 'Senses ore/minerals' );
 replace into race (
   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, resists )
 values ( 7, 'Half-Orc', 2, 0, -1, 1, 0, -4, 12, -5, -5, 10, 110, -3, -3, -3, -1, 30, 0, '+0/7', 'darkness damage' );
