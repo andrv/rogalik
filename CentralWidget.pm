@@ -34,7 +34,7 @@ sub raceChanged {
 
         # update and show basic factors
         foreach my $factor( qw( str dex int con wis chr ) ) {
-            this->{$factor.'Data'}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
+            this->{$factor}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
         }
 
         # update and show rest
@@ -46,13 +46,14 @@ sub raceChanged {
         }
         $data =~ s|/$||;
         this->{hitShootThrow}->setText( this->tr( $data ) );
+
+        this->{hitDie}->setText( this->tr( this->getFactor( 'hitDie', $raceIndex ) ) );
     }
     else {
-        # do not show if nothing choosen
-        foreach my $factor( qw ( str dex int con wis chr ) ) {
-            this->{$factor.'Data'}->setText( this->tr( '' ) );
+        # do not show data if nothing choosen
+        foreach my $factor( qw ( str dex int con wis chr hitShootThrow hitDie ) ) {
+            this->{$factor}->setText( this->tr( '' ) );
         }
-        this->{hitShootThrow}->setText( this->tr( '' ) );
 
         this->{charFactorsGroupBox}->setDisabled( 1 );
     }
@@ -180,13 +181,12 @@ sub createBasicFactors {
 
     foreach my $charFactor( qw( str dex int con wis chr ) ) {
         # Strength Dexterity Intelligence Constitution Wisdom Charisma
-        my $childnameData  = $charFactor.'Data';
         my $labelTxt       = ucfirst $charFactor;
 
-        this->{$childnameData}  = Qt::Label( this->tr( '' ) );
+        this->{$charFactor}  = Qt::Label( this->tr( '' ) );
 
         $basicFactors->addWidget( Qt::Label( this->tr( "$labelTxt:" ) ), $row, $column );
-        $basicFactors->addWidget( this->{$childnameData}, $row, $column + 1, Qt::AlignRight() );
+        $basicFactors->addWidget( this->{$charFactor}, $row, $column + 1, Qt::AlignRight() );
 
         $count++;
         $row++ unless $count % 2;
