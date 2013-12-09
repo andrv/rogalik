@@ -40,21 +40,26 @@ sub raceChanged {
         # update and show rest
         my $data = '';
 
-        ## hit/shoot/throw
         foreach my $factor( qw( hit shoot throw ) ) {
             $data .= this->getFactor( $factor, $raceIndex ) . '/';
         }
         $data =~ s|/$||;
         this->{hitShootThrow}->setText( this->tr( $data ) );
 
-        this->{hitDie}->setText( this->tr( this->getFactor( 'hitDie', $raceIndex ) ) );
+        $data = this->getFactor( 'hitDie', $raceIndex );
+        $data =~ s/^\+//;
+        this->{hitDie}->setText( this->tr( $data ) );
+
         this->{XPmod}->setText( this->tr( this->getFactor( 'XPmod', $raceIndex ) . '%' ) );
 
         foreach my $factor( qw( disarm devices save stealth ) ) {
             this->{$factor}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
         }
 
-        this->{infravision}->setText( this->tr( this->getFactor( 'infravision', $raceIndex ) . ' ft' ) );
+        $data = this->getFactor( 'infravision', $raceIndex ) . ' ft';
+        $data =~ s/^\+//;
+        this->{infravision}->setText( this->tr( $data ) );
+
         this->{digging}->setText( this->tr( this->getFactor( 'digging', $raceIndex ) ) );
         this->{search}->setText( this->tr( this->getFactor( 'search', $raceIndex ) ) );
     }
@@ -314,7 +319,10 @@ sub getFactor {
 #    say 'getFactor, $rows: '.$rows;
 #    say "getFactor, \$rv: $rv";
 
-    return $result->[0]->{$factor};
+    my $ret = $result->[0]->{$factor};
+    $ret = "+$ret" if $ret =~ m/^\d+$/;
+
+    return $ret;
 }
 
 1;
