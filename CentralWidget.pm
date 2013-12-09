@@ -77,8 +77,9 @@ sub NEW {
     my ( $class ) = @_;
     $class->SUPER::NEW();
 
-    this->{sexComboBox} = this->createSexCombo();
-    this->{raceComboBox} = this->createRaceCombo();
+    this->{sexComboBox}   = this->createSexCombo();
+    this->{raceComboBox}  = this->createRaceCombo();
+    this->{classComboBox} = this->createClassCombo();
 
     this->connect(
         this->{sexComboBox},
@@ -144,12 +145,13 @@ sub NEW {
     # show menus
     $layout->addWidget( this->{sexComboBox}, 1, 1, Qt::AlignTop() );
     $layout->addWidget( this->{raceComboBox}, 2, 1, Qt::AlignTop() );
+    $layout->addWidget( this->{classComboBox}, 3, 1, Qt::AlignTop() );
 
     # placeholder between menus and tables
     $layout->setColumnMinimumWidth( 2, 20 );
 
     # show character factors and bonuses table
-    $layout->addWidget( this->{charFactorsGroupBox}, 2, 3 );
+    $layout->addWidget( this->{charFactorsGroupBox}, 3, 3 );
 }
 
 sub createSexCombo {
@@ -186,6 +188,18 @@ sub createRaceCombo {
     $race->setDisabled( 1 );
 
     return $race;
+}
+
+sub createClassCombo {
+    my $class = Qt::ComboBox();
+
+    $class->addItem( this->tr('Choose class...') );
+
+    $class->setToolTip( this->tr("Your 'class' determines various intrinsic factors and bonuses") );
+
+    $class->setDisabled( 1 );
+
+    return $class;
 }
 
 sub createBasicFactors {
@@ -323,6 +337,15 @@ sub getFactor {
     $ret = "+$ret" if $ret =~ m/^\d+$/;
 
     return $ret;
+}
+
+sub createActions() {
+    my $exitAct = this->{exitAct} = Qt::Action( this->tr('E&xit'), this );
+    $exitAct->setShortcut(Qt::KeySequence( this->tr('Ctrl+Q') ) );
+    $exitAct->setStatusTip( this->tr('Exit the application') );
+    this->connect( $exitAct, SIGNAL 'triggered()', this, SLOT 'close()' );
+
+    this->addAction( this->getExitAct() );
 }
 
 1;
