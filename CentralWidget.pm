@@ -53,10 +53,12 @@ sub raceChanged {
         foreach my $factor( qw( disarm devices save stealth ) ) {
             this->{$factor}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
         }
+
+        this->{infravision}->setText( this->tr( this->getFactor( 'infravision', $raceIndex ) . ' ft' ) );
     }
     else {
         # do not show data if nothing choosen
-        foreach my $factor( qw ( str dex int con wis chr hitShootThrow hitDie XPmod disarm devices save stealth ) ) {
+        foreach my $factor( qw ( str dex int con wis chr hitShootThrow hitDie XPmod disarm devices save stealth infravision ) ) {
             this->{$factor}->setText( this->tr( '' ) );
         }
 
