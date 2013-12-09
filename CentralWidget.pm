@@ -48,10 +48,11 @@ sub raceChanged {
         this->{hitShootThrow}->setText( this->tr( $data ) );
 
         this->{hitDie}->setText( this->tr( this->getFactor( 'hitDie', $raceIndex ) ) );
+        this->{XPmod}->setText( this->tr( this->getFactor( 'XPmod', $raceIndex ) . '%' ) );
     }
     else {
         # do not show data if nothing choosen
-        foreach my $factor( qw ( str dex int con wis chr hitShootThrow hitDie ) ) {
+        foreach my $factor( qw ( str dex int con wis chr hitShootThrow hitDie XPmod ) ) {
             this->{$factor}->setText( this->tr( '' ) );
         }
 
@@ -221,9 +222,9 @@ sub createAdditionalFactors {
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'XP mod:' ) ), 1, 2 );
-    this->{XPMod} = Qt::Label( this->tr( '' ) );
+    this->{XPmod} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
-        this->{XPMod},
+        this->{XPmod},
         1, 3,
     );
 
