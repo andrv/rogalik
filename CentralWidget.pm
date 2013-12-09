@@ -32,12 +32,17 @@ sub raceChanged {
     if( my $raceIndex = this->{raceComboBox}->currentIndex() ) {
         this->{charFactorsGroupBox}->setEnabled( 1 );
 
-        # update basic factors
+        # update and show basic factors
         foreach my $factor( qw( str dex int con wis chr ) ) {
             this->{$factor.'Data'}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
         }
     }
     else {
+        # do not show if nothing choosen
+        foreach my $factor( qw ( str dex int con wis chr ) ) {
+            this->{$factor.'Data'}->setText( this->tr( '' ) );
+        }
+
         this->{charFactorsGroupBox}->setDisabled( 1 );
     }
 }
