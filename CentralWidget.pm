@@ -45,14 +45,14 @@ sub raceChanged {
             $data .= this->getFactor( $factor, $raceIndex ) . '/';
         }
         $data =~ s|/$||;
-        this->{hitShootRow}->setText( this->tr( $data ) );
+        this->{hitShootThrow}->setText( this->tr( $data ) );
     }
     else {
         # do not show if nothing choosen
         foreach my $factor( qw ( str dex int con wis chr ) ) {
             this->{$factor.'Data'}->setText( this->tr( '' ) );
         }
-        this->{hitShootRow}->setText( this->tr( '' ) );
+        this->{hitShootThrow}->setText( this->tr( '' ) );
 
         this->{charFactorsGroupBox}->setDisabled( 1 );
     }
@@ -206,9 +206,9 @@ sub createAdditionalFactors {
         1, 2,  # row span, column span
     );
 
-    this->{hitShootRow} = Qt::Label( this->tr( '' ) );
+    this->{hitShootThrow} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
-        this->{hitShootRow},
+        this->{hitShootThrow},
         0, 2,
         1, 2,
     );
