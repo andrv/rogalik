@@ -120,6 +120,9 @@ sub sexChanged {
 
         this->race()->setCurrentIndex( 0 );
         this->race()->setDisabled( 1 );
+
+        this->class()->setCurrentIndex( 0 );
+        this->class()->setDisabled( 1 );
     }
 }
 
@@ -165,11 +168,14 @@ sub raceChanged {
         }
 
         this->characterFactors()->setDisabled( 1 );
+
+        this->class()->setCurrentIndex( 0 );
+        this->class()->setDisabled( 1 );
     }
 }
 
 sub nextStep {
-    say 'enter fired';
+    this->class()->setEnabled( 1 ) if this->race()->currentIndex();
 }
 
 # methods
