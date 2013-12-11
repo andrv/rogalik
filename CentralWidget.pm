@@ -99,8 +99,8 @@ sub NEW {
     # show character factors and bonuses table
     $layout->addWidget( this->characterFactors(), 3, 3 );
 
-    Qt::Shortcut(Qt::KeySequence(${Qt::Key_Enter()}), this, SLOT 'nextStep()');
-    Qt::Shortcut(Qt::KeySequence(${Qt::Key_Return()}), this, SLOT 'nextStep()');
+    Qt::Shortcut( Qt::KeySequence( ${Qt::Key_Enter()} ), this, SLOT 'nextStep()' );
+    Qt::Shortcut( Qt::KeySequence( ${Qt::Key_Return()} ), this, SLOT 'nextStep()' );
 }
 
 # slots
