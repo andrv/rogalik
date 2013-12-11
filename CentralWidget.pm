@@ -111,6 +111,14 @@ sub sexChanged {
         this->{raceComboBox}->setEnabled( 1 );
     }
     else {
+        # do not show character data if nothing choosen
+        foreach my $factor( qw ( str dex int con wis chr hitShootThrow hitDie XPmod disarm devices save stealth infravision digging search ) ) {
+            this->{$factor}->setText( this->tr( '' ) );
+        }
+
+        this->{charFactorsGroupBox}->setDisabled( 1 );
+
+        this->race()->setCurrentIndex( 0 );
         this->{raceComboBox}->setDisabled( 1 );
     }
 }
