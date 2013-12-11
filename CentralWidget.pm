@@ -34,7 +34,7 @@ sub NEW {
         SLOT 'sexChanged()',
     );
     this->connect(
-        this->{raceComboBox},
+        this->race(),
         SIGNAL 'currentIndexChanged(int)',
         this,
         SLOT 'raceChanged()',
@@ -90,8 +90,8 @@ sub NEW {
 
     # show menus
     $layout->addWidget( this->sex(), 1, 1, Qt::AlignTop() );
-    $layout->addWidget( this->{raceComboBox}, 2, 1, Qt::AlignTop() );
-    $layout->addWidget( this->{classComboBox}, 3, 1, Qt::AlignTop() );
+    $layout->addWidget( this->race(), 2, 1, Qt::AlignTop() );
+    $layout->addWidget( this->class(), 3, 1, Qt::AlignTop() );
 
     # placeholder between menus and tables
     $layout->setColumnMinimumWidth( 2, 20 );
@@ -108,7 +108,7 @@ sub sexChanged {
 #    say this->sex()->currentText();
 
     if( this->sex()->currentIndex() ) {
-        this->{raceComboBox}->setEnabled( 1 );
+        this->race()->setEnabled( 1 );
     }
     else {
         # do not show character data if no sex choosen
@@ -119,12 +119,12 @@ sub sexChanged {
         this->{charFactorsGroupBox}->setDisabled( 1 );
 
         this->race()->setCurrentIndex( 0 );
-        this->{raceComboBox}->setDisabled( 1 );
+        this->race()->setDisabled( 1 );
     }
 }
 
 sub raceChanged {
-    if( my $raceIndex = this->{raceComboBox}->currentIndex() ) {
+    if( my $raceIndex = this->race()->currentIndex() ) {
         this->{charFactorsGroupBox}->setEnabled( 1 );
 
         # update and show basic factors
