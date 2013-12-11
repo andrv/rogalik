@@ -97,7 +97,7 @@ sub NEW {
     $layout->setColumnMinimumWidth( 2, 20 );
 
     # show character factors and bonuses table
-    $layout->addWidget( this->{charFactorsGroupBox}, 3, 3 );
+    $layout->addWidget( this->characterFactors(), 3, 3 );
 
     Qt::Shortcut(Qt::KeySequence(${Qt::Key_Enter()}), this, SLOT 'nextStep()');
     Qt::Shortcut(Qt::KeySequence(${Qt::Key_Return()}), this, SLOT 'nextStep()');
@@ -116,7 +116,7 @@ sub sexChanged {
             this->{$factor}->setText( this->tr( '' ) );
         }
 
-        this->{charFactorsGroupBox}->setDisabled( 1 );
+        this->characterFactors()->setDisabled( 1 );
 
         this->race()->setCurrentIndex( 0 );
         this->race()->setDisabled( 1 );
@@ -125,7 +125,7 @@ sub sexChanged {
 
 sub raceChanged {
     if( my $raceIndex = this->race()->currentIndex() ) {
-        this->{charFactorsGroupBox}->setEnabled( 1 );
+        this->characterFactors()->setEnabled( 1 );
 
         # update and show basic factors
         foreach my $factor( qw( str dex int con wis chr ) ) {
@@ -164,7 +164,7 @@ sub raceChanged {
             this->{$factor}->setText( this->tr( '' ) );
         }
 
-        this->{charFactorsGroupBox}->setDisabled( 1 );
+        this->characterFactors()->setDisabled( 1 );
     }
 }
 
@@ -364,5 +364,7 @@ sub sex { return this->{sexComboBox} }
 sub race { return this->{raceComboBox} }
 
 sub class { return this->{classComboBox} }
+
+sub characterFactors { return this->{charFactorsGroupBox} }
 
 1;
