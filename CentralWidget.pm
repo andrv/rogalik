@@ -28,7 +28,7 @@ sub NEW {
     this->{classComboBox} = this->createClassCombo();
 
     this->connect(
-        this->{sexComboBox},
+        this->sex(),
         SIGNAL 'currentIndexChanged(int)',
         this,
         SLOT 'sexChanged()',
@@ -89,7 +89,7 @@ sub NEW {
     );
 
     # show menus
-    $layout->addWidget( this->{sexComboBox}, 1, 1, Qt::AlignTop() );
+    $layout->addWidget( this->sex(), 1, 1, Qt::AlignTop() );
     $layout->addWidget( this->{raceComboBox}, 2, 1, Qt::AlignTop() );
     $layout->addWidget( this->{classComboBox}, 3, 1, Qt::AlignTop() );
 
@@ -105,13 +105,13 @@ sub NEW {
 
 # slots
 sub sexChanged {
-#    say this->{sexComboBox}->currentText();
+#    say this->sex()->currentText();
 
-    if( this->{sexComboBox}->currentIndex() ) {
+    if( this->sex()->currentIndex() ) {
         this->{raceComboBox}->setEnabled( 1 );
     }
     else {
-        # do not show character data if nothing choosen
+        # do not show character data if no sex choosen
         foreach my $factor( qw ( str dex int con wis chr hitShootThrow hitDie XPmod disarm devices save stealth infravision digging search ) ) {
             this->{$factor}->setText( this->tr( '' ) );
         }
