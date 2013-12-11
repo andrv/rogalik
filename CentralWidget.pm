@@ -12,66 +12,11 @@ use QtCore4::isa qw( Qt::Widget );
 
 use QtCore4::slots
     sexChanged  => [],
-    raceChanged => [];
+    raceChanged => [],
+    nextStep    => [];
 
 use lib 'lib';
 use Rogalik::DB;
-
-sub sexChanged {
-#    say this->{sexComboBox}->currentText();
-
-    if( this->{sexComboBox}->currentIndex() ) {
-        this->{raceComboBox}->setEnabled( 1 );
-    }
-    else {
-        this->{raceComboBox}->setDisabled( 1 );
-    }
-}
-
-sub raceChanged {
-    if( my $raceIndex = this->{raceComboBox}->currentIndex() ) {
-        this->{charFactorsGroupBox}->setEnabled( 1 );
-
-        # update and show basic factors
-        foreach my $factor( qw( str dex int con wis chr ) ) {
-            this->{$factor}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
-        }
-
-        # update and show rest
-        my $data = '';
-
-        foreach my $factor( qw( hit shoot throw ) ) {
-            $data .= this->getFactor( $factor, $raceIndex ) . '/';
-        }
-        $data =~ s|/$||;
-        this->{hitShootThrow}->setText( this->tr( $data ) );
-
-        $data = this->getFactor( 'hitDie', $raceIndex );
-        $data =~ s/^\+//;
-        this->{hitDie}->setText( this->tr( $data ) );
-
-        this->{XPmod}->setText( this->tr( this->getFactor( 'XPmod', $raceIndex ) . '%' ) );
-
-        foreach my $factor( qw( disarm devices save stealth ) ) {
-            this->{$factor}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
-        }
-
-        $data = this->getFactor( 'infravision', $raceIndex ) . ' ft';
-        $data =~ s/^\+//;
-        this->{infravision}->setText( this->tr( $data ) );
-
-        this->{digging}->setText( this->tr( this->getFactor( 'digging', $raceIndex ) ) );
-        this->{search}->setText( this->tr( this->getFactor( 'search', $raceIndex ) ) );
-    }
-    else {
-        # do not show data if nothing choosen
-        foreach my $factor( qw ( str dex int con wis chr hitShootThrow hitDie XPmod disarm devices save stealth infravision digging search ) ) {
-            this->{$factor}->setText( this->tr( '' ) );
-        }
-
-        this->{charFactorsGroupBox}->setDisabled( 1 );
-    }
-}
 
 sub NEW {
     my ( $class ) = @_;
@@ -152,8 +97,73 @@ sub NEW {
 
     # show character factors and bonuses table
     $layout->addWidget( this->{charFactorsGroupBox}, 3, 3 );
+
+    Qt::Shortcut(Qt::KeySequence(${Qt::Key_Enter()}), this, SLOT 'nextStep()');
+    Qt::Shortcut(Qt::KeySequence(${Qt::Key_Return()}), this, SLOT 'nextStep()');
 }
 
+# slots
+sub sexChanged {
+#    say this->{sexComboBox}->currentText();
+
+    if( this->{sexComboBox}->currentIndex() ) {
+        this->{raceComboBox}->setEnabled( 1 );
+    }
+    else {
+        this->{raceComboBox}->setDisabled( 1 );
+    }
+}
+
+sub raceChanged {
+    if( my $raceIndex = this->{raceComboBox}->currentIndex() ) {
+        this->{charFactorsGroupBox}->setEnabled( 1 );
+
+        # update and show basic factors
+        foreach my $factor( qw( str dex int con wis chr ) ) {
+            this->{$factor}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
+        }
+
+        # update and show rest
+        my $data = '';
+
+        foreach my $factor( qw( hit shoot throw ) ) {
+            $data .= this->getFactor( $factor, $raceIndex ) . '/';
+        }
+        $data =~ s|/$||;
+        this->{hitShootThrow}->setText( this->tr( $data ) );
+
+        $data = this->getFactor( 'hitDie', $raceIndex );
+        $data =~ s/^\+//;
+        this->{hitDie}->setText( this->tr( $data ) );
+
+        this->{XPmod}->setText( this->tr( this->getFactor( 'XPmod', $raceIndex ) . '%' ) );
+
+        foreach my $factor( qw( disarm devices save stealth ) ) {
+            this->{$factor}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
+        }
+
+        $data = this->getFactor( 'infravision', $raceIndex ) . ' ft';
+        $data =~ s/^\+//;
+        this->{infravision}->setText( this->tr( $data ) );
+
+        this->{digging}->setText( this->tr( this->getFactor( 'digging', $raceIndex ) ) );
+        this->{search}->setText( this->tr( this->getFactor( 'search', $raceIndex ) ) );
+    }
+    else {
+        # do not show data if nothing choosen
+        foreach my $factor( qw ( str dex int con wis chr hitShootThrow hitDie XPmod disarm devices save stealth infravision digging search ) ) {
+            this->{$factor}->setText( this->tr( '' ) );
+        }
+
+        this->{charFactorsGroupBox}->setDisabled( 1 );
+    }
+}
+
+sub nextStep {
+    say 'enter fired';
+}
+
+# methods
 sub createSexCombo {
     my $sex = Qt::ComboBox();
 
@@ -337,15 +347,6 @@ sub getFactor {
     $ret = "+$ret" if $ret =~ m/^\d+$/;
 
     return $ret;
-}
-
-sub createActions() {
-    my $exitAct = this->{exitAct} = Qt::Action( this->tr('E&xit'), this );
-    $exitAct->setShortcut(Qt::KeySequence( this->tr('Ctrl+Q') ) );
-    $exitAct->setStatusTip( this->tr('Exit the application') );
-    this->connect( $exitAct, SIGNAL 'triggered()', this, SLOT 'close()' );
-
-    this->addAction( this->getExitAct() );
 }
 
 1;
