@@ -12,10 +12,6 @@ use QtCore4::isa qw( Qt::MainWindow );
 
 use CentralWidget;
 
-sub getExitAct() {
-    return this->{exitAct};
-}
-
 sub NEW {
     my ( $class ) = @_;
     $class->SUPER::NEW();
@@ -25,22 +21,7 @@ sub NEW {
     # initial
     this->setGeometry( 100, 100, 800, 600 );
 
-    this->createActions();
-#    this->createMenus();
-}
-
-sub createActions() {
-    my $exitAct = this->{exitAct} = Qt::Action( this->tr('E&xit'), this );
-    $exitAct->setShortcut(Qt::KeySequence( this->tr('Ctrl+Q') ) );
-    $exitAct->setStatusTip( this->tr('Exit the application') );
-    this->connect( $exitAct, SIGNAL 'triggered()', this, SLOT 'close()' );
-
-    this->addAction( this->getExitAct() );
-}
-
-sub createMenus {
-    my $fileMenu = this->{fileMenu} = this->menuBar()->addMenu( this->tr('&File') );
-    $fileMenu->addAction( this->getExitAct() );
+    Qt::Shortcut( Qt::KeySequence( ${Qt::CTRL() + Qt::Key_Q()} ), this, SLOT 'close()' );
 }
 
 1;
