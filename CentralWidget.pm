@@ -82,7 +82,7 @@ sub NEW {
 
     # show character create invitation
     $layout->addWidget(
-        Qt::Label( this->tr( 'Plese select your character from the menu below:' ) ),
+        Qt::Label( this->tr( 'Plese select your character from the menus below:' ) ),
         0, 1,
         1, 3,
         Qt::AlignHCenter() | Qt::AlignBottom(),
@@ -195,7 +195,7 @@ sub createSexCombo {
 sub createRaceCombo {
     my $race = Qt::ComboBox();
 
-    $race->addItem( this->tr('Choose race...') );
+    $race->addItem( this->tr('Choose race... hit enter if done') );
     $race->addItem( this->tr('Human') );
     $race->addItem( this->tr('Half-elf') );
     $race->addItem( this->tr('Elf') );
