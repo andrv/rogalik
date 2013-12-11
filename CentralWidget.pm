@@ -18,6 +18,7 @@ use QtCore4::slots
 use lib 'lib';
 use Rogalik::DB;
 
+# constructor
 sub NEW {
     my ( $class ) = @_;
     $class->SUPER::NEW();
@@ -348,5 +349,12 @@ sub getFactor {
 
     return $ret;
 }
+
+# getters
+sub sex { return this->{sexComboBox} }
+
+sub race { return this->{raceComboBox} }
+
+sub class { return this->{classComboBox} }
 
 1;
