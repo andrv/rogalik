@@ -176,6 +176,7 @@ sub raceChanged {
 
 sub nextStep {
     this->class()->setEnabled( 1 ) if this->race()->currentIndex();
+    this->class()->setFocus();
 }
 
 # methods
@@ -219,6 +220,12 @@ sub createClassCombo {
     my $class = Qt::ComboBox();
 
     $class->addItem( this->tr('Choose class...') );
+    $class->addItem( this->tr('Warrior') );
+    $class->addItem( this->tr('Mage') );
+    $class->addItem( this->tr('Priest') );
+    $class->addItem( this->tr('Rogue') );
+    $class->addItem( this->tr('Ranger') );
+    $class->addItem( this->tr('Paladin') );
 
     $class->setToolTip( this->tr("Your 'class' determines various intrinsic factors and bonuses") );
 
