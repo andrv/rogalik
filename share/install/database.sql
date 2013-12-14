@@ -33,9 +33,25 @@ INSERT INTO charProperties VALUES ( 'Rogue',      4, 'class' );
 INSERT INTO charProperties VALUES ( 'Ranger',     5, 'class' );
 INSERT INTO charProperties VALUES ( 'Paladin',    6, 'class' );
 
--- replace into race (
---   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search
--- ) values ( 1, 'Human', 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 100, 0, 0, 0, 0, 0, 0, '+0/10');
+INSERT INTO charFactors VALUES ( 'Human', 'Strength',      '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'Dexterity',     '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'Intelligence',  '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'Constitution',  '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'Wisdom',        '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'Charisma',      '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'Hit',           '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'Shoot',         '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'Throw',         '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'HitDie',        '10' );
+INSERT INTO charFactors VALUES ( 'Human', 'XPmod',       '100%' );
+INSERT INTO charFactors VALUES ( 'Human', 'Disarm',        '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'Devices',       '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'Save',          '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'Stealth',       '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'Infravision', '0 ft' );
+INSERT INTO charFactors VALUES ( 'Human', 'Digging',       '+0' );
+INSERT INTO charFactors VALUES ( 'Human', 'Search',     '+0/10' );
+
 -- replace into race (
 --   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, sustains )
 -- values ( 2, 'Half-Elf', 0, 1, 1, -1, -1, 1, -1, 5, 5, 10, 110, 2, 3, 3, 1, 20, 0, '+6/11', 'dexterity' );
