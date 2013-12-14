@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS charProperties (
 
 CREATE TABLE IF NOT EXISTS charFactors (
    property TEXT,
-   name     TEXT,
+   factor   TEXT,
    value    TEXT,
    FOREIGN KEY( property ) REFERENCES charProperties( name )
 );
