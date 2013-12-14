@@ -52,9 +52,26 @@ INSERT INTO charFactors VALUES ( 'Human', 'Infravision', '0 ft' );
 INSERT INTO charFactors VALUES ( 'Human', 'Digging',       '+0' );
 INSERT INTO charFactors VALUES ( 'Human', 'Search',     '+0/10' );
 
--- replace into race (
---   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, sustains )
--- values ( 2, 'Half-Elf', 0, 1, 1, -1, -1, 1, -1, 5, 5, 10, 110, 2, 3, 3, 1, 20, 0, '+6/11', 'dexterity' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Strength',        '+0' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Dexterity',       '+1' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Intelligence',    '+1' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Constitution',    '-1' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Wisdom',          '-1' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Charisma',        '+1' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Hit',             '-1' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Shoot',           '+5' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Throw',           '+5' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'HitDie',          '10' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'XPmod',         '110%' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Disarm',          '+2' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Devices',         '+3' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Save',            '+3' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Stealth',         '+1' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Infravision',  '20 ft' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Digging',         '+0' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Search',       '+6/11' );
+INSERT INTO charFactors VALUES ( 'Half-Elf', 'Sustains', 'dexterity' );
+
 -- replace into race (
 --   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, sustains, resists )
 -- values ( 3, 'Elf', -1, 1, 2, -2, -1, 1, -5, 15, 15, 9, 120, 5, 6, 6, 3, 30, 0, '+8/12', 'dexterity', 'light damage' );
