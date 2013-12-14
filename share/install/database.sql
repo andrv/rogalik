@@ -72,9 +72,27 @@ INSERT INTO charFactors VALUES ( 'Half-Elf', 'Digging',         '+0' );
 INSERT INTO charFactors VALUES ( 'Half-Elf', 'Search',       '+6/11' );
 INSERT INTO charFactors VALUES ( 'Half-Elf', 'Sustains', 'dexterity' );
 
--- replace into race (
---   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, sustains, resists )
--- values ( 3, 'Elf', -1, 1, 2, -2, -1, 1, -5, 15, 15, 9, 120, 5, 6, 6, 3, 30, 0, '+8/12', 'dexterity', 'light damage' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Strength',          '-1' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Dexterity',         '+1' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Intelligence',      '+2' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Constitution',      '-2' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Wisdom',            '-1' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Charisma',          '+1' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Hit',               '-5' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Shoot',            '+15' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Throw',            '+15' );
+INSERT INTO charFactors VALUES ( 'Elf', 'HitDie',             '9' );
+INSERT INTO charFactors VALUES ( 'Elf', 'XPmod',           '120%' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Disarm',            '+5' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Devices',           '+6' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Save',              '+6' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Stealth',           '+3' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Infravision',    '30 ft' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Digging',           '+0' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Search',         '+8/12' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Sustains',   'dexterity' );
+INSERT INTO charFactors VALUES ( 'Elf', 'Resists', 'light damage' );
+
 -- replace into race (
 --   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, sustains, extra )
 -- values ( 4, 'Hobbit', -2, 3, 2, 2, 1, 1, -10, 20, 20, 7, 110, 15, 18, 18, 4, 40, 0, '+12/15', 'experience', 'Identifies mushrooms' );
