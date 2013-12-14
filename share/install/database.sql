@@ -14,6 +14,25 @@ CREATE TABLE IF NOT EXISTS charFactors (
    FOREIGN KEY( property ) REFERENCES charProperties( name )
 );
 
+INSERT INTO charProperties VALUES ( 'Human',      1, 'race' );
+INSERT INTO charProperties VALUES ( 'Half-Elf',   2, 'race' );
+INSERT INTO charProperties VALUES ( 'Elf',        3, 'race' );
+INSERT INTO charProperties VALUES ( 'Hobbit',     4, 'race' );
+INSERT INTO charProperties VALUES ( 'Gnome',      5, 'race' );
+INSERT INTO charProperties VALUES ( 'Dwarf',      6, 'race' );
+INSERT INTO charProperties VALUES ( 'Half-Orc',   7, 'race' );
+INSERT INTO charProperties VALUES ( 'Half-Troll', 8, 'race' );
+INSERT INTO charProperties VALUES ( 'Dunadan',    9, 'race' );
+INSERT INTO charProperties VALUES ( 'High-Elf',  10, 'race' );
+INSERT INTO charProperties VALUES ( 'Kobold',    11, 'race' );
+
+INSERT INTO charProperties VALUES ( 'Warrior',    1, 'class' );
+INSERT INTO charProperties VALUES ( 'Mage',       2, 'class' );
+INSERT INTO charProperties VALUES ( 'Priest',     3, 'class' );
+INSERT INTO charProperties VALUES ( 'Rogue',      4, 'class' );
+INSERT INTO charProperties VALUES ( 'Ranger',     5, 'class' );
+INSERT INTO charProperties VALUES ( 'Paladin',    6, 'class' );
+
 -- replace into race (
 --   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search
 -- ) values ( 1, 'Human', 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 100, 0, 0, 0, 0, 0, 0, '+0/10');
