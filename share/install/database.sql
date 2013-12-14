@@ -93,9 +93,27 @@ INSERT INTO charFactors VALUES ( 'Elf', 'Search',         '+8/12' );
 INSERT INTO charFactors VALUES ( 'Elf', 'Sustains',   'dexterity' );
 INSERT INTO charFactors VALUES ( 'Elf', 'Resists', 'light damage' );
 
--- replace into race (
---   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, sustains, extra )
--- values ( 4, 'Hobbit', -2, 3, 2, 2, 1, 1, -10, 20, 20, 7, 110, 15, 18, 18, 4, 40, 0, '+12/15', 'experience', 'Identifies mushrooms' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Strength',          '-2' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Dexterity',         '+3' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Intelligence',      '+2' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Constitution',      '+2' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Wisdom',            '+1' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Charisma',          '+1' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Hit',              '-10' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Shoot',            '+20' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Throw',            '+20' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'HitDie',             '7' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'XPmod',           '110%' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Disarm',           '+15' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Devices',          '+18' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Save',             '+18' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Stealth',           '+4' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Infravision',    '40 ft' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Digging',           '+0' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Search',        '+12/15' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Sustains',  'experience' );
+INSERT INTO charFactors VALUES ( 'Hobbit', 'Identifies', 'mushrooms' );
+
 -- replace into race (
 --   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, resists, extra )
 -- values ( 5, 'Gnome', -1, 2, 2, 1, 0, -2, -8, 12, 12, 8, 125, 10, 22, 12, 3, 40, 0, '+6/13', 'paralysis', 'Identifies magic devices' );
