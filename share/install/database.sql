@@ -114,10 +114,27 @@ INSERT INTO charFactors VALUES ( 'Hobbit', 'Search',        '+12/15' );
 INSERT INTO charFactors VALUES ( 'Hobbit', 'Sustains',  'experience' );
 INSERT INTO charFactors VALUES ( 'Hobbit', 'Identifies', 'mushrooms' );
 
--- replace into race (
---   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, resists, extra )
--- values ( 5, 'Gnome', -1, 2, 2, 1, 0, -2, -8, 12, 12, 8, 125, 10, 22, 12, 3, 40, 0, '+6/13', 'paralysis', 'Identifies magic devices' );
--- replace into race (
+INSERT INTO charFactors VALUES ( 'Gnome', 'Strength',              '-1' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Dexterity',             '+2' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Intelligence',          '+2' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Constitution',          '+1' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Wisdom',                '+0' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Charisma',              '-2' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Hit',                   '-8' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Shoot',                '+12' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Throw',                '+12' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'HitDie',                 '8' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'XPmod',               '125%' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Disarm',               '+10' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Devices',              '+22' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Save',                 '+12' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Stealth',               '+3' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Infravision',        '40 ft' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Digging',               '+0' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Search',             '+6/13' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Resists',        'paralysis' );
+INSERT INTO charFactors VALUES ( 'Gnome', 'Identifies', 'magic devices' );
+
 --   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, resists, extra )
 -- values ( 6, 'Dwarf', 2, -2, -3, 2, 2, -3, 15, 0, 0, 11, 120, 2, 9, 9, -1, 50, 40, '+7/10', 'blindness', 'Senses ore/minerals' );
 -- replace into race (
