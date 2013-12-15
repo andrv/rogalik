@@ -238,6 +238,22 @@ INSERT INTO charFactors VALUES ( 'High-Elf', 'Search',             '+3/14' );
 INSERT INTO charFactors VALUES ( 'High-Elf', 'Resists',     'light damage' );
 INSERT INTO charFactors VALUES ( 'High-Elf', 'Sees', 'invisible creatures' );
 
--- replace into race (
---   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, resists )
--- values ( 11, 'Kobold', -1, 2, -1, 2, 0, -2, -5, 10, 10, 8, 115, 10, 5, 0, 4, 50, 0, '+15/15', 'poison' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Strength',       '-1' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Dexterity',      '+2' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Intelligence',   '-1' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Constitution',   '+2' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Wisdom',         '+0' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Charisma',       '-2' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Hit',            '-5' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Shoot',         '+10' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Throw',         '+10' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'HitDie',          '8' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'XPmod',        '115%' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Disarm',        '+10' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Devices',        '+5' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Save',           '+0' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Stealth',        '+4' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Infravision', '50 ft' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Digging',        '+0' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Search',     '+15/15' );
+INSERT INTO charFactors VALUES ( 'Kobold', 'Resists',    'poison' );
