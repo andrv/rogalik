@@ -156,9 +156,26 @@ INSERT INTO charFactors VALUES ( 'Dwarf', 'Search',            '+7/10' );
 INSERT INTO charFactors VALUES ( 'Dwarf', 'Resists',       'blindness' );
 INSERT INTO charFactors VALUES ( 'Dwarf', 'Identifies', 'ore/minerals' );
 
--- replace into race (
---   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, resists )
--- values ( 7, 'Half-Orc', 2, 0, -1, 1, 0, -4, 12, -5, -5, 10, 110, -3, -3, -3, -1, 30, 0, '+0/7', 'darkness damage' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Strength',             '+2' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Dexterity',            '+0' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Intelligence',         '-1' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Constitution',         '+1' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Wisdom',               '+0' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Charisma',             '-4' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Hit',                 '+12' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Shoot',                '-5' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Throw',                '-5' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'HitDie',               '10' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'XPmod',              '110%' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Disarm',               '-3' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Devices',              '-3' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Save',                 '-3' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Stealth',              '-1' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Infravision',       '30 ft' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Digging',              '+0' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Search',             '+0/7' );
+INSERT INTO charFactors VALUES ( 'Half-Orc', 'Resists', 'darkness damage' );
+
 -- replace into race (
 --   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, sustains, extra )
 -- values ( 8, 'Half-Troll', 4, -4, -4, 3, -2, -6, 20, -10, -10, 12, 120, -5, -8, -8, -2, 30, 0, '-1/5', 'strength', 'Regenerates quickly' );
