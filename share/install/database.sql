@@ -197,9 +197,26 @@ INSERT INTO charFactors VALUES ( 'Half-Troll', 'Search',         '-1/5' );
 INSERT INTO charFactors VALUES ( 'Half-Troll', 'Sustains',   'strength' );
 INSERT INTO charFactors VALUES ( 'Half-Troll', 'Regenerates', 'quickly' );
 
--- replace into race (
---   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, sustains )
--- values ( 9, 'Dunadan', 1, 2, 2, 3, 2, 2, 15, 10, 10, 10, 180, 4, 5, 5, 2, 0, 0, '+3/13', 'constitution' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Strength',           '+1' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Dexterity',          '+2' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Intelligence',       '+2' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Constitution',       '+3' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Wisdom',             '+2' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Charisma',           '+2' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Hit',               '+15' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Shoot',             '+10' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Throw',             '+10' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'HitDie',             '10' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'XPmod',            '180%' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Disarm',             '+4' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Devices',            '+5' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Save',               '+5' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Stealth',            '+2' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Infravision',      '0 ft' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Digging',            '+0' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Search',          '+3/13' );
+INSERT INTO charFactors VALUES ( 'Dunadan', 'Sustains', 'constitution' );
+
 -- replace into race (
 --   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, resists, extra )
 -- values ( 10, 'High-Elf', 1, 3, 3, 1, -1, 5, 10, 25, 25, 10, 200, 4, 20, 20, 3, 40, 0, '+3/14', 'light damage', 'Sees invisible creatures' );
