@@ -135,8 +135,27 @@ INSERT INTO charFactors VALUES ( 'Gnome', 'Search',             '+6/13' );
 INSERT INTO charFactors VALUES ( 'Gnome', 'Resists',        'paralysis' );
 INSERT INTO charFactors VALUES ( 'Gnome', 'Identifies', 'magic devices' );
 
---   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, resists, extra )
--- values ( 6, 'Dwarf', 2, -2, -3, 2, 2, -3, 15, 0, 0, 11, 120, 2, 9, 9, -1, 50, 40, '+7/10', 'blindness', 'Senses ore/minerals' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Strength',             '+2' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Dexterity',            '-2' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Intelligence',         '-3' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Constitution',         '+2' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Wisdom',               '+2' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Charisma',             '-3' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Hit',                 '+15' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Shoot',                '+0' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Throw',                '+0' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'HitDie',               '11' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'XPmod',              '120%' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Disarm',               '+2' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Devices',              '+9' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Save',                 '+9' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Stealth',              '-1' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Infravision',       '50 ft' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Digging',             '+40' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Search',            '+7/10' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Resists',       'blindness' );
+INSERT INTO charFactors VALUES ( 'Dwarf', 'Identifies', 'ore/minerals' );
+
 -- replace into race (
 --   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, resists )
 -- values ( 7, 'Half-Orc', 2, 0, -1, 1, 0, -4, 12, -5, -5, 10, 110, -3, -3, -3, -1, 30, 0, '+0/7', 'darkness damage' );
