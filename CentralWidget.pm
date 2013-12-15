@@ -112,7 +112,7 @@ sub sexChanged {
     }
     else {
         # do not show character data if no sex choosen
-        foreach my $factor( qw ( str dex int con wis chr hitShootThrow hitDie XPmod disarm devices save stealth infravision digging search ) ) {
+        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom Charisma hitShootThrow hitDie XPmod Disarm Devices Save Stealth infravision digging search ) ) {
             this->{$factor}->setText( this->tr( '' ) );
         }
 
@@ -127,7 +127,8 @@ sub sexChanged {
 }
 
 sub raceChanged {
-    if( my $race = this->race()->currentText() ) {
+    if( this->race()->currentIndex() ) {
+        my $race = this->race()->currentText();
         this->characterFactors()->setEnabled( 1 );
 
         # update and show basic factors
@@ -161,7 +162,7 @@ sub raceChanged {
     }
     else {
         # do not show data if nothing choosen
-        foreach my $factor( qw ( str dex int con wis chr hitShootThrow hitDie XPmod disarm devices save stealth infravision digging search ) ) {
+        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom Charisma hitShootThrow hitDie XPmod Disarm Devices Save Stealth infravision digging search ) ) {
             this->{$factor}->setText( this->tr( '' ) );
         }
 
