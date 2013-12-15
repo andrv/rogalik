@@ -217,9 +217,27 @@ INSERT INTO charFactors VALUES ( 'Dunadan', 'Digging',            '+0' );
 INSERT INTO charFactors VALUES ( 'Dunadan', 'Search',          '+3/13' );
 INSERT INTO charFactors VALUES ( 'Dunadan', 'Sustains', 'constitution' );
 
--- replace into race (
---   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, resists, extra )
--- values ( 10, 'High-Elf', 1, 3, 3, 1, -1, 5, 10, 25, 25, 10, 200, 4, 20, 20, 3, 40, 0, '+3/14', 'light damage', 'Sees invisible creatures' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Strength',              '+1' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Dexterity',             '+3' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Intelligence',          '+3' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Constitution',          '+1' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Wisdom',                '-1' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Charisma',              '+5' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Hit',                  '+10' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Shoot',                '+25' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Throw',                '+25' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'HitDie',                '10' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'XPmod',               '200%' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Disarm',                '+4' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Devices',              '+20' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Save',                 '+20' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Stealth',               '+3' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Infravision',        '40 ft' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Digging',               '+0' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Search',             '+3/14' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Resists',     'light damage' );
+INSERT INTO charFactors VALUES ( 'High-Elf', 'Sees', 'invisible creatures' );
+
 -- replace into race (
 --   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, resists )
 -- values ( 11, 'Kobold', -1, 2, -1, 2, 0, -2, -5, 10, 10, 8, 115, 10, 5, 0, 4, 50, 0, '+15/15', 'poison' );
