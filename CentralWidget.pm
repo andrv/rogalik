@@ -127,39 +127,37 @@ sub sexChanged {
 }
 
 sub raceChanged {
-    if( my $raceIndex = this->race()->currentIndex() ) {
+    if( my $race = this->race()->currentText() ) {
         this->characterFactors()->setEnabled( 1 );
 
         # update and show basic factors
-        foreach my $factor( qw( str dex int con wis chr ) ) {
-            this->{$factor}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
+        foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom Charisma ) ) {
+            this->{$factor}->setText( this->tr( this->getFactor( $factor, $race ) ) );
         }
 
         # update and show rest
         my $data = '';
 
-        foreach my $factor( qw( hit shoot throw ) ) {
-            $data .= this->getFactor( $factor, $raceIndex ) . '/';
+        foreach my $factor( qw( Hit Shoot Throw ) ) {
+            $data .= this->getFactor( $factor, $race ) . '/';
         }
         $data =~ s|/$||;
         this->{hitShootThrow}->setText( this->tr( $data ) );
 
-        $data = this->getFactor( 'hitDie', $raceIndex );
-        $data =~ s/^\+//;
+        $data = this->getFactor( 'HitDie', $race );
         this->{hitDie}->setText( this->tr( $data ) );
 
-        this->{XPmod}->setText( this->tr( this->getFactor( 'XPmod', $raceIndex ) . '%' ) );
+        this->{XPmod}->setText( this->tr( this->getFactor( 'XPmod', $race ) ) );
 
-        foreach my $factor( qw( disarm devices save stealth ) ) {
-            this->{$factor}->setText( this->tr( this->getFactor( $factor, $raceIndex ) ) );
+        foreach my $factor( qw( Disarm Devices Save Stealth ) ) {
+            this->{$factor}->setText( this->tr( this->getFactor( $factor, $race ) ) );
         }
 
-        $data = this->getFactor( 'infravision', $raceIndex ) . ' ft';
-        $data =~ s/^\+//;
+        $data = this->getFactor( 'Infravision', $race );
         this->{infravision}->setText( this->tr( $data ) );
 
-        this->{digging}->setText( this->tr( this->getFactor( 'digging', $raceIndex ) ) );
-        this->{search}->setText( this->tr( this->getFactor( 'search', $raceIndex ) ) );
+        this->{digging}->setText( this->tr( this->getFactor( 'Digging', $race ) ) );
+        this->{search}->setText( this->tr( this->getFactor( 'Search', $race ) ) );
     }
     else {
         # do not show data if nothing choosen
@@ -198,7 +196,7 @@ sub createRaceCombo {
 
     $race->addItem( this->tr('Choose race... hit enter if done') );
     $race->addItem( this->tr('Human') );
-    $race->addItem( this->tr('Half-elf') );
+    $race->addItem( this->tr('Half-Elf') );
     $race->addItem( this->tr('Elf') );
     $race->addItem( this->tr('Hobbit') );
     $race->addItem( this->tr('Gnome') );
@@ -239,8 +237,7 @@ sub createBasicFactors {
 
     my ( $row, $column, $count ) = ( 0, 0, 0 );
 
-    foreach my $charFactor( qw( str dex int con wis chr ) ) {
-        # Strength Dexterity Intelligence Constitution Wisdom Charisma
+    foreach my $charFactor( qw( Strength Dexterity Intelligence Constitution Wisdom Charisma ) ) {
         my $labelTxt       = ucfirst $charFactor;
 
         this->{$charFactor}  = Qt::Label( this->tr( '' ) );
@@ -288,28 +285,28 @@ sub createAdditionalFactors {
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Disarm:' ) ), 2, 0 );
-    this->{disarm} = Qt::Label( this->tr( '' ) );
+    this->{Disarm} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{disarm},
         2, 1, Qt::AlignRight(),
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Devices:' ) ), 2, 2 );
-    this->{devices} = Qt::Label( this->tr( '' ) );
+    this->{Devices} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{devices},
         2, 3, Qt::AlignRight(),
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Save:' ) ), 3, 0 );
-    this->{save} = Qt::Label( this->tr( '' ) );
+    this->{Save} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{save},
         3, 1, Qt::AlignRight(),
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Stealth:' ) ), 3, 2 );
-    this->{stealth} = Qt::Label( this->tr( '' ) );
+    this->{Stealth} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
         this->{stealth},
         3, 3, Qt::AlignRight(),
@@ -355,18 +352,17 @@ sub createAdditionalFactors {
 }
 
 sub getFactor {
-    my $factor    = shift;
-    my $raceIndex = shift;
+    my $factor = shift;
+    my $race   = shift;
 
     my ( $result, $rows, $rv ) = Rogalik::DB->execute(
-        "select $factor from race where guiId = $raceIndex"
+        "select value from charFactors where property = '$race' and factor = '$factor'"
     );
 
 #    say 'getFactor, $rows: '.$rows;
 #    say "getFactor, \$rv: $rv";
 
-    my $ret = $result->[0]->{$factor};
-    $ret = "+$ret" if $ret =~ m/^\d+$/;
+    my $ret = $result->[0]->{value};
 
     return $ret;
 }
