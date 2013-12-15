@@ -176,9 +176,27 @@ INSERT INTO charFactors VALUES ( 'Half-Orc', 'Digging',              '+0' );
 INSERT INTO charFactors VALUES ( 'Half-Orc', 'Search',             '+0/7' );
 INSERT INTO charFactors VALUES ( 'Half-Orc', 'Resists', 'darkness damage' );
 
--- replace into race (
---   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, sustains, extra )
--- values ( 8, 'Half-Troll', 4, -4, -4, 3, -2, -6, 20, -10, -10, 12, 120, -5, -8, -8, -2, 30, 0, '-1/5', 'strength', 'Regenerates quickly' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Strength',         '+4' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Dexterity',        '-4' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Intelligence',     '-4' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Constitution',     '+3' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Wisdom',           '-2' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Charisma',         '-6' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Hit',             '+20' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Shoot',           '-10' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Throw',           '-10' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'HitDie',           '12' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'XPmod',          '120%' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Disarm',           '-5' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Devices',          '-8' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Save',             '-8' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Stealth',          '-2' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Infravision',   '30 ft' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Digging',          '+0' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Search',         '-1/5' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Sustains',   'strength' );
+INSERT INTO charFactors VALUES ( 'Half-Troll', 'Regenerates', 'quickly' );
+
 -- replace into race (
 --   guiId, name, str, dex, int, con, wis, chr, hit, shoot, throw, hitDie, XPmod, disarm, devices, save, stealth, infravision, digging, search, sustains )
 -- values ( 9, 'Dunadan', 1, 2, 2, 3, 2, 2, 15, 10, 10, 10, 180, 4, 5, 5, 2, 0, 0, '+3/13', 'constitution' );
