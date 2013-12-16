@@ -239,6 +239,7 @@ sub createBasicFactors {
     my ( $row, $column, $count ) = ( 0, 0, 0 );
 
     foreach my $charFactor( qw( Strength Dexterity Intelligence Constitution Wisdom Charisma ) ) {
+        # TODO exterminate next line
         my $labelTxt       = ucfirst $charFactor;
 
         this->{$charFactor}  = Qt::Label( this->tr( '' ) );
@@ -288,28 +289,28 @@ sub createAdditionalFactors {
     $addFactors->addWidget( Qt::Label( this->tr( 'Disarm:' ) ), 2, 0 );
     this->{Disarm} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
-        this->{disarm},
+        this->{Disarm},
         2, 1, Qt::AlignRight(),
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Devices:' ) ), 2, 2 );
     this->{Devices} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
-        this->{devices},
+        this->{Devices},
         2, 3, Qt::AlignRight(),
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Save:' ) ), 3, 0 );
     this->{Save} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
-        this->{save},
+        this->{Save},
         3, 1, Qt::AlignRight(),
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Stealth:' ) ), 3, 2 );
     this->{Stealth} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
-        this->{stealth},
+        this->{Stealth},
         3, 3, Qt::AlignRight(),
     );
 
