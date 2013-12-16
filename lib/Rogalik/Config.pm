@@ -21,8 +21,7 @@ use constant BASEDIR => File::Spec->rel2abs( File::Spec->curdir() );
 # db file (SQLite)
 use constant DBFILE => File::Spec->catfile( BASEDIR, 'sqlite/db' );
 
-# TODO
-# place the db into $HOME unless DEV
+# TODO place the db into $HOME unless DEV
 
 ###
 

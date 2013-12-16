@@ -27,8 +27,7 @@ sub main {
        Rogalik::Config::BASEDIR,
        'share',
    );
-   # TODO
-   # use File::ShareDir::dist_dir if CPAN distribution
+   # TODO use File::ShareDir::dist_dir if CPAN distribution
 
    my $splashImagePath = File::Spec->catdir(
        $shareDir,
