@@ -64,9 +64,12 @@ sub NEW {
     $charFactors->setRowMinimumHeight( 3, 20 );
 
     # create bonuses
-    this->{raceBonus} = Qt::Label( this->tr( '' ) );
-    # show bonuses
-    $charFactors->addWidget( this->{raceBonus}, 4, 0 );
+    this->{bonusLine1} = Qt::Label( this->tr( '' ) );
+    $charFactors->addWidget( this->{bonusLine1}, 4, 0 );
+    $charFactors->setRowMinimumHeight( 4, 17 );
+    this->{bonusLine2} = Qt::Label( this->tr( '' ) );
+    $charFactors->addWidget( this->{bonusLine2}, 5, 0 );
+    $charFactors->setRowMinimumHeight( 5, 17 );
 
     $groupBox->setLayout( this->{charFactorsLayout} );
     this->{charFactorsGroupBox} = $groupBox;
