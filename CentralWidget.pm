@@ -115,7 +115,7 @@ sub sexChanged {
     }
     else {
         # do not show character data if no sex choosen
-        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom Charisma hitShootThrow hitDie XPmod Disarm Devices Save Stealth infravision digging search ) ) {
+        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom Charisma hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
             this->{$factor}->setText( this->tr( '' ) );
         }
 
@@ -131,41 +131,31 @@ sub sexChanged {
 
 sub raceChanged {
     if( this->race()->currentIndex() ) {
-        my $race = this->race()->currentText();
+        my %factors = this->getFactors( this->race()->currentText() );
         this->characterFactors()->setEnabled( 1 );
 
         # update and show basic factors
         foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom Charisma ) ) {
-            this->{$factor}->setText( this->tr( this->getFactors( $factor, $race ) ) );
+            this->{$factor}->setText( this->tr( delete $factors{$factor} ) );
         }
 
         # update and show rest
         my $data = '';
 
         foreach my $factor( qw( Hit Shoot Throw ) ) {
-            $data .= this->getFactors( $factor, $race ) . '/';
+            $data .= delete( $factors{$factor} ) . '/';
         }
         $data =~ s|/$||;
         this->{hitShootThrow}->setText( this->tr( $data ) );
 
-        $data = this->getFactors( 'HitDie', $race );
-        this->{hitDie}->setText( this->tr( $data ) );
-
-        this->{XPmod}->setText( this->tr( this->getFactors( 'XPmod', $race ) ) );
-
-        foreach my $factor( qw( Disarm Devices Save Stealth ) ) {
-            this->{$factor}->setText( this->tr( this->getFactors( $factor, $race ) ) );
+        foreach my $factor( qw( HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
+            this->{$factor}->setText( this->tr( delete $factors{$factor} ) );
         }
 
-        $data = this->getFactors( 'Infravision', $race );
-        this->{infravision}->setText( this->tr( $data ) );
-
-        this->{digging}->setText( this->tr( this->getFactors( 'Digging', $race ) ) );
-        this->{search}->setText( this->tr( this->getFactors( 'Search', $race ) ) );
     }
     else {
         # do not show data if nothing choosen
-        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom Charisma hitShootThrow hitDie XPmod Disarm Devices Save Stealth infravision digging search ) ) {
+        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom Charisma hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
             this->{$factor}->setText( this->tr( '' ) );
         }
 
@@ -276,9 +266,9 @@ sub createAdditionalFactors {
     );
 
     $addFactors->addWidget( Qt::Label( this->tr( 'Hit die:' ) ), 1, 0 );
-    this->{hitDie} = Qt::Label( this->tr( '' ) );
+    this->{HitDie} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
-        this->{hitDie},
+        this->{HitDie},
         1, 1, Qt::AlignRight(),
     );
 
@@ -322,9 +312,9 @@ sub createAdditionalFactors {
         4, 0,
         1, 2,
     );
-    this->{infravision} = Qt::Label( this->tr( '' ) );
+    this->{Infravision} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
-        this->{infravision},
+        this->{Infravision},
         4, 2,
         1, 2,
     );
@@ -334,9 +324,9 @@ sub createAdditionalFactors {
         5, 0,
         1, 2,
     );
-    this->{digging} = Qt::Label( this->tr( '' ) );
+    this->{Digging} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
-        this->{digging},
+        this->{Digging},
         5, 2,
         1, 2,
     );
@@ -346,9 +336,9 @@ sub createAdditionalFactors {
         6, 0,
         1, 2,
     );
-    this->{search} = Qt::Label( this->tr( '' ) );
+    this->{Search} = Qt::Label( this->tr( '' ) );
     $addFactors->addWidget(
-        this->{search},
+        this->{Search},
         6, 2,
         1, 2,
     );
@@ -357,19 +347,19 @@ sub createAdditionalFactors {
 }
 
 sub getFactors {
-    my $factor = shift;
     my $race   = shift;
 
     my ( $result, $rows, $rv ) = Rogalik::DB->execute(
-        "select value from charFactors where property = '$race' and factor = '$factor'"
+        "select factor, value from charFactors where property = '$race'"
     );
 
-#    say 'getFactor, $rows: '.$rows;
-#    say "getFactor, \$rv: $rv";
+    my %ret = ();
 
-    my $ret = $result->[0]->{value};
+    foreach my $line( @$result ) {
+        $ret{$line->{factor}} = $line->{value};
+    }
 
-    return $ret;
+    return %ret;
 }
 
 # getters
