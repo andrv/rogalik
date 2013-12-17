@@ -136,32 +136,32 @@ sub raceChanged {
 
         # update and show basic factors
         foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom Charisma ) ) {
-            this->{$factor}->setText( this->tr( this->getFactor( $factor, $race ) ) );
+            this->{$factor}->setText( this->tr( this->getFactors( $factor, $race ) ) );
         }
 
         # update and show rest
         my $data = '';
 
         foreach my $factor( qw( Hit Shoot Throw ) ) {
-            $data .= this->getFactor( $factor, $race ) . '/';
+            $data .= this->getFactors( $factor, $race ) . '/';
         }
         $data =~ s|/$||;
         this->{hitShootThrow}->setText( this->tr( $data ) );
 
-        $data = this->getFactor( 'HitDie', $race );
+        $data = this->getFactors( 'HitDie', $race );
         this->{hitDie}->setText( this->tr( $data ) );
 
-        this->{XPmod}->setText( this->tr( this->getFactor( 'XPmod', $race ) ) );
+        this->{XPmod}->setText( this->tr( this->getFactors( 'XPmod', $race ) ) );
 
         foreach my $factor( qw( Disarm Devices Save Stealth ) ) {
-            this->{$factor}->setText( this->tr( this->getFactor( $factor, $race ) ) );
+            this->{$factor}->setText( this->tr( this->getFactors( $factor, $race ) ) );
         }
 
-        $data = this->getFactor( 'Infravision', $race );
+        $data = this->getFactors( 'Infravision', $race );
         this->{infravision}->setText( this->tr( $data ) );
 
-        this->{digging}->setText( this->tr( this->getFactor( 'Digging', $race ) ) );
-        this->{search}->setText( this->tr( this->getFactor( 'Search', $race ) ) );
+        this->{digging}->setText( this->tr( this->getFactors( 'Digging', $race ) ) );
+        this->{search}->setText( this->tr( this->getFactors( 'Search', $race ) ) );
     }
     else {
         # do not show data if nothing choosen
@@ -356,7 +356,7 @@ sub createAdditionalFactors {
     return $addFactors;
 }
 
-sub getFactor {
+sub getFactors {
     my $factor = shift;
     my $race   = shift;
 
