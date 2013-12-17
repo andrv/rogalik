@@ -115,7 +115,7 @@ sub sexChanged {
     }
     else {
         # do not show character data if no sex choosen
-        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom Charisma hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
+        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom Charisma hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search bonusLine1 bonusLine2 ) ) {
             this->{$factor}->setText( this->tr( '' ) );
         }
 
@@ -130,6 +130,11 @@ sub sexChanged {
 }
 
 sub raceChanged {
+    # clear bonuses
+    foreach my $factor( qw ( bonusLine1 bonusLine2 ) ) {
+        this->{$factor}->setText( this->tr( '' ) );
+    }
+
     if( this->race()->currentIndex() ) {
         my %factors = this->getFactors( this->race()->currentText() );
         this->characterFactors()->setEnabled( 1 );
@@ -152,6 +157,10 @@ sub raceChanged {
             this->{$factor}->setText( this->tr( delete $factors{$factor} ) );
         }
 
+        if( %factors ) {
+            # race have bonuses
+            this->{bonusLine1}->setText( this->tr( "Sustains $factors{Sustains}" ) ) if exists $factors{Sustains};
+        }
     }
     else {
         # do not show data if nothing choosen
