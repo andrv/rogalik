@@ -157,10 +157,7 @@ sub raceChanged {
             this->{$factor}->setText( this->tr( delete $factors{$factor} ) );
         }
 
-        if( %factors ) {
-            # race have bonuses
-            this->{bonusLine1}->setText( this->tr( "Sustains $factors{Sustains}" ) ) if exists $factors{Sustains};
-        }
+        this->showBonuses( %factors );
     }
     else {
         # do not show data if nothing choosen
@@ -369,6 +366,16 @@ sub getFactors {
     }
 
     return %ret;
+}
+
+sub showBonuses {
+    my %factors = @_;
+    print Dumper \%factors;
+
+#    if( %factors ) {
+#        # race have bonuses
+#        this->{bonusLine1}->setText( this->tr( "Sustains $factors{Sustains}" ) ) if exists $factors{Sustains};
+#    }
 }
 
 # getters
