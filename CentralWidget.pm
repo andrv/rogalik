@@ -370,12 +370,31 @@ sub getFactors {
 
 sub showBonuses {
     my %factors = @_;
-    print Dumper \%factors;
 
-#    if( %factors ) {
-#        # race have bonuses
-#        this->{bonusLine1}->setText( this->tr( "Sustains $factors{Sustains}" ) ) if exists $factors{Sustains};
-#    }
+    if( %factors ) {
+        # have bonuses
+        if( exists $factors{Sustains} ) {
+            this->{bonusLine1}->setText( this->tr( "Sustains $factors{Sustains}" ) );
+            delete $factors{Sustains};
+        }
+        elsif( exists $factors{Resists} ) {
+            this->{bonusLine1}->setText( this->tr( "Resists $factors{Resists}" ) );
+            delete $factors{Resists};
+        }
+
+        if( %factors ) {
+            # have more bonuses
+
+            # in %factors should left only one pair
+            my( $left, $right ) = %factors;
+
+            my $wichPlace = this->{bonusLine1}->text() ?
+                            'bonusLine2'               :
+                            'bonusLine1';
+
+            this->{$wichPlace}->setText( this->tr( "$left $right" ) );
+        }
+    }
 }
 
 # getters
