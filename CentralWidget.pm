@@ -11,9 +11,10 @@ use QtGui4;
 use QtCore4::isa qw( Qt::Widget );
 
 use QtCore4::slots
-    sexChanged  => [],
-    raceChanged => [],
-    nextStep    => [];
+    sexChanged   => [],
+    raceChanged  => [],
+    classChanged => [],
+    nextStep     => [];
 
 use lib 'lib';
 use Rogalik::DB;
@@ -64,12 +65,7 @@ sub NEW {
     $charFactors->setRowMinimumHeight( 3, 20 );
 
     # create bonuses
-    this->{bonusLine1} = Qt::Label( this->tr( '' ) );
-    $charFactors->addWidget( this->{bonusLine1}, 4, 0 );
-    $charFactors->setRowMinimumHeight( 4, 17 );
-    this->{bonusLine2} = Qt::Label( this->tr( '' ) );
-    $charFactors->addWidget( this->{bonusLine2}, 5, 0 );
-    $charFactors->setRowMinimumHeight( 5, 17 );
+    this->prepareBonusArea();
 
     $groupBox->setLayout( this->{charFactorsLayout} );
     this->{charFactorsGroupBox} = $groupBox;
@@ -170,6 +166,9 @@ sub raceChanged {
         this->class()->setCurrentIndex( 0 );
         this->class()->setDisabled( 1 );
     }
+}
+
+sub classChanged {
 }
 
 sub nextStep {
@@ -350,6 +349,14 @@ sub createAdditionalFactors {
     );
 
     return $addFactors;
+}
+
+sub prepareBonusArea {
+    foreach my $i ( 1 .. 3 ) {
+        this->{"bonusLine$i"} = Qt::Label( this->tr( '' ) );
+        this->{charFactorsLayout}->addWidget( this->{"bonusLine$i"}, 3+$i, 0 );
+        this->{charFactorsLayout}->setRowMinimumHeight( 3+$i, 17 );
+    }
 }
 
 sub getFactors {
