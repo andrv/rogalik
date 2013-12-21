@@ -127,7 +127,7 @@ sub sexChanged {
 
 sub raceChanged {
     # clear bonuses
-    foreach my $factor( qw ( bonusLine1 bonusLine2 ) ) {
+    foreach my $factor( qw ( bonusLine1 bonusLine2 bonusLine3 ) ) {
         this->{$factor}->setText( this->tr( '' ) );
     }
 
@@ -140,7 +140,7 @@ sub raceChanged {
             this->{$factor}->setText( this->tr( delete $factors{$factor} ) );
         }
 
-        # update and show rest
+        # update and show Hit/Shot/Throw
         my $data = '';
 
         foreach my $factor( qw( Hit Shoot Throw ) ) {
@@ -149,10 +149,12 @@ sub raceChanged {
         $data =~ s|/$||;
         this->{hitShootThrow}->setText( this->tr( $data ) );
 
+        # update and show rest
         foreach my $factor( qw( HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
             this->{$factor}->setText( this->tr( delete $factors{$factor} ) );
         }
 
+        # update and show bonuses
         this->showBonuses( %factors );
     }
     else {
@@ -169,6 +171,17 @@ sub raceChanged {
 }
 
 sub classChanged {
+    if( this->race()->currentIndex() ) {
+        my %factors = this->getFactors( this->race()->currentText() );
+
+        # calculate basic factors
+        foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom Charisma ) ) {
+        }
+    }
+    else {
+        # show race factors
+        this->raceChanged();
+    }
 }
 
 sub nextStep {
