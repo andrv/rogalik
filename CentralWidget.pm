@@ -40,6 +40,12 @@ sub NEW {
         this,
         SLOT 'raceChanged()',
     );
+    this->connect(
+        this->class(),
+        SIGNAL 'currentIndexChanged(int)',
+        this,
+        SLOT 'classChanged()',
+    );
 
     my $groupBox = Qt::GroupBox( this->tr( 'Race factors and bonuses' ) );
     
@@ -172,10 +178,14 @@ sub raceChanged {
 
 sub classChanged {
     if( this->race()->currentIndex() ) {
-        my %factors = this->getFactors( this->race()->currentText() );
+        my %raceFactors  = this->getFactors( this->race()->currentText() );
+        my %classFactors = this->getFactors( this->class()->currentText() );
 
         # calculate basic factors
         foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom Charisma ) ) {
+            my $sum = $raceFactors{$factor} + $classFactors{$factor};
+            $sum = "+$sum" if $sum >= 0;
+            print "$factor: $sum\n";
         }
     }
     else {
