@@ -112,10 +112,7 @@ sub NEW {
 sub sexChanged {
 #    say this->sex()->currentText();
 
-    if( this->sex()->currentIndex() ) {
-        this->race()->setEnabled( 1 );
-    }
-    else {
+    unless( this->sex()->currentIndex() )  {
         # do not show character data if no sex choosen
         foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom Charisma hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search bonusLine1 bonusLine2 ) ) {
             this->{$factor}->setText( this->tr( '' ) );
@@ -136,6 +133,9 @@ sub raceChanged {
     foreach my $factor( qw ( bonusLine1 bonusLine2 bonusLine3 ) ) {
         this->{$factor}->setText( this->tr( '' ) );
     }
+
+    this->class()->setCurrentIndex( 0 );
+    this->class()->setDisabled( 1 );
 
     if( this->race()->currentIndex() ) {
         my %factors = this->getFactors( this->race()->currentText() );
@@ -170,14 +170,11 @@ sub raceChanged {
         }
 
         this->characterFactors()->setDisabled( 1 );
-
-        this->class()->setCurrentIndex( 0 );
-        this->class()->setDisabled( 1 );
     }
 }
 
 sub classChanged {
-    if( this->race()->currentIndex() ) {
+    if( this->class()->currentIndex() ) {
         my %raceFactors  = this->getFactors( this->race()->currentText() );
         my %classFactors = this->getFactors( this->class()->currentText() );
 
@@ -185,18 +182,26 @@ sub classChanged {
         foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom Charisma ) ) {
             my $sum = $raceFactors{$factor} + $classFactors{$factor};
             $sum = "+$sum" if $sum >= 0;
-            print "$factor: $sum\n";
+            this->{$factor}->setText( this->tr( $sum ) );
         }
     }
     else {
         # show race factors
         this->raceChanged();
+        this->race()->setFocus();
     }
 }
 
 sub nextStep {
-    this->class()->setEnabled( 1 ) if this->race()->currentIndex();
-    this->class()->setFocus();
+    if( this->sex()->currentIndex() ) {
+        this->race()->setEnabled( 1 );
+        this->race()->setFocus();
+
+        if( this->race()->currentIndex() ) {
+            this->class()->setEnabled( 1 );
+            this->class()->setFocus();
+        }
+    }
 }
 
 # methods
