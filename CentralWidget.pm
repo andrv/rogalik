@@ -87,7 +87,10 @@ sub NEW {
 
     # show character create invitation
     $layout->addWidget(
-        Qt::Label( this->tr( 'Plese select your character from the menus below:' ) ),
+        Qt::Label( this->tr( 'Please select your character from the menus below.'.
+                "\n".
+                'Hit enter to select the current menu item:'
+        ) ),
         0, 1,
         1, 3,
         Qt::AlignHCenter() | Qt::AlignBottom(),
@@ -170,6 +173,9 @@ sub raceChanged {
         }
 
         this->characterFactors()->setDisabled( 1 );
+        this->race()->setDisabled(1);
+        this->sexChanged();
+        this->sex()->setFocus();
     }
 }
 
@@ -221,7 +227,7 @@ sub createSexCombo {
 sub createRaceCombo {
     my $race = Qt::ComboBox();
 
-    $race->addItem( this->tr('Choose race... hit enter if done') );
+    $race->addItem( this->tr('Choose race...') );
     $race->addItem( this->tr('Human') );
     $race->addItem( this->tr('Half-Elf') );
     $race->addItem( this->tr('Elf') );
