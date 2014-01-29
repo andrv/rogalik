@@ -113,8 +113,6 @@ sub NEW {
 
 # slots
 sub sexChanged {
-#    say this->sex()->currentText();
-
     unless( this->sex()->currentIndex() )  {
         # do not show character data if no sex choosen
         foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom Charisma hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search bonusLine1 bonusLine2 ) ) {
@@ -149,7 +147,7 @@ sub raceChanged {
             this->{$factor}->setText( this->tr( delete $factors{$factor} ) );
         }
 
-        # update and show Hit/Shot/Throw
+        # update and show Hit/Shoot/Throw
         my $data = '';
 
         foreach my $factor( qw( Hit Shoot Throw ) ) {
@@ -190,6 +188,9 @@ sub classChanged {
             $sum = "+$sum" if $sum >= 0;
             this->{$factor}->setText( this->tr( $sum ) );
         }
+
+        # update and show Hit/Shoot/Throw
+        this->{hitShootThrow}->setText( showHitShootThrow( %classFactors ));
     }
     else {
         # show race factors
@@ -436,6 +437,13 @@ sub showBonuses {
             this->{$wichPlace}->setText( this->tr( "$left $right" ) );
         }
     }
+}
+
+sub showHitShootThrow {
+    my %factors = @_;
+    return unless %factors;
+
+    return join '/', @factors{qw(Hit Shoot Throw)};
 }
 
 # getters
