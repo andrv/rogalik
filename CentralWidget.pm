@@ -191,6 +191,14 @@ sub classChanged {
 
         # update and show Hit/Shoot/Throw
         this->{hitShootThrow}->setText( showHitShootThrow( %classFactors ));
+
+        # update and show rest
+        foreach my $factor( qw( HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
+            this->{$factor}->setText( this->tr( $classFactors{$factor} ) );
+        }
+
+        # update and show bonuses
+        this->showBonuses2(%classFactors);
     }
     else {
         # show race factors
@@ -436,6 +444,16 @@ sub showBonuses {
 
             this->{$wichPlace}->setText( this->tr( "$left $right" ) );
         }
+    }
+}
+
+sub showBonuses2 {
+    my %factors = @_;
+    return unless %factors;
+
+    foreach my $i(qw(1 2 3)) {
+        this->{"bonusLine$i"}->setText(this->tr(''));
+        this->{"bonusLine$i"}->setText(this->tr( $factors{"bonus$i"} )) if exists $factors{"bonus$i"};
     }
 }
 
