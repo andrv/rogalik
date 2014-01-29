@@ -130,11 +130,6 @@ sub sexChanged {
 }
 
 sub raceChanged {
-    # clear bonuses
-    foreach my $factor( qw ( bonusLine1 bonusLine2 bonusLine3 ) ) {
-        this->{$factor}->setText( this->tr( '' ) );
-    }
-
     this->class()->setCurrentIndex( 0 );
     this->class()->setDisabled( 1 );
 
@@ -144,21 +139,15 @@ sub raceChanged {
 
         # update and show basic factors
         foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom Charisma ) ) {
-            this->{$factor}->setText( this->tr( delete $factors{$factor} ) );
+            this->{$factor}->setText( this->tr( $factors{$factor} ) );
         }
 
         # update and show Hit/Shoot/Throw
-        my $data = '';
-
-        foreach my $factor( qw( Hit Shoot Throw ) ) {
-            $data .= delete( $factors{$factor} ) . '/';
-        }
-        $data =~ s|/$||;
-        this->{hitShootThrow}->setText( this->tr( $data ) );
+        this->showHitShootThrow(%factors);
 
         # update and show rest
         foreach my $factor( qw( HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
-            this->{$factor}->setText( this->tr( delete $factors{$factor} ) );
+            this->{$factor}->setText( this->tr( $factors{$factor} ) );
         }
 
         # update and show bonuses
@@ -190,7 +179,7 @@ sub classChanged {
         }
 
         # update and show Hit/Shoot/Throw
-        this->{hitShootThrow}->setText( showHitShootThrow( %classFactors ));
+        this->showHitShootThrow(%classFactors);
 
         # update and show rest
         foreach my $factor( qw( HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
@@ -198,7 +187,7 @@ sub classChanged {
         }
 
         # update and show bonuses
-        this->showBonuses2(%classFactors);
+        this->showBonuses(%classFactors);
     }
     else {
         # show race factors
@@ -420,35 +409,6 @@ sub getFactors {
 
 sub showBonuses {
     my %factors = @_;
-
-    if( %factors ) {
-        # have bonuses
-        if( exists $factors{Sustains} ) {
-            this->{bonusLine1}->setText( this->tr( "Sustains $factors{Sustains}" ) );
-            delete $factors{Sustains};
-        }
-        elsif( exists $factors{Resists} ) {
-            this->{bonusLine1}->setText( this->tr( "Resists $factors{Resists}" ) );
-            delete $factors{Resists};
-        }
-
-        if( %factors ) {
-            # have more bonuses
-
-            # in %factors should left only one pair
-            my( $left, $right ) = %factors;
-
-            my $wichPlace = this->{bonusLine1}->text() ?
-                            'bonusLine2'               :
-                            'bonusLine1';
-
-            this->{$wichPlace}->setText( this->tr( "$left $right" ) );
-        }
-    }
-}
-
-sub showBonuses2 {
-    my %factors = @_;
     return unless %factors;
 
     foreach my $i(qw(1 2 3)) {
@@ -461,7 +421,7 @@ sub showHitShootThrow {
     my %factors = @_;
     return unless %factors;
 
-    return join '/', @factors{qw(Hit Shoot Throw)};
+    this->{hitShootThrow}->setText(this->tr(join '/', @factors{qw(Hit Shoot Throw)}));
 }
 
 # getters
