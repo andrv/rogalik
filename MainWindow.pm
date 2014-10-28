@@ -10,13 +10,13 @@ use QtCore4;
 use QtGui4;
 use QtCore4::isa qw( Qt::MainWindow );
 
-use CentralWidget;
+use CharacterCreation;
 
 sub NEW {
     my ( $class ) = @_;
     $class->SUPER::NEW();
     my $widget = Qt::Widget();
-    this->setCentralWidget( CentralWidget() );
+    this->setCentralWidget( CharacterCreation() );
 
     # initial
     this->setGeometry( 100, 100, 800, 600 );

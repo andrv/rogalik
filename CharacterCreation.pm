@@ -1,4 +1,4 @@
-package CentralWidget;
+package CharacterCreation;
 
 use strict;
 use warnings;
