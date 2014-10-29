@@ -105,6 +105,8 @@ sub NEW {
 
     # show character factors and bonuses table
     $layout->addWidget( this->characterFactors(), 3, 3 );
+
+    this->setWindowTitle( 'Character creation' );
 }
 
 # slots

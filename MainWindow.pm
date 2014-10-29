@@ -32,13 +32,15 @@ sub NEW {
 
 # slots
 sub nextStep {
-    if( this->sex()->currentIndex() ) {
-        this->race()->setEnabled( 1 );
-        this->race()->setFocus();
+    if( this->centralWidget()->windowTitle() eq 'Character creation' ) {
+        if( this->sex()->currentIndex() ) {
+            this->race()->setEnabled( 1 );
+            this->race()->setFocus();
 
-        if( this->race()->currentIndex() ) {
-            this->class()->setEnabled( 1 );
-            this->class()->setFocus();
+            if( this->race()->currentIndex() ) {
+                this->class()->setEnabled( 1 );
+                this->class()->setFocus();
+            }
         }
     }
 }
