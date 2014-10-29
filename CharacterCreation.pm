@@ -198,10 +198,9 @@ sub classChanged {
 sub createSexCombo {
     my $sex = Qt::ComboBox();
 
-    $sex->addItem( this->tr('Choose sex...') );
-    $sex->addItem( this->tr('Female') );
-    $sex->addItem( this->tr('Male') );
-    $sex->addItem( this->tr('Neuter') );
+    foreach my $text( 'Choose sex...', qw/ Female Male Neuter / ) {
+        $sex->addItem( this->tr( $text ) );
+    }
 
     $sex->setToolTip( this->tr("Your 'sex' does not have any significant gameplay effects") );
 
@@ -211,18 +210,9 @@ sub createSexCombo {
 sub createRaceCombo {
     my $race = Qt::ComboBox();
 
-    $race->addItem( this->tr('Choose race...') );
-    $race->addItem( this->tr('Human') );
-    $race->addItem( this->tr('Half-Elf') );
-    $race->addItem( this->tr('Elf') );
-    $race->addItem( this->tr('Hobbit') );
-    $race->addItem( this->tr('Gnome') );
-    $race->addItem( this->tr('Dwarf') );
-    $race->addItem( this->tr('Half-Orc') );
-    $race->addItem( this->tr('Half-Troll') );
-    $race->addItem( this->tr('Dunadan') );
-    $race->addItem( this->tr('High-Elf') );
-    $race->addItem( this->tr('Kobold') );
+    foreach my $text( 'Choose race...', qw/ Human Half-Elf Elf Hobbit Gnome Dwarf Half-Orc Half-Troll Dunadan High-Elf Kobold / ) {
+        $race->addItem( this->tr( $text ) );
+    }
 
     $race->setToolTip( this->tr("Your 'race' determines various intrinsic factors and bonuses") );
 
@@ -234,13 +224,10 @@ sub createRaceCombo {
 sub createClassCombo {
     my $class = Qt::ComboBox();
 
-    $class->addItem( this->tr('Choose class...') );
-    $class->addItem( this->tr('Warrior') );
-    $class->addItem( this->tr('Mage') );
-    $class->addItem( this->tr('Priest') );
-    $class->addItem( this->tr('Rogue') );
-    $class->addItem( this->tr('Ranger') );
-    $class->addItem( this->tr('Paladin') );
+    foreach my $text( 'Choose class...', qw/ Warrior Mage Priest Rogue Ranger Paladin / ) {
+        #
+        $class->addItem( this->tr( $text ) );
+    }
 
     $class->setToolTip( this->tr("Your 'class' determines various intrinsic factors and bonuses") );
 
