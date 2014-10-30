@@ -40,6 +40,10 @@ sub nextStep {
             if( this->race()->currentIndex() ) {
                 this->class()->setEnabled( 1 );
                 this->class()->setFocus();
+
+                if( this->class()->currentIndex() ) {
+                    say 'sex ', this->sex()->currentText(), ' race ',  this->race()->currentText(), ' class ', this->class()->currentText();
+                }
             }
         }
     }
