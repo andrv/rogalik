@@ -15,6 +15,9 @@ use CharacterCreation;
 use QtCore4::slots
     nextStep     => [];
 
+use lib 'lib';
+use Rogalik::DB;
+
 sub NEW {
     my ( $class ) = @_;
     $class->SUPER::NEW();
@@ -42,7 +45,14 @@ sub nextStep {
                 this->class()->setFocus();
 
                 if( this->class()->currentIndex() ) {
-                    say 'sex ', this->sex()->currentText(), ' race ',  this->race()->currentText(), ' class ', this->class()->currentText();
+                    my( $result, $rows, $rv ) = Rogalik::DB->execute(
+                        "insert into theCharacter( sex, race, class, alive ) values( '" .
+                        this->sex()->currentText() . "', '" .
+                        this->race()->currentText() . "', '" .
+                        this->class()->currentText() . "', " .
+                        "1 " .
+                        ")"
+                    );
                 }
             }
         }
