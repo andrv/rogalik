@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS theCharacter (
    sex   TEXT,
    race  TEXT,
    class TEXT,
+   alive BOOLEAN,
    PRIMARY KEY( id ASC ),
    FOREIGN KEY( race )  REFERENCES charProperties( name ),
    FOREIGN KEY( class ) REFERENCES charProperties( name )
