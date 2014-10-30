@@ -22,7 +22,18 @@ CREATE TABLE IF NOT EXISTS charFactors (
    property TEXT,
    factor   TEXT,
    value    TEXT,
+   PRIMARY KEY( property, factor ),
    FOREIGN KEY( property ) REFERENCES charProperties( name )
+);
+
+CREATE TABLE IF NOT EXISTS theCharacter (
+   id    INTEGER,
+   sex   TEXT,
+   race  TEXT,
+   class TEXT,
+   PRIMARY KEY( id ASC ),
+   FOREIGN KEY( race )  REFERENCES charProperties( name ),
+   FOREIGN KEY( class ) REFERENCES charProperties( name )
 );
 
 INSERT INTO charProperties VALUES ( 'Human',      1, 'race' );
