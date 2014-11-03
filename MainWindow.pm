@@ -11,6 +11,7 @@ use QtGui4;
 use QtCore4::isa qw( Qt::MainWindow );
 
 use CharacterCreation;
+use CharFineTuning;
 
 use QtCore4::slots
     nextStep     => [];
@@ -22,8 +23,8 @@ sub NEW {
     my ( $class ) = @_;
     $class->SUPER::NEW();
 
-    my $centralWidget = CharacterCreation();
-    this->setCentralWidget( $centralWidget );
+    my $CharCreation = CharacterCreation();
+    this->setCentralWidget( $CharCreation );
 
     # initial
     this->setGeometry( 100, 100, 800, 600 );
@@ -53,6 +54,10 @@ sub nextStep {
                         "1 " .
                         ")"
                     );
+
+                    ### next screen
+                    my $CharFineTuning = CharFineTuning();
+                    this->setCentralWidget( $CharFineTuning );
                 }
             }
         }
