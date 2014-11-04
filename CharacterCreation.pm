@@ -81,7 +81,7 @@ sub NEW {
     # main layout
     my $layout = Qt::GridLayout( this );
 
-    # left placeholder
+    # space left
     $layout->setColumnMinimumWidth( 0, 20 );
 
     # show character create invitation
@@ -100,11 +100,14 @@ sub NEW {
     $layout->addWidget( this->race(), 2, 1, Qt::AlignTop() );
     $layout->addWidget( this->class(), 3, 1, Qt::AlignTop() );
 
-    # placeholder between menus and tables
+    # space between menus and tables
     $layout->setColumnMinimumWidth( 2, 20 );
 
     # show character factors and bonuses table
     $layout->addWidget( this->characterFactors(), 3, 3 );
+
+    # space between character factors table and right window edge
+    $layout->setColumnMinimumWidth( 4, 20 );
 
     this->setWindowTitle( 'Character creation' );
 }
