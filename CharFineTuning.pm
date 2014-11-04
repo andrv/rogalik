@@ -16,6 +16,21 @@ sub NEW {
     $class->SUPER::NEW();
 
     this->setWindowTitle( 'Fine tuning' );
+
+    # main layout
+    my $layout = Qt::GridLayout( this );
+
+    # left placeholder
+    $layout->setColumnMinimumWidth( 0, 20 );
+
+    # invitation for name
+    $layout->addWidget(
+        Qt::Label( this->tr( 'Enter a name for your character:' ) ),
+        0, 1,
+#        1, 3,
+#        Qt::AlignHCenter() | Qt::AlignBottom(),
+    );
+
 }
 
 1;
