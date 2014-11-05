@@ -368,7 +368,7 @@ sub prepareBonusArea {
 }
 
 sub getFactors {
-    my $race   = shift;
+    my $race = shift;
 
     my ( $result, $rows, $rv ) = Rogalik::DB->execute(
         "select factor, value from charFactors where property = '$race'"
