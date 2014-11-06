@@ -76,7 +76,7 @@ sub execute {
             push @$result, $row;
         }
 
-        return ( $result, $rows, ($rv ? $rv : undef) );
+        return ( $result, scalar( @$result ), ($rv ? $rv : undef) );
     }
 
     return ( undef, undef, $sth->errstr );
