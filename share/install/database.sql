@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS theCharacter (
    race    TEXT,
    class   TEXT,
    updated DATETIME,
-   deade   DATETIME,
+   dead    DATETIME,
    PRIMARY KEY( id ASC ),
    FOREIGN KEY( race )  REFERENCES charProperties( name ),
    FOREIGN KEY( class ) REFERENCES charProperties( name )
