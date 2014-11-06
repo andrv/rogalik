@@ -4,9 +4,11 @@ use strict;
 use warnings;
 
 use 5.010;
+use Data::Dumper;
+
 use lib 'lib';
 use Rogalik::Config;
-#use Rogalik::DB; # not yet
+use Rogalik::DB;
 
 use QtCore4;
 use QtGui4;
@@ -17,7 +19,20 @@ use File::Spec ();
 # use File::ShareDir;
 
 sub init {
-    # I don't know what can I do in init at the moment
+    # 1. Check if alive characters exists
+    my( $result, $rows, $rv ) = Rogalik::DB->execute( 'select id from theCharacter where dead is null order by updated desc' );
+#    say "найдено $rows живых персонажей";
+    return unless $rows;
+
+    my @ids;
+
+    # 2. Collect ids of alive
+    foreach my $line( @$result ) {
+        push @ids, $line->{id};
+    }
+
+    # 3. Return ids
+    return @ids;
 }
 
 sub main {
@@ -41,11 +56,11 @@ sub main {
    $splash->show();
    $splash->showMessage( '' );
 
-   init();
+   my @characterIds = init();
 
    sleep 2;
 
-   my $mainWindow = MainWindow();
+   my $mainWindow = MainWindow( @characterIds );
    $mainWindow->show();
 
    $splash->finish( $mainWindow );

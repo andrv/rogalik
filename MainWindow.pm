@@ -20,7 +20,7 @@ use lib 'lib';
 use Rogalik::DB;
 
 sub NEW {
-    my ( $class ) = @_;
+    my ( $class, @characterIds ) = @_;
     $class->SUPER::NEW();
 
     my $CharCreation = CharacterCreation();
