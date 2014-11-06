@@ -27,11 +27,12 @@ CREATE TABLE IF NOT EXISTS charFactors (
 );
 
 CREATE TABLE IF NOT EXISTS theCharacter (
-   id    INTEGER,
-   sex   TEXT,
-   race  TEXT,
-   class TEXT,
-   alive BOOLEAN,
+   id      INTEGER,
+   sex     TEXT,
+   race    TEXT,
+   class   TEXT,
+   updated DATETIME,
+   deade   DATETIME,
    PRIMARY KEY( id ASC ),
    FOREIGN KEY( race )  REFERENCES charProperties( name ),
    FOREIGN KEY( class ) REFERENCES charProperties( name )
