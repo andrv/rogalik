@@ -36,7 +36,7 @@ sub NEW {
     
     $layout->addWidget( Qt::Label( this->tr( 'Name:' ) ), 1, 1 );
 
-    my( $result, $row, $rv ) = Rogalik::DB->execute( 'select * from theCharacter order by updated desc' );
+    my( $result, $row, $rv ) = Rogalik::DB->execute( 'select * from theCharacter where dead is null order by updated desc' );
     $layout->addWidget( Qt::Label( this->tr( 'Sex:' ) ), 2, 1 );
     $layout->addWidget( Qt::Label( this->tr( $result->[0]->{sex} ) ), 2, 2 );
     $layout->addWidget( Qt::Label( this->tr( 'Race' ) ), 3, 1 );
