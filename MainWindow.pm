@@ -47,10 +47,11 @@ sub nextStep {
 
                 if( this->class()->currentIndex() ) {
                     my( $result, $rows, $rv ) = Rogalik::DB->execute(
-                        "insert into theCharacter( sex, race, class ) values( '" .
+                        "insert into theCharacter( sex, race, class, updated ) values( '" .
                         this->sex()->currentText() . "', '" .
                         this->race()->currentText() . "', '" .
-                        this->class()->currentText() . "'" .
+                        this->class()->currentText() . "', " .
+                        "datetime( 'now' ) " .
                         ")"
                     );
 
