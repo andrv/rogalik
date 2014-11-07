@@ -23,8 +23,16 @@ sub NEW {
     my ( $class, @characterIds ) = @_;
     $class->SUPER::NEW();
 
-    my $CharCreation = CharacterCreation();
-    this->setCentralWidget( $CharCreation );
+    # display screens depending on existence of alive chartacters
+    if( @characterIds ) {
+        my $CharFineTuning = CharFineTuning( @characterIds );
+        this->setCentralWidget( $CharFineTuning );
+    }
+    else {
+        my $CharCreation = CharacterCreation();
+        this->setCentralWidget( $CharCreation );
+    }
+
 
     # initial
     this->setGeometry( 100, 100, 800, 600 );
