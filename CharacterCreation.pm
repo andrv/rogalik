@@ -198,48 +198,56 @@ sub classChanged {
 }
 
 # methods
-sub createSexCombo {
-    my $sex = Qt::ComboBox();
 
-    foreach my $text( 'Choose sex...', qw/ Female Male Neuter / ) {
-        $sex->addItem( this->tr( $text ) );
+sub createCombo {
+    my( $type, $toolTip, @data ) = @_;
+
+    my $combo = Qt::ComboBox();
+    $combo->addItem( this->tr( "Choose $type..." ) );
+    $combo->setToolTip( this->tr( $toolTip ) );
+
+    unless( @data ) {
+        # get data from db
+        my( $res, $rows, $rv ) = Rogalik::DB->execute( "select name from charProperties where type = '$type' order by guiId asc" );
+
+        foreach my $line( @$res ) {
+            push @data, $line->{name}
+        }
     }
 
-    $sex->setToolTip( this->tr("Your 'sex' does not have any significant gameplay effects") );
+    foreach my $element( @data ) {
+        $combo->addItem( this->tr( $element ) );
+    }
+
+    $combo->setDisabled( 1 ) unless $type eq 'sex';
+
+    return $combo;
+}
+
+sub createSexCombo {
+    my $sex = createCombo(
+        'sex',
+        "Your 'sex' does not have any significant gameplay effects",
+        qw/ Female Male Neuter /
+    );
 
     return $sex;
 }
 
 sub createRaceCombo {
-    my $race = Qt::ComboBox();
-
-    $race->addItem( this->tr( 'Choose race...' ) );
-    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select name from charProperties where type = 'race' order by guiId" );
-
-    foreach my $line( @$res ) {
-        $race->addItem( this->tr( $line->{name} ) );
-    }
-
-    $race->setToolTip( this->tr("Your 'race' determines various intrinsic factors and bonuses") );
-
-    $race->setDisabled( 1 );
+    my $race = createCombo(
+        'race',
+        "Your 'race' determines various intrinsic factors and bonuses",
+    );
 
     return $race;
 }
 
 sub createClassCombo {
-    my $class = Qt::ComboBox();
-
-    $class->addItem( this->tr( 'Choose class...' ) );
-    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select name from charProperties where type = 'class' order by guiId" );
-
-    foreach my $line( @$res ) {
-        $class->addItem( this->tr( $line->{name} ) );
-    }
-
-    $class->setToolTip( this->tr("Your 'class' determines various intrinsic factors and bonuses") );
-
-    $class->setDisabled( 1 );
+    my $class = createCombo(
+        'class',
+        "Your 'class' determines various intrinsic factors and bonuses",
+    );
 
     return $class;
 }
