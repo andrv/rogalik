@@ -23,9 +23,9 @@ sub NEW {
     my ( $class ) = @_;
     $class->SUPER::NEW();
 
-    this->{sexComboBox}   = this->createSexCombo();
-    this->{raceComboBox}  = this->createRaceCombo();
-    this->{classComboBox} = this->createClassCombo();
+    this->{sexComboBox}   = this->createCombo( 'sex', qw/ Female Male Neuter / );
+    this->{raceComboBox}  = this->createCombo( 'race' );
+    this->{classComboBox} = this->createCombo( 'class' );
 
     this->connect(
         this->sex(),
@@ -200,11 +200,16 @@ sub classChanged {
 # methods
 
 sub createCombo {
-    my( $type, $toolTip, @data ) = @_;
+    my( $type, @data ) = @_;
+    my %toolTip = (
+        sex   => "Your 'sex' does not have any significant gameplay effects",
+        race  => "Your 'race' determines various intrinsic factors and bonuses",
+        class => "Your 'class' determines various intrinsic factors and bonuses",
+    );
 
     my $combo = Qt::ComboBox();
     $combo->addItem( this->tr( "Choose $type..." ) );
-    $combo->setToolTip( this->tr( $toolTip ) );
+    $combo->setToolTip( this->tr( $toolTip{$type} ) );
 
     unless( @data ) {
         # get data from db
@@ -222,34 +227,6 @@ sub createCombo {
     $combo->setDisabled( 1 ) unless $type eq 'sex';
 
     return $combo;
-}
-
-sub createSexCombo {
-    my $sex = createCombo(
-        'sex',
-        "Your 'sex' does not have any significant gameplay effects",
-        qw/ Female Male Neuter /
-    );
-
-    return $sex;
-}
-
-sub createRaceCombo {
-    my $race = createCombo(
-        'race',
-        "Your 'race' determines various intrinsic factors and bonuses",
-    );
-
-    return $race;
-}
-
-sub createClassCombo {
-    my $class = createCombo(
-        'class',
-        "Your 'class' determines various intrinsic factors and bonuses",
-    );
-
-    return $class;
 }
 
 sub createBasicFactors {
