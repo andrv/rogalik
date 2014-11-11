@@ -12,6 +12,7 @@ use QtCore4::isa qw( Qt::MainWindow );
 
 use CharacterCreation;
 use CharFineTuning;
+use ChooseCharacter;
 
 use QtCore4::slots
     nextStep     => [];
@@ -26,7 +27,8 @@ sub NEW {
     # display screens depending on existence of alive characters
     if( @characterIds and @characterIds - 1 ) {
         # at least two alive characters
-        say "TODO: сделать экран выбора живых персонажей";
+        my $chooseCharacter = ChooseCharacter( @characterIds );
+        this->setCentralWidget( $chooseCharacter );
     }
     elsif ( @characterIds ) {
         # only one alive character
