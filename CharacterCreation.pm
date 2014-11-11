@@ -213,8 +213,11 @@ sub createSexCombo {
 sub createRaceCombo {
     my $race = Qt::ComboBox();
 
-    foreach my $text( 'Choose race...', qw/ Human Half-Elf Elf Hobbit Gnome Dwarf Half-Orc Half-Troll Dunadan High-Elf Kobold / ) {
-        $race->addItem( this->tr( $text ) );
+    $race->addItem( this->tr( 'Choose race...' ) );
+    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select name from charProperties where type = 'race' order by guiId" );
+
+    foreach my $line( @$res ) {
+        $race->addItem( this->tr( $line->{name} ) );
     }
 
     $race->setToolTip( this->tr("Your 'race' determines various intrinsic factors and bonuses") );
@@ -227,9 +230,11 @@ sub createRaceCombo {
 sub createClassCombo {
     my $class = Qt::ComboBox();
 
-    foreach my $text( 'Choose class...', qw/ Warrior Mage Priest Rogue Ranger Paladin / ) {
-        #
-        $class->addItem( this->tr( $text ) );
+    $class->addItem( this->tr( 'Choose class...' ) );
+    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select name from charProperties where type = 'class' order by guiId" );
+
+    foreach my $line( @$res ) {
+        $class->addItem( this->tr( $line->{name} ) );
     }
 
     $class->setToolTip( this->tr("Your 'class' determines various intrinsic factors and bonuses") );
