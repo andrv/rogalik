@@ -23,8 +23,13 @@ sub NEW {
     my ( $class, @characterIds ) = @_;
     $class->SUPER::NEW();
 
-    # display screens depending on existence of alive chartacters
-    if( @characterIds ) {
+    # display screens depending on existence of alive characters
+    if( @characterIds and @characterIds - 1 ) {
+        # at least two alive characters
+        say "TODO: сделать экран выбора живых персонажей";
+    }
+    elsif ( @characterIds ) {
+        # only one alive character
         my $CharFineTuning = CharFineTuning( @characterIds );
         this->setCentralWidget( $CharFineTuning );
     }
