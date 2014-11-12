@@ -25,15 +25,10 @@ sub NEW {
     $class->SUPER::NEW();
 
     # display screens depending on existence of alive characters
-    if( @characterIds and @characterIds - 1 ) {
-        # at least two alive characters
+    if( @characterIds ) {
+        # alive characters exists
         my $chooseCharacter = ChooseCharacter( @characterIds );
         this->setCentralWidget( $chooseCharacter );
-    }
-    elsif ( @characterIds ) {
-        # only one alive character
-        my $CharFineTuning = CharFineTuning( @characterIds );
-        this->setCentralWidget( $CharFineTuning );
     }
     else {
         my $CharCreation = CharacterCreation();
