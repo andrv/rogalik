@@ -13,25 +13,26 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS charProperties (
    name  TEXT,
-   guiId INTEGER,
-   type  TEXT,
+   guiId INTEGER NOT NULL,
+   type  TEXT NOT NULL,
    PRIMARY KEY( name ASC )
 );
 
 CREATE TABLE IF NOT EXISTS charFactors (
    property TEXT,
    factor   TEXT,
-   value    TEXT,
+   value    TEXT NOT NULL,
    PRIMARY KEY( property, factor ),
    FOREIGN KEY( property ) REFERENCES charProperties( name )
 );
 
 CREATE TABLE IF NOT EXISTS theCharacter (
    id      INTEGER,
-   sex     TEXT,
-   race    TEXT,
-   class   TEXT,
-   updated DATETIME,
+   name    TEXT,
+   sex     TEXT NOT NULL,
+   race    TEXT NOT NULL,
+   class   TEXT NOT NULL,
+   updated DATETIME NOT NULL,
    dead    DATETIME,
    PRIMARY KEY( id ASC ),
    FOREIGN KEY( race )  REFERENCES charProperties( name ),
