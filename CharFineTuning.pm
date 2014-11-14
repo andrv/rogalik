@@ -15,7 +15,9 @@ use Rogalik::DB;
 
 
 sub NEW {
-    my ( $class ) = @_;
+    my ( $class, @characterIds ) = @_;
+    print Dumper \@characterIds;
+
     $class->SUPER::NEW();
 
     this->setWindowTitle( 'Fine tuning' );

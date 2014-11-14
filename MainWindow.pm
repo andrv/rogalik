@@ -46,7 +46,9 @@ sub NEW {
 
 # slots
 sub nextStep {
-    if( this->centralWidget()->windowTitle() eq 'Character creation' ) {
+    my $centralWidget = this->centralWidget()->windowTitle();
+
+    if( $centralWidget eq 'Character creation' ) {
         if( this->sex()->currentIndex() ) {
             this->race()->setEnabled( 1 );
             this->race()->setFocus();
@@ -65,11 +67,23 @@ sub nextStep {
                         ")"
                     );
 
+                    ( $result, $rows, $rv ) = Rogalik::DB->execute(
+                        "select last_insert_rowid() as id" );
+
                     ### next screen
-                    my $CharFineTuning = CharFineTuning();
-                    this->setCentralWidget( $CharFineTuning );
+                    this->setCentralWidget( CharFineTuning( ( $result->[0]->{id} ) ) );
                 }
             }
+        }
+    }
+    elsif( $centralWidget eq 'Choose character' ) {
+        my $choosen = this->centralWidget()->{charactersComboBox}->currentText();
+        if( $choosen eq 'Add new one' ) {
+            this->setCentralWidget( CharacterCreation() )
+        }
+        else {
+            my( $charId ) = $choosen =~ m/^(\d+):.*/;
+            this->setCentralWidget( CharFineTuning( ( $charId ) ) )
         }
     }
 }

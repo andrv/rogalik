@@ -47,11 +47,11 @@ sub createCombo {
     my $combo = Qt::ComboBox();
 
     foreach my $id( @characterIds ) {
-        my( $res, $rows, $rv ) = Rogalik::DB->execute( "select name, sex, race, class, updated from theCharacter where id = $id" );
+        my( $res, $rows, $rv ) = Rogalik::DB->execute( "select id, name, sex, race, class, updated from theCharacter where id = $id" );
         my $char = $res->[0];
         my $name = $char->{name} || 'No name yet';
 
-        $combo->addItem( this->tr( "$name, $char->{sex}, $char->{race}, $char->{class}, $char->{updated}" ) );
+        $combo->addItem( this->tr( "$char->{id}: $name, $char->{sex}, $char->{race}, $char->{class}, $char->{updated}" ) );
     }
 
     $combo->addItem( this->tr( 'Add new one' ) );
