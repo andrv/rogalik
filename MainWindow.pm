@@ -71,7 +71,7 @@ sub nextStep {
                         "select last_insert_rowid() as id" );
 
                     ### next screen
-                    this->setCentralWidget( CharFineTuning( ( $result->[0]->{id} ) ) );
+                    this->setCentralWidget( CharFineTuning( $result->[0]->{id} ) );
                 }
             }
         }
@@ -83,7 +83,7 @@ sub nextStep {
         }
         else {
             my( $charId ) = $choosen =~ m/^(\d+):.*/;
-            this->setCentralWidget( CharFineTuning( ( $charId ) ) )
+            this->setCentralWidget( CharFineTuning( int $charId ) )
         }
     }
 }
