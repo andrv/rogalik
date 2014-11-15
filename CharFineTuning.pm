@@ -15,8 +15,7 @@ use Rogalik::DB;
 
 
 sub NEW {
-    my ( $class, @characterIds ) = @_;
-    print Dumper \@characterIds;
+    my ( $class, $characterId ) = @_;
 
     $class->SUPER::NEW();
 
@@ -38,7 +37,7 @@ sub NEW {
     
     $layout->addWidget( Qt::Label( this->tr( 'Name:' ) ), 1, 1 );
 
-    my( $result, $row, $rv ) = Rogalik::DB->execute( 'select * from theCharacter where dead is null order by updated desc' );
+    my( $result, $row, $rv ) = Rogalik::DB->execute( "select name, sex, race, class from theCharacter where id = $characterId" );
     $layout->addWidget( Qt::Label( this->tr( 'Sex:' ) ), 2, 1 );
     $layout->addWidget( Qt::Label( this->tr( $result->[0]->{sex} ) ), 2, 2 );
     $layout->addWidget( Qt::Label( this->tr( 'Race' ) ), 3, 1 );
