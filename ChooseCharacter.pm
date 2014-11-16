@@ -29,16 +29,19 @@ sub NEW {
     $layout->setColumnMinimumWidth( 0, 20 );
 
     $layout->addWidget(
-        Qt::Label( this->tr( 'Non dead character exists'.
-                "\n".
-                'Please choose one:'
+        Qt::Label( this->tr( 'Non dead character exists.'.
+                ' Please choose one:'
         ) ),
         0, 1,
 #        1, 3,
-#        Qt::AlignHCenter() | Qt::AlignBottom(),
+        Qt::AlignHCenter() | Qt::AlignBottom(),
+#        Qt::AlignHCenter(),
     );
 
-    $layout->addWidget( this->characters(), 1, 1 );
+    $layout->addWidget( this->characters(), 1, 1, Qt::AlignTop() );
+
+    # right placeholder
+    $layout->setColumnMinimumWidth( 2, 20 );
 }
 
 sub createCombo {

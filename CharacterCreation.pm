@@ -109,6 +109,9 @@ sub NEW {
     # space between character factors table and right window edge
     $layout->setColumnMinimumWidth( 4, 20 );
 
+    # a bit space at bottom
+    $layout->setRowMinimumHeight( 4, 20 );
+
     this->setWindowTitle( 'Character creation' );
 }
 
