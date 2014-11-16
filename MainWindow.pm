@@ -79,7 +79,8 @@ sub nextStep {
     elsif( $centralWidget eq 'Choose character' ) {
         my $choosen = this->centralWidget()->{charactersComboBox}->currentText();
         if( $choosen eq 'Add new one' ) {
-            this->setCentralWidget( CharacterCreation() )
+            this->setCentralWidget( CharacterCreation() );
+            this->sex()->setFocus();
         }
         else {
             my( $charId ) = $choosen =~ m/^(\d+):.*/;
