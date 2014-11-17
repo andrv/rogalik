@@ -84,7 +84,7 @@ sub nextStep {
         }
         else {
             my( $charId ) = $choosen =~ m/^(\d+):.*/;
-            this->setCentralWidget( CharFineTuning( int $charId ) )
+            this->setCentralWidget( CharFineTuning( int $charId ) );
         }
     }
 }
