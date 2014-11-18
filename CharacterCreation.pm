@@ -238,12 +238,9 @@ sub createBasicFactors {
     my ( $row, $column, $count ) = ( 0, 0, 0 );
 
     foreach my $charFactor( qw( Strength Dexterity Intelligence Constitution Wisdom Charisma ) ) {
-        # TODO exterminate next line
-        my $labelTxt       = ucfirst $charFactor;
-
         this->{$charFactor}  = Qt::Label( this->tr( '' ) );
 
-        $basicFactors->addWidget( Qt::Label( this->tr( "$labelTxt:" ) ), $row, $column );
+        $basicFactors->addWidget( Qt::Label( this->tr( "$charFactor:" ) ), $row, $column );
         $basicFactors->addWidget( this->{$charFactor}, $row, $column + 1, Qt::AlignRight() );
 
         $count++;
