@@ -31,9 +31,11 @@ sub NEW {
     $layout->addWidget(
         Qt::Label( this->tr( 'Enter a name for your character:' ) ),
         0, 1,
-#        1, 3,
-#        Qt::AlignHCenter() | Qt::AlignBottom(),
     );
+    
+    # name input field
+    this->setName( Qt::LineEdit() );
+    $layout->addWidget( this->name(), 0, 2, 1, 2 );
 
     $layout->addWidget( this->basicsOne( $characterId ), 1, 1 );
 
@@ -87,7 +89,8 @@ sub basicsOne {
     $table->addWidget( Qt::Label( this->tr( 'HP' ) ),               5, 0 );
     $table->addWidget( Qt::Label( this->tr( 'SP' ) ),               6, 0 );
 
-    $table->addWidget( Qt::Label( this->tr( $res->[0]->{name} ) ),  0, 1 );
+    this->{charName} = Qt::Label( this->tr( $res->[0]->{name} ) );
+    $table->addWidget( this->{charName},                            0, 1 );
     $table->addWidget( Qt::Label( this->tr( $res->[0]->{sex} ) ),   1, 1 );
     $table->addWidget( Qt::Label( this->tr( $res->[0]->{race} ) ),  2, 1 );
     $table->addWidget( Qt::Label( this->tr( $res->[0]->{class} ) ), 3, 1 );
@@ -269,5 +272,9 @@ sub detailedThree {
     $groupBox->setLayout( $table );
     return $groupBox;
 }
+
+sub name { return this->{nameLineEdit} }
+
+sub setName { this->{nameLineEdit} = shift }
 
 1;

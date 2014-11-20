@@ -58,7 +58,7 @@ sub nextStep {
                 this->class()->setFocus();
 
                 if( this->class()->currentIndex() ) {
-                    my( $result, $rows, $rv ) = Rogalik::DB->execute(
+                    my( $res, $rows, $rv ) = Rogalik::DB->execute(
                         "insert into theCharacter( sex, race, class, updated ) values( '" .
                         this->sex()->currentText() . "', '" .
                         this->race()->currentText() . "', '" .
@@ -67,11 +67,13 @@ sub nextStep {
                         ")"
                     );
 
-                    ( $result, $rows, $rv ) = Rogalik::DB->execute(
+                    ( $res, $rows, $rv ) = Rogalik::DB->execute(
                         "select last_insert_rowid() as id" );
+                    this->setCurrentCharId( $res->[0]->{id} );
 
                     ### next screen
-                    this->setCentralWidget( CharFineTuning( $result->[0]->{id} ) );
+                    this->setCentralWidget( CharFineTuning( this->currentCharId() ) );
+                    this->centralWidget()->name()->setFocus();
                 }
             }
         }
@@ -84,8 +86,18 @@ sub nextStep {
         }
         else {
             my( $charId ) = $choosen =~ m/^(\d+):.*/;
-            this->setCentralWidget( CharFineTuning( int $charId ) );
+            this->setCurrentCharId( int $charId );
+            this->setCentralWidget( CharFineTuning( this->currentCharId() ) );
+            this->centralWidget()->name()->setFocus();
         }
+    }
+    elsif( $centralWidget eq 'Fine tuning' ) {
+        my( $res, $rows, $rv ) = Rogalik::DB->execute(
+            "update theCharacter set name = '".
+            this->centralWidget()->name()->text(). "' where id = ".
+            this->currentCharId() );
+        this->centralWidget()->{charName}->setText( this->tr( this->centralWidget()->name()->text() ) );
+        this->centralWidget()->name()->setDisabled( 1 );
     }
 }
 
@@ -96,5 +108,10 @@ sub sex { return this->centralWidget()->{sexComboBox} }
 sub race { return this->centralWidget()->{raceComboBox} }
 
 sub class { return this->centralWidget()->{classComboBox} }
+
+sub currentCharId { return this->{currentCharId} }
+
+# setters
+sub setCurrentCharId { this->{currentCharId} = shift }
 
 1;
