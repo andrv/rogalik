@@ -43,6 +43,7 @@ sub execute {
     my $dbh = $self->connect;
 
     unless( $sql =~ m/^select/i ) {
+#        say "#$sql#";
         my $rv = $dbh->do( $sql );
 
         my $rc = $dbh->err ?
