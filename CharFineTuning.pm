@@ -60,12 +60,13 @@ sub NEW {
     # space between middle and bottom
     $layout->setRowMinimumHeight( 4, 20 );
 
-    # TODO: how to create text field with automatically line break on window size change
+    this->setCharTxtInfo( Qt::Label( this->tr( '(tbd) You are one of several children of a Yeoman. You are the black sheep of the family. You have dark brown eyes, curly blond hair, and a very dark complexion. (tbd) Bla, bla, bla.' ) ) );
+    this->charTxtInfo()->setWordWrap( 1 );
     $layout->addWidget(
-        Qt::Label( this->tr( '(tbd) You are one of several children of a Yeoman. You are the black sheep of the family. You have dark brown eyes, curly blond hair, and a very dark complexion. (tbd) Bla, bla, bla.' ) ),
+        this->charTxtInfo(),
         5, 1,
         1, 5,
-        Qt::AlignHCenter() | Qt::AlignTop(),
+        Qt::AlignTop(),
     );
 
     # space after bottom
@@ -282,5 +283,9 @@ sub setName { this->{nameLineEdit} = shift }
 sub nameLabel { return this->{nameLabel} }
 
 sub setNameLabel { this->{nameLabel} = shift }
+
+sub charTxtInfo { return this->{charTxtInfo} }
+
+sub setCharTxtInfo { this->{charTxtInfo} = shift }
 
 1;
