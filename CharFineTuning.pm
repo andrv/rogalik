@@ -27,9 +27,10 @@ sub NEW {
     # left placeholder
     $layout->setColumnMinimumWidth( 0, 20 );
 
-    # invitation for name
+    # invitation for name input
+    this->setNameLabel( Qt::Label( this->tr( 'Enter a name for your character:' ) ) );
     $layout->addWidget(
-        Qt::Label( this->tr( 'Enter a name for your character:' ) ),
+        this->nameLabel(),
         0, 1,
     );
     
@@ -273,8 +274,13 @@ sub detailedThree {
     return $groupBox;
 }
 
+# getters & setters
 sub name { return this->{nameLineEdit} }
 
 sub setName { this->{nameLineEdit} = shift }
+
+sub nameLabel { return this->{nameLabel} }
+
+sub setNameLabel { this->{nameLabel} = shift }
 
 1;

@@ -80,6 +80,7 @@ sub nextStep {
     }
     elsif( $centralWidget eq 'Choose character' ) {
         my $choosen = this->centralWidget()->{charactersComboBox}->currentText();
+
         if( $choosen eq 'Add new one' ) {
             this->setCentralWidget( CharacterCreation() );
             this->sex()->setFocus();
@@ -88,14 +89,18 @@ sub nextStep {
             my( $charId ) = $choosen =~ m/^(\d+):.*/;
             this->setCurrentCharId( int $charId );
             this->setCentralWidget( CharFineTuning( this->currentCharId() ) );
-            this->centralWidget()->name()->setFocus();
+
+            if( Rogalik::DB->get( 'theCharacter', 'name', this->currentCharId() ) ) {
+                this->centralWidget()->nameLabel()->hide();
+                this->centralWidget()->name()->hide();
+            }
+            else {
+                this->centralWidget()->name()->setFocus();
+            }
         }
     }
     elsif( $centralWidget eq 'Fine tuning' ) {
-        my( $res, $rows, $rv ) = Rogalik::DB->execute(
-            "update theCharacter set name = '".
-            this->centralWidget()->name()->text(). "' where id = ".
-            this->currentCharId() );
+        Rogalik::DB->set( 'theCharacter', 'name', "'".this->centralWidget()->name()->text()."'", this->currentCharId() );
         this->centralWidget()->{charName}->setText( this->tr( this->centralWidget()->name()->text() ) );
         this->centralWidget()->name()->setDisabled( 1 );
     }
@@ -113,5 +118,12 @@ sub currentCharId { return this->{currentCharId} }
 
 # setters
 sub setCurrentCharId { this->{currentCharId} = shift }
+
+#sub _different {
+#    my( $old, $new ) = @_;
+#
+#    return 1 if $old ne $new;
+#    return;
+#}
 
 1;
