@@ -83,4 +83,25 @@ sub execute {
     return ( undef, undef, $sth->errstr );
 }
 
+sub get {
+    my $self = ref $_[0] ? ref shift : shift;
+    my $table = shift;
+    my $field = shift;
+    my $id    = shift;
+
+    my( $res, $rows, $rv ) = $self->execute( "select $field from $table where id = $id" );
+
+    return $res->[0]->{$field};
+}
+
+sub set {
+    my $self = ref $_[0] ? ref shift : shift;
+    my $table = shift;
+    my $field = shift;
+    my $value = shift;
+    my $id    = shift;
+
+    my( $res, $row, $rv ) = $self->execute( "update $table set $field = $value, updated = datetime( 'now' ) where id = $id" );
+}
+
 1;
