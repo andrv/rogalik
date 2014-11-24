@@ -26,51 +26,50 @@ sub NEW {
 
     # left placeholder
     $layout->setColumnMinimumWidth( 0, 20 );
+    # free space at top
+    $layout->setRowMinimumHeight( 0, 20 );
+    # don't disappear row with name input field
+    $layout->setRowMinimumHeight( 1, 20 );
 
     # invitation for name input
     this->setNameLabel( Qt::Label( this->tr( 'Enter a name for your character:' ) ) );
     $layout->addWidget(
         this->nameLabel(),
-        0, 1,
+        1, 1,
     );
     
     # name input field
     this->setName( Qt::LineEdit() );
-    $layout->addWidget( this->name(), 0, 2, 1, 2 );
+    $layout->addWidget( this->name(), 1, 2, 1, 2 );
 
-    $layout->addWidget( this->basicsOne( $characterId ), 1, 1 );
+    $layout->addWidget( this->basicsOne( $characterId ), 2, 1 );
 
     # empty space
     $layout->setColumnMinimumWidth( 2, 20 );
 
-    $layout->addWidget( this->basicsTwo(), 1, 3 );
+    $layout->addWidget( this->basicsTwo(), 2, 3 );
 
     # empty space
     $layout->setColumnMinimumWidth( 4, 20 );
 
-    $layout->addWidget( this->qualities(), 1, 5 );
+    $layout->addWidget( this->qualities(), 2, 5 );
 
     # space between top and middle
-    $layout->setRowMinimumHeight( 2, 20 );
+    $layout->setRowMinimumHeight( 3, 20 );
 
-    $layout->addWidget( this->detailedOne(),   3, 1 );
-    $layout->addWidget( this->detailedTwo(),   3, 3 );
-    $layout->addWidget( this->detailedThree(), 3, 5 );
+    $layout->addWidget( this->detailedOne(),   4, 1 );
+    $layout->addWidget( this->detailedTwo(),   4, 3 );
+    $layout->addWidget( this->detailedThree(), 4, 5 );
 
     # space between middle and bottom
-    $layout->setRowMinimumHeight( 4, 20 );
+    $layout->setRowMinimumHeight( 5, 20 );
 
     this->setCharTxtInfo( Qt::Label( this->tr( '(tbd) You are one of several children of a Yeoman. You are the black sheep of the family. You have dark brown eyes, curly blond hair, and a very dark complexion. (tbd) Bla, bla, bla.' ) ) );
     this->charTxtInfo()->setWordWrap( 1 );
-    $layout->addWidget(
-        this->charTxtInfo(),
-        5, 1,
-        1, 5,
-        Qt::AlignTop(),
-    );
+    $layout->addWidget( this->charTxtInfo(), 6, 1, 1, 5, Qt::AlignTop() );
 
     # space after bottom
-    $layout->setRowMinimumHeight( 6, 20 );
+    $layout->setRowMinimumHeight( 7, 20 );
 
     # space at right edge
     $layout->setColumnMinimumWidth( 6, 20 );
