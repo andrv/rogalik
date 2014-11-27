@@ -11,6 +11,40 @@
 
 PRAGMA foreign_keys = ON;
 
+CREATE TABLE IF NOT EXISTS theRace (
+   id                INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+   name              TEXT    NOT NULL,
+   strength          INTEGER NOT NULL,
+   intelligence      INTEGER NOT NULL,
+   wisdom            INTEGER NOT NULL,
+   dexterity         INTEGER NOT NULL,
+   constitution      INTEGER NOT NULL,
+   disarming         INTEGER NOT NULL,
+   magic_device      INTEGER NOT NULL,
+   saving_throw      INTEGER NOT NULL,
+   stealth           INTEGER NOT NULL,
+   search_ability    INTEGER NOT NULL,
+   search_freq       INTEGER NOT NULL,
+   to_hit_melee      INTEGER NOT NULL,
+   to_hit_bow        INTEGER NOT NULL,
+   to_hit_throw      INTEGER NOT NULL,
+   digging           INTEGER NOT NULL,
+   hp                INTEGER NOT NULL,
+   exp               INTEGER NOT NULL,
+   infravision       INTEGER NOT NULL,
+   history_start     INTEGER NOT NULL,
+   age               INTEGER NOT NULL,
+   age_mod           INTEGER NOT NULL,
+   height_male       INTEGER NOT NULL,
+   height_male_mod   INTEGER NOT NULL,
+   height_female     INTEGER NOT NULL,
+   height_female_mod INTEGER NOT NULL,
+   weight_male       INTEGER NOT NULL,
+   weight_male_mod   INTEGER NOT NULL,
+   weight_female     INTEGER NOT NULL,
+   weight_female_mod INTEGER NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS charProperties (
    name  TEXT,
    guiId INTEGER NOT NULL,
