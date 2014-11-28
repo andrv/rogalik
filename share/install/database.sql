@@ -45,6 +45,47 @@ CREATE TABLE IF NOT EXISTS theRace (
    weight_female_mod INTEGER NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS theClass (
+   id                INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+   name              TEXT    NOT NULL,
+   strength          INTEGER NOT NULL,
+   intelligence      INTEGER NOT NULL,
+   wisdom            INTEGER NOT NULL,
+   dexterity         INTEGER NOT NULL,
+   constitution      INTEGER NOT NULL,
+   disarming         INTEGER NOT NULL,
+   disarm_mod        INTEGER NOT NULL,
+   magic_device      INTEGER NOT NULL,
+   dev_mod           INTEGER NOT NULL,
+   saving_throw      INTEGER NOT NULL,
+   sav_mod           INTEGER NOT NULL,
+   stealth           INTEGER NOT NULL,
+   stealth_mod       INTEGER NOT NULL,
+   search_ability    INTEGER NOT NULL,
+   search_mod        INTEGER NOT NULL,
+   search_freq       INTEGER NOT NULL,
+   search_freq_mod   INTEGER NOT NULL,
+   to_hit_melee      INTEGER NOT NULL,
+   hit_melee_mod     INTEGER NOT NULL,
+   to_hit_bow        INTEGER NOT NULL,
+   hit_bow_mod       INTEGER NOT NULL,
+   to_hit_throw      INTEGER NOT NULL,
+   hit_throw_mod     INTEGER NOT NULL,
+   digging           INTEGER NOT NULL,
+   digging_mod       INTEGER NOT NULL,
+   hp                INTEGER NOT NULL,
+   exp               INTEGER NOT NULL,
+   sense_base        INTEGER NOT NULL,
+   sense_div         INTEGER NOT NULL,
+   max_attacks       INTEGER NOT NULL,
+   min_weight        INTEGER NOT NULL,
+   att_multiply      INTEGER NOT NULL,
+   spellbook_tval    INTEGER NOT NULL,
+   spell_stat        INTEGER NOT NULL,
+   first_lvl         INTEGER NOT NULL,
+   max_weight        INTEGER NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS charProperties (
    name  TEXT,
    guiId INTEGER NOT NULL,
