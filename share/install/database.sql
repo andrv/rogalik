@@ -86,6 +86,28 @@ CREATE TABLE IF NOT EXISTS theClass (
    max_weight        INTEGER NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS Flags (
+   id   INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+   abbr TEXT,
+   desc TEXT
+);
+
+CREATE TABLE IF NOT EXISTS race2flag (
+   race_id INTEGER,
+   flag_id INTEGER,
+   PRIMARY KEY( race_id, flag_id ),
+   FOREIGN KEY( race_id ) REFERENCES theRace( id ),
+   FOREIGN KEY( flag_id ) REFERENCES Flags( id )
+);
+
+CREATE TABLE IF NOT EXISTS class2flag (
+   class_id INTEGER,
+   flag_id  INTEGER,
+   PRIMARY KEY( class_id, flag_id ),
+   FOREIGN KEY( class_id ) REFERENCES theClass( id ),
+   FOREIGN KEY( flag_id ) REFERENCES Flags( id )
+);
+
 CREATE TABLE IF NOT EXISTS charProperties (
    name  TEXT,
    guiId INTEGER NOT NULL,
