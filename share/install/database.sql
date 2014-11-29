@@ -45,6 +45,11 @@ CREATE TABLE IF NOT EXISTS theRace (
    weight_female_mod INTEGER NOT NULL
 );
 
+INSERT INTO theRace VALUES(  1, 'Human',     0, 0,  0, 0,  0,  0,  0,  0, 0,  0, 10,   0,  0,  0, 0, 10, 100, 0,  1, 14,  6, 72, 6, 66, 4, 180, 25, 150, 20 );
+INSERT INTO theRace VALUES(  2, 'Half-Elf',  0, 1, -1, 1, -1,  2,  3,  3, 1,  6, 11,  -1,  5,  5, 0, 10, 110, 2,  4, 24, 16, 66, 6, 62, 6, 130, 15, 100, 10 );
+INSERT INTO theRace VALUES(  3, 'Elf',      -1, 2, -1, 1, -1,  5,  6,  6, 2,  8, 12,  -5, 15, 15, 0,  9, 120, 3,  5, 75, 75, 60, 4, 54, 4, 100,  6,  80,  6 );
+INSERT INTO theRace VALUES(  4, 'Hobbit',   -2, 2,  1, 3,  2, 15, 18, 18, 4, 12, 15, -10, 20, 20, 0,  7, 110, 4, 10, 21, 12, 36, 3, 33, 3,  60,  3,  50,  3 );
+
 CREATE TABLE IF NOT EXISTS theClass (
    id                INTEGER PRIMARY KEY ASC AUTOINCREMENT,
    name              TEXT    NOT NULL,
