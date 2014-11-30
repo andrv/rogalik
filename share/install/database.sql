@@ -100,10 +100,34 @@ CREATE TABLE IF NOT EXISTS theClass (
 );
 
 CREATE TABLE IF NOT EXISTS Flags (
-   id   INTEGER PRIMARY KEY ASC AUTOINCREMENT,
-   abbr TEXT,
-   desc TEXT
+   id     INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+   abbr   TEXT,
+   desc   TEXT,
+   hidden INTEGER
 );
+
+INSERT INTO Flags( abbr, desc ) VALUES( 'SUST_STR',                 'Sustains strength' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'SUST_DEX',                 'Sustains dexterity' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'SUST_CON',                 'Sustains constitution' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'RES_POISON',               'Resists poison' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'RES_LIGHT',                'Resists light damage' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'RES_DARK',                 'Resists darkness damage' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'RES_BLIND',                'Resists blindness' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'HOLD_LIFE',                'Sustains experience' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'FREE_ACT',                 'Resists paralysis' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'REGEN',                    'Regenerates quickly' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'SEE_INVIS',                'Sees invisible creatures' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'EXTRA_SHOT',               'Gains extra shots with bow' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'BRAVERY_30',               'Gains immunity to fear' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'BLESS_WEAPON',             'Prefers blunt/blessed weapons' );
+INSERT INTO Flags( abbr, desc, hidden ) VALUES( 'CUMBER_GLOVE',     'Have difficulty using magic with covered hands', 1 );
+INSERT INTO Flags( abbr, desc ) VALUES( 'ZERO_FAIL',                'Advanced spellcasting' );
+INSERT INTO Flags( abbr, desc, hidden ) VALUES( 'BEAM',             'Frequently turn bolt spells into beams', 1 );
+INSERT INTO Flags( abbr, desc, hidden ) VALUES( 'CHOOSE_SPELLS',    'May choose their own spells to study', 1 );
+INSERT INTO Flags( abbr, desc, hidden ) VALUES( 'PSEUDO_ID_IMPROV', 'Get better at pseudo id with experience', 1 );
+INSERT INTO Flags( abbr, desc ) VALUES( 'KNOW_MUSHROOM',            'Identifies mushrooms' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'KNOW_ZAPPER',              'Identifies magic devices' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'SEE_ORE',                  'Senses ore/minerals' );
 
 CREATE TABLE IF NOT EXISTS race2flag (
    race_id INTEGER,
