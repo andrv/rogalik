@@ -119,7 +119,7 @@ sub NEW {
 sub sexChanged {
     unless( this->sex()->currentIndex() )  {
         # do not show character data if no sex choosen
-        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom Charisma hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search bonusLine1 bonusLine2 ) ) {
+        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search bonusLine1 bonusLine2 ) ) {
             this->{$factor}->setText( this->tr( '' ) );
         }
 
@@ -142,7 +142,7 @@ sub raceChanged {
         this->characterFactors()->setEnabled( 1 );
 
         # update and show basic factors
-        foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom Charisma ) ) {
+        foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom ) ) {
             this->{$factor}->setText( this->tr( $factors{$factor} ) );
         }
 
@@ -159,7 +159,7 @@ sub raceChanged {
     }
     else {
         # do not show data if nothing choosen
-        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom Charisma hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
+        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
             this->{$factor}->setText( this->tr( '' ) );
         }
 
@@ -176,7 +176,7 @@ sub classChanged {
         my %classFactors = this->getFactors( this->class()->currentText() );
 
         # calculate basic factors
-        foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom Charisma ) ) {
+        foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom ) ) {
             my $sum = $raceFactors{$factor} + $classFactors{$factor};
             $sum = "+$sum" if $sum >= 0;
             this->{$factor}->setText( this->tr( $sum ) );
@@ -242,7 +242,7 @@ sub createBasicFactors {
 
     my ( $row, $column, $count ) = ( 0, 0, 0 );
 
-    foreach my $charFactor( qw( Strength Dexterity Intelligence Constitution Wisdom Charisma ) ) {
+    foreach my $charFactor( qw( Strength Dexterity Intelligence Constitution Wisdom ) ) {
         this->{$charFactor}  = Qt::Label( this->tr( '' ) );
 
         $basicFactors->addWidget( Qt::Label( this->tr( "$charFactor:" ) ), $row, $column );
