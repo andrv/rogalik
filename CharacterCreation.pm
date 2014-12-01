@@ -210,13 +210,18 @@ sub createCombo {
         class => "Your 'class' determines various intrinsic factors and bonuses",
     );
 
+    my %sql = ( # temporary
+        race  => 'select name from theRace order by id asc',
+        class => "select name from charProperties where type = 'class' order by guiId asc",
+    );
+
     my $combo = Qt::ComboBox();
     $combo->addItem( this->tr( "Choose $type..." ) );
     $combo->setToolTip( this->tr( $toolTip{$type} ) );
 
     unless( @data ) {
         # get data from db
-        my( $res, $rows, $rv ) = Rogalik::DB->execute( "select name from charProperties where type = '$type' order by guiId asc" );
+        my( $res, $rows, $rv ) = Rogalik::DB->execute( $sql{$type} );
 
         foreach my $line( @$res ) {
             push @data, $line->{name}
