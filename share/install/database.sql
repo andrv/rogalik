@@ -137,6 +137,23 @@ CREATE TABLE IF NOT EXISTS race2flag (
    FOREIGN KEY( flag_id ) REFERENCES Flags( id )
 );
 
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Half-Elf' AND f.abbr = 'SUST_DEX';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Elf' AND f.abbr = 'SUST_DEX';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Elf' AND f.abbr = 'RES_LIGHT';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Hobbit' AND f.abbr = 'HOLD_LIFE';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Hobbit' AND f.abbr = 'KNOW_MUSHROOM';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Gnome' AND f.abbr = 'FREE_ACT';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Gnome' AND f.abbr = 'KNOW_ZAPPER';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Dwarf' AND f.abbr = 'RES_BLIND';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Dwarf' AND f.abbr = 'SEE_ORE';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Half-Orc' AND f.abbr = 'RES_DARK';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Half-Troll' AND f.abbr = 'SUST_STR';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Half-Troll' AND f.abbr = 'REGEN';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Dunadan' AND f.abbr = 'RES_DARK';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'High-Elf' AND f.abbr = 'RES_LIGHT';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'High-Elf' AND f.abbr = 'SEE_INVIS';
+INSERT INTO race2flag( race_id, flag_id ) SELECT r.id, f.id FROM theRace r, Flags f WHERE r.name = 'Kobold' AND f.abbr = 'RES_POISON';
+
 CREATE TABLE IF NOT EXISTS class2flag (
    class_id INTEGER,
    flag_id  INTEGER,
