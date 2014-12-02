@@ -138,24 +138,25 @@ sub raceChanged {
     this->class()->setDisabled( 1 );
 
     if( this->race()->currentIndex() ) {
-        my %factors = this->getFactors( this->race()->currentText() );
+#        my %factors = this->getFactors( this->race()->currentText() );
+        my %stats = this->getStats( race => this->race()->currentText() );
         this->characterFactors()->setEnabled( 1 );
 
         # update and show basic factors
         foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom ) ) {
-            this->{$factor}->setText( this->tr( $factors{$factor} ) );
+            this->{$factor}->setText( this->tr( $stats{$factor} ) );
         }
 
         # update and show Hit/Shoot/Throw
-        this->showHitShootThrow(%factors);
+        this->showHitShootThrow(%stats);
 
         # update and show rest
         foreach my $factor( qw( HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
-            this->{$factor}->setText( this->tr( $factors{$factor} ) );
+            this->{$factor}->setText( this->tr( $stats{$factor} ) );
         }
 
-        # update and show bonuses
-        this->showBonuses( %factors );
+        # update and show flags
+        this->showFlags( %stats );
     }
     else {
         # do not show data if nothing choosen
@@ -376,6 +377,56 @@ sub getFactors {
     }
 
     return %ret;
+}
+
+sub getStats {
+    my $which = shift;
+    my $name  = shift;
+
+    my %table = (
+        race  => 'theRace',
+        class => 'theClass',
+    );
+
+    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select * from $table{$which} where name = '$name'" );
+    my %dbdata = %{$res->[0]};
+
+    my %ret = ();
+
+    while( my( $key, $value ) = each %dbdata ) {
+        if( grep( /$key/i, qw/ Strength Dexterity Intelligence Constitution Wisdom / ) ) {
+            $value = sprintf '%+d', $value if $value >= 0;
+            $value = sprintf '%-d', $value if $value <  0;
+            $ret{ucfirst $key} = $value;
+        }
+    }
+#$VAR1 = {
+#          'Intelligence' => '+1',
+#          'Dexterity' => '+1',
+#          'Charisma' => '+1',
+#          'Shoot' => '+5',
+#          'Hit' => '-1',
+#          'Wisdom' => '-1',
+#          'Devices' => '+3',
+#          'Save' => '+3',
+#          'Disarm' => '+2',
+#          'Search' => '+6/11',
+#          'HitDie' => '10',
+#          'Constitution' => '-1',
+#          'XPmod' => '110%',
+#          'Throw' => '+5',
+#          'bonus1' => 'Sustains dexterity',
+#          'Stealth' => '+1',
+#          'Strength' => '+0',
+#          'Infravision' => '20 ft',
+#          'Digging' => '+0'
+#        };
+    print Dumper \%ret;
+    return %ret;
+}
+
+sub showFlags {
+    my %stats = @_;
 }
 
 sub showBonuses {
