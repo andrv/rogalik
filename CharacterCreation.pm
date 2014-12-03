@@ -395,23 +395,25 @@ sub getStats {
 
     while( my( $key, $value ) = each %dbdata ) {
         if( grep( /$key/i, qw/ Strength Dexterity Intelligence Constitution Wisdom / ) ) {
-            $value = this->addSign( $value );
             $ret{ucfirst $key} = $value;
         }
 
         if( $key =~ m/melee/ ) {
-            $value = this->addSign( $value );
             $ret{Hit} = $value;
         }
 
         if( $key =~ m/bow/ ) {
-            $value = this->addSign( $value );
             $ret{Shoot} = $value;
         }
 
         if( $key =~ m/hit_throw/ ) {
-            $value = this->addSign( $value );
             $ret{Throw} = $value;
+        }
+    }
+
+    while( my( $key, $value ) = each %ret ) {
+        unless( grep( m/^$key$/, qw / XPmod Infravision / ) ) {
+            $ret{$key} = this->addSign( $value );
         }
     }
 #$VAR1 = {
