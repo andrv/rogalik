@@ -395,8 +395,7 @@ sub getStats {
 
     while( my( $key, $value ) = each %dbdata ) {
         if( grep( /$key/i, qw/ Strength Dexterity Intelligence Constitution Wisdom / ) ) {
-            $value = sprintf '%+d', $value if $value >= 0;
-            $value = sprintf '%-d', $value if $value <  0;
+            $value = this->addSign( $value );
             $ret{ucfirst $key} = $value;
         }
     }
@@ -423,6 +422,12 @@ sub getStats {
 #        };
     print Dumper \%ret;
     return %ret;
+}
+
+sub addSign {
+    my $number = shift;
+    return sprintf '%+d', $number if $number >= 0;
+    return sprintf '%-d', $number if $number <  0;
 }
 
 sub showFlags {
