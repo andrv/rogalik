@@ -156,7 +156,7 @@ sub raceChanged {
         }
 
         # update and show flags
-        this->showFlags( %stats );
+        this->showFlags( race => this->race()->currentText() );
     }
     else {
         # do not show data if nothing choosen
@@ -380,8 +380,7 @@ sub getFactors {
 }
 
 sub getStats {
-    my $which = shift;
-    my $name  = shift;
+    my( $which, $name ) = @_;
 
     my %table = (
         race  => 'theRace',
@@ -422,9 +421,7 @@ sub getStats {
             $ret{$key} = this->addSign( $value );
         }
     }
-#$VAR1 = {
-#          'bonus1' => 'Sustains dexterity',
-#        };
+
     print Dumper \%ret;
     return %ret;
 }
@@ -436,7 +433,23 @@ sub addSign {
 }
 
 sub showFlags {
-    my %stats = @_;
+    my( $which, $name ) = @_;
+
+    my %table = (
+        race  => 'theRace',
+        class => 'theClass',
+    );
+    my %toFlag = (
+        race  => 'race2flag',
+        class => 'class2flag',
+    );
+    my %toColmn = (
+        race  => 'race_id',
+        class => 'class_id',
+    );
+
+    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select Flags.id, Flags.abbr, Flags.desc from Flags, $toFlag{$which}, $table{$which} where Flags.hidden is null and Flags.id = $toFlag{$which}.flag_id and $toFlag{$which}.$toColmn{$which} = $table{$which}.id and $table{$which}.name = '$name'" );
+    print Dumper $res;
 }
 
 sub showBonuses {
