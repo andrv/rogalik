@@ -392,50 +392,38 @@ sub getStats {
     my %dbdata = %{$res->[0]};
 
     my %ret = ();
+    my %db2gui = (
+        to_hit_melee => 'Hit',
+        to_hit_bow   => 'Shoot',
+        to_hit_throw => 'Throw',
+        hp           => 'HitDie',
+        disarming    => 'Disarm',
+        magic_device => 'Devices',
+        saving_throw => 'Save',
+    );
 
-    while( my( $key, $value ) = each %dbdata ) {
-        if( grep( /$key/i, qw/ Strength Dexterity Intelligence Constitution Wisdom / ) ) {
-            $ret{ucfirst $key} = $value;
-        }
-
-        if( $key =~ m/melee/ ) {
-            $ret{Hit} = $value;
-        }
-
-        if( $key =~ m/bow/ ) {
-            $ret{Shoot} = $value;
-        }
-
-        if( $key =~ m/hit_throw/ ) {
-            $ret{Throw} = $value;
-        }
+    foreach my $key( qw/ Strength Dexterity Intelligence Constitution Wisdom Stealth Digging / ) {
+        $ret{$key} = $dbdata{lc $key};
     }
 
+    foreach my $key( keys %db2gui ) {
+        $ret{$db2gui{$key}} = $dbdata{$key};
+    }
+
+    $ret{XPmod}       = "$dbdata{exp}%";
+    $ret{Infravision} = "$dbdata{infravision} ft";
+
+    # search
+    $dbdata{search_ability} = this->addSign( $dbdata{search_ability} );
+    $ret{Search} = "$dbdata{search_ability}/$dbdata{search_freq}";
+
     while( my( $key, $value ) = each %ret ) {
-        unless( grep( m/^$key$/, qw / XPmod Infravision / ) ) {
+        unless( grep( m/^$key$/, qw / HitDie XPmod Infravision Search / ) ) {
             $ret{$key} = this->addSign( $value );
         }
     }
 #$VAR1 = {
-#          'Intelligence' => '+1',
-#          'Dexterity' => '+1',
-#          'Charisma' => '+1',
-#          'Shoot' => '+5',
-#          'Hit' => '-1',
-#          'Wisdom' => '-1',
-#          'Devices' => '+3',
-#          'Save' => '+3',
-#          'Disarm' => '+2',
-#          'Search' => '+6/11',
-#          'HitDie' => '10',
-#          'Constitution' => '-1',
-#          'XPmod' => '110%',
-#          'Throw' => '+5',
 #          'bonus1' => 'Sustains dexterity',
-#          'Stealth' => '+1',
-#          'Strength' => '+0',
-#          'Infravision' => '20 ft',
-#          'Digging' => '+0'
 #        };
     print Dumper \%ret;
     return %ret;
