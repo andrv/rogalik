@@ -358,8 +358,10 @@ sub createAdditionalFactors {
 sub prepareBonusArea {
     foreach my $i ( 1 .. 3 ) {
         this->{"bonusLine$i"} = Qt::Label( this->tr( '' ) );
-        this->{charFactorsLayout}->addWidget( this->{"bonusLine$i"}, 3+$i, 0 );
+        this->{charFactorsLayout}->addWidget( this->{"bonusLine$i"}, 3+$i, 0, Qt::AlignTop() );
         this->{charFactorsLayout}->setRowMinimumHeight( 3+$i, 17 );
+        #
+        this->{charFactorsLayout}->setRowMinimumHeight( 4, 51 );
     }
 }
 
@@ -422,7 +424,6 @@ sub getStats {
         }
     }
 
-    print Dumper \%ret;
     return %ret;
 }
 
@@ -435,21 +436,20 @@ sub addSign {
 sub showFlags {
     my( $which, $name ) = @_;
 
-    my %table = (
-        race  => 'theRace',
-        class => 'theClass',
-    );
-    my %toFlag = (
-        race  => 'race2flag',
-        class => 'class2flag',
-    );
-    my %toColmn = (
-        race  => 'race_id',
-        class => 'class_id',
-    );
+    my $table   = "the". ucfirst( $which );
+    my $toFlag  = "${which}2flag";
+    my $toColmn = "${which}_id";
 
-    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select Flags.id, Flags.abbr, Flags.desc from Flags, $toFlag{$which}, $table{$which} where Flags.hidden is null and Flags.id = $toFlag{$which}.flag_id and $toFlag{$which}.$toColmn{$which} = $table{$which}.id and $table{$which}.name = '$name'" );
-    print Dumper $res;
+    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select Flags.id, Flags.abbr, Flags.desc from Flags, $toFlag, $table where Flags.hidden is null and Flags.id = $toFlag.flag_id and $toFlag.$toColmn = $table.id and $table.name = '$name' order by Flags.id" );
+    
+    my @flags;
+
+    foreach my $flag( @$res ) {
+        push @flags, $flag->{desc};
+    }
+
+    this->{"bonusLine$_"}->setText( this->tr( '' ) ) for qw/ 1 2 3 /;
+    this->{"bonusLine1"}->setText( this->tr( join "\n", @flags ) );
 }
 
 sub showBonuses {
