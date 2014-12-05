@@ -138,7 +138,6 @@ sub raceChanged {
     this->class()->setDisabled( 1 );
 
     if( this->race()->currentIndex() ) {
-#        my %factors = this->getFactors( this->race()->currentText() );
         my %stats = this->getStats( race => this->race()->currentText() );
         this->characterFactors()->setEnabled( 1 );
 
