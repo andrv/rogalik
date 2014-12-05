@@ -67,24 +67,24 @@ CREATE TABLE IF NOT EXISTS theClass (
    dexterity         INTEGER NOT NULL,
    constitution      INTEGER NOT NULL,
    disarming         INTEGER NOT NULL,
-   disarm_mod        INTEGER NOT NULL,
    magic_device      INTEGER NOT NULL,
-   dev_mod           INTEGER NOT NULL,
    saving_throw      INTEGER NOT NULL,
-   sav_mod           INTEGER NOT NULL,
    stealth           INTEGER NOT NULL,
-   stealth_mod       INTEGER NOT NULL,
    search_ability    INTEGER NOT NULL,
-   search_mod        INTEGER NOT NULL,
    search_freq       INTEGER NOT NULL,
-   search_freq_mod   INTEGER NOT NULL,
    to_hit_melee      INTEGER NOT NULL,
-   hit_melee_mod     INTEGER NOT NULL,
    to_hit_bow        INTEGER NOT NULL,
-   hit_bow_mod       INTEGER NOT NULL,
    to_hit_throw      INTEGER NOT NULL,
-   hit_throw_mod     INTEGER NOT NULL,
    digging           INTEGER NOT NULL,
+   disarm_mod        INTEGER NOT NULL,
+   dev_mod           INTEGER NOT NULL,
+   sav_mod           INTEGER NOT NULL,
+   stealth_mod       INTEGER NOT NULL,
+   search_mod        INTEGER NOT NULL,
+   search_freq_mod   INTEGER NOT NULL,
+   hit_melee_mod     INTEGER NOT NULL,
+   hit_bow_mod       INTEGER NOT NULL,
+   hit_throw_mod     INTEGER NOT NULL,
    digging_mod       INTEGER NOT NULL,
    hp                INTEGER NOT NULL,
    exp               INTEGER NOT NULL,
@@ -98,6 +98,8 @@ CREATE TABLE IF NOT EXISTS theClass (
    first_lvl         INTEGER NOT NULL,
    max_weight        INTEGER NOT NULL
 );
+
+INSERT INTO theClass VALUES( 1, 'Warrior', 3, -2, -2, 2, 2, 25, 18, 18,  0, 14,  2, 70, 55, 55, 0, 10, 7, 10, 0, 0, 0, 45, 45, 45, 0, 9, 0, 7000, 40, 6, 30, 5, 0, 0, 0, 0 );
 
 CREATE TABLE IF NOT EXISTS Flags (
    id     INTEGER PRIMARY KEY ASC AUTOINCREMENT,
@@ -161,6 +163,9 @@ CREATE TABLE IF NOT EXISTS class2flag (
    FOREIGN KEY( class_id ) REFERENCES theClass( id ),
    FOREIGN KEY( flag_id ) REFERENCES Flags( id )
 );
+
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Warrior' AND f.abbr = 'BRAVERY_30';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Warrior' AND f.abbr = 'PSEUDO_ID_IMPROV';
 
 CREATE TABLE IF NOT EXISTS charProperties (
    name  TEXT,
