@@ -99,7 +99,12 @@ CREATE TABLE IF NOT EXISTS theClass (
    max_weight        INTEGER NOT NULL
 );
 
-INSERT INTO theClass VALUES( 1, 'Warrior', 3, -2, -2, 2, 2, 25, 18, 18,  0, 14,  2, 70, 55, 55, 0, 10, 7, 10, 0, 0, 0, 45, 45, 45, 0, 9, 0, 7000, 40, 6, 30, 5, 0, 0, 0, 0 );
+INSERT INTO theClass VALUES( 1, 'Warrior',  3, -2, -2,  2,  2, 25, 18, 18,  0, 14,  2, 70, 55, 55, 0, 10,  7, 10, 0, 0, 0, 45, 45, 45, 0, 9,  0,   7000, 40, 6, 30, 5,  0, 0, 0,   0 );
+INSERT INTO theClass VALUES( 2, 'Mage',    -3,  3,  0,  0, -2, 30, 36, 30,  2, 16, 20, 34, 20, 20, 0,  7, 13,  9, 0, 0, 0, 15, 15, 15, 0, 0, 30, 170000,  5, 4, 40, 2, 90, 1, 1, 300 );
+INSERT INTO theClass VALUES( 3, 'Priest',  -1, -3,  3, -1,  1, 25, 30, 32,  2, 16,  8, 48, 35, 35, 0,  7, 10, 12, 0, 0, 0, 20, 20, 20, 0, 2, 20,  15000, 40, 4, 35, 3, 91, 2, 1, 350 );
+INSERT INTO theClass VALUES( 4, 'Rogue',    0,  1, -3,  3, -1, 45, 32, 28,  3, 32, 24, 60, 66, 66, 0, 15, 10, 10, 1, 0, 0, 40, 30, 30, 0, 6, 25,  10000, 40, 5, 30, 4, 90, 1, 5, 350 );
+INSERT INTO theClass VALUES( 5, 'Ranger',   0,  2, -2,  1, -1, 30, 32, 28,  3, 24, 16, 56, 72, 72, 0,  8, 10, 10, 0, 0, 0, 30, 45, 45, 0, 4, 30,  20000, 40, 5, 35, 4, 90, 1, 3, 400 );
+INSERT INTO theClass VALUES( 6, 'Paladin',  1, -3,  1, -1,  2, 20, 24, 25,  0, 12,  2, 68, 40, 40, 0,  7, 10, 11, 0, 0, 0, 35, 30, 30, 0, 6, 35,  60000, 40, 5, 30, 5, 91, 2, 1, 400 );
 
 CREATE TABLE IF NOT EXISTS Flags (
    id     INTEGER PRIMARY KEY ASC AUTOINCREMENT,
@@ -166,6 +171,21 @@ CREATE TABLE IF NOT EXISTS class2flag (
 
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Warrior' AND f.abbr = 'BRAVERY_30';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Warrior' AND f.abbr = 'PSEUDO_ID_IMPROV';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Mage' AND f.abbr = 'CUMBER_GLOVE';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Mage' AND f.abbr = 'ZERO_FAIL';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Mage' AND f.abbr = 'BEAM';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Mage' AND f.abbr = 'CHOOSE_SPELLS';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Priest' AND f.abbr = 'BLESS_WEAPON';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Priest' AND f.abbr = 'ZERO_FAIL';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Priest' AND f.abbr = 'PSEUDO_ID_IMPROV';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Rogue' AND f.abbr = 'CUMBER_GLOVE';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Rogue' AND f.abbr = 'CHOOSE_SPELLS';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Rogue' AND f.abbr = 'PSEUDO_ID_IMPROV';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Ranger' AND f.abbr = 'CUMBER_GLOVE';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Ranger' AND f.abbr = 'EXTRA_SHOT';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Ranger' AND f.abbr = 'CHOOSE_SPELLS';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Ranger' AND f.abbr = 'PSEUDO_ID_IMPROV';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Paladin' AND f.abbr = 'PSEUDO_ID_IMPROV';
 
 CREATE TABLE IF NOT EXISTS charProperties (
    name  TEXT,
