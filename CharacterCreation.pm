@@ -138,29 +138,16 @@ sub raceChanged {
     this->class()->setDisabled( 1 );
 
     if( this->race()->currentIndex() ) {
-        my %stats = this->getStats( race => this->race()->currentText() );
+        this->changeStats( race => this->race()->currentText() );
         this->characterFactors()->setEnabled( 1 );
-
-        # update and show basic factors
-        foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom ) ) {
-            this->{$factor}->setText( this->tr( $stats{$factor} ) );
-        }
-
-        # update and show Hit/Shoot/Throw
-        this->showHitShootThrow(%stats);
-
-        # update and show rest
-        foreach my $factor( qw( HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
-            this->{$factor}->setText( this->tr( $stats{$factor} ) );
-        }
 
         # update and show flags
         this->showFlags( race => this->race()->currentText() );
     }
     else {
         # do not show data if nothing choosen
-        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
-            this->{$factor}->setText( this->tr( '' ) );
+        foreach my $stat( qw ( Strength Dexterity Intelligence Constitution Wisdom hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
+            this->{$stat}->setText( this->tr( '' ) );
         }
 
         this->characterFactors()->setDisabled( 1 );
@@ -172,26 +159,13 @@ sub raceChanged {
 
 sub classChanged {
     if( this->class()->currentIndex() ) {
-        my %raceFactors  = this->getFactors( this->race()->currentText() );
-        my %classFactors = this->getFactors( this->class()->currentText() );
+        this->changeStats(
+            class => this->class()->currentText(),
+            race  => this->race()->currentText(),
+        );
 
-        # calculate basic factors
-        foreach my $factor( qw( Strength Dexterity Intelligence Constitution Wisdom ) ) {
-            my $sum = $raceFactors{$factor} + $classFactors{$factor};
-            $sum = "+$sum" if $sum >= 0;
-            this->{$factor}->setText( this->tr( $sum ) );
-        }
-
-        # update and show Hit/Shoot/Throw
-        this->showHitShootThrow(%classFactors);
-
-        # update and show rest
-        foreach my $factor( qw( HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
-            this->{$factor}->setText( this->tr( $classFactors{$factor} ) );
-        }
-
-        # update and show bonuses
-        this->showBonuses(%classFactors);
+        # update and show flags
+        this->showFlags( class => this->class()->currentText() );
     }
     else {
         # show race factors
@@ -355,41 +329,27 @@ sub createAdditionalFactors {
 }
 
 sub prepareBonusArea {
-    foreach my $i ( 1 .. 3 ) {
-        this->{"bonusLine$i"} = Qt::Label( this->tr( '' ) );
-        this->{charFactorsLayout}->addWidget( this->{"bonusLine$i"}, 3+$i, 0, Qt::AlignTop() );
-        this->{charFactorsLayout}->setRowMinimumHeight( 3+$i, 17 );
-        #
-        this->{charFactorsLayout}->setRowMinimumHeight( 4, 51 );
-    }
+    this->{"bonusLine1"} = Qt::Label( this->tr( '' ) );
+    this->{charFactorsLayout}->addWidget( this->{"bonusLine1"}, 4, 0, Qt::AlignTop() );
+    this->{charFactorsLayout}->setRowMinimumHeight( 4, 51 );
 }
 
-sub getFactors {
-    my $race = shift;
+sub changeStats {
+    my %args = @_;
+    my @fields = qw/ strength dexterity intelligence constitution wisdom disarming magic_device saving_throw stealth search_ability search_freq to_hit_melee to_hit_bow to_hit_throw digging hp exp infravision /;
 
-    my ( $result, $rows, $rv ) = Rogalik::DB->execute(
-        "select factor, value from charFactors where property = '$race'"
-    );
-
-    my %ret = ();
-
-    foreach my $line( @$result ) {
-        $ret{$line->{factor}} = $line->{value};
-    }
-
-    return %ret;
-}
-
-sub getStats {
-    my( $which, $name ) = @_;
-
-    my %table = (
-        race  => 'theRace',
-        class => 'theClass',
-    );
-
-    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select * from $table{$which} where name = '$name'" );
+    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select @{[ join ', ', @fields ]} from theRace where name = '$args{race}'" );
     my %dbdata = %{$res->[0]};
+
+    if( exists $args{class} ) {
+        pop @fields;
+        my( $res, $rows, $rv ) = Rogalik::DB->execute( "select @{[ join ', ', @fields ]} from theClass where name = '$args{class}'" );
+
+        # calculate race + class stats
+        foreach my $field( keys %{$res->[0]} ) {
+            $dbdata{$field} += $res->[0]->{$field};
+        }
+    }
 
     my %ret = ();
     my %db2gui = (
@@ -411,7 +371,7 @@ sub getStats {
     }
 
     $ret{XPmod}       = "$dbdata{exp}%";
-    $ret{Infravision} = "$dbdata{infravision} ft";
+    $ret{Infravision} = ($dbdata{infravision} * 10) ." ft";
 
     # search
     $dbdata{search_ability} = this->addSign( $dbdata{search_ability} );
@@ -423,7 +383,18 @@ sub getStats {
         }
     }
 
-    return %ret;
+    # update and show basic factors
+    foreach my $stat( qw( Strength Dexterity Intelligence Constitution Wisdom ) ) {
+        this->{$stat}->setText( this->tr( $ret{$stat} ) );
+    }
+
+    # update and show Hit/Shoot/Throw
+    this->showHitShootThrow(%ret);
+
+    # update and show rest
+    foreach my $stat( qw( HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
+        this->{$stat}->setText( this->tr( $ret{$stat} ) );
+    }
 }
 
 sub addSign {
@@ -443,22 +414,26 @@ sub showFlags {
     
     my @flags;
 
+    if( $which eq 'class' ) {
+        my $spellbook = Rogalik::DB->get(
+            'theClass',
+            'spellbook_tval',
+            this->class()->currentIndex(),
+        );
+        if( $spellbook == 90 ) {
+            push @flags, 'Learns arcane magic';
+        }
+        elsif( $spellbook == 91 ) {
+            push @flags, 'Learns divine magic';
+        }
+    }
+
     foreach my $flag( @$res ) {
         push @flags, $flag->{desc};
     }
 
-    this->{"bonusLine$_"}->setText( this->tr( '' ) ) for qw/ 1 2 3 /;
+    this->{"bonusLine1"}->setText( this->tr( '' ) );
     this->{"bonusLine1"}->setText( this->tr( join "\n", @flags ) );
-}
-
-sub showBonuses {
-    my %factors = @_;
-    return unless %factors;
-
-    foreach my $i(qw(1 2 3)) {
-        this->{"bonusLine$i"}->setText(this->tr(''));
-        this->{"bonusLine$i"}->setText(this->tr( $factors{"bonus$i"} )) if exists $factors{"bonus$i"};
-    }
 }
 
 sub showHitShootThrow {
