@@ -119,7 +119,7 @@ sub NEW {
 sub sexChanged {
     unless( this->sex()->currentIndex() )  {
         # do not show character data if no sex choosen
-        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search bonusLine1 bonusLine2 ) ) {
+        foreach my $factor( qw ( Strength Dexterity Intelligence Constitution Wisdom hitShootThrow HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search bonusLine1 ) ) {
             this->{$factor}->setText( this->tr( '' ) );
         }
 
@@ -184,18 +184,13 @@ sub createCombo {
         class => "Your 'class' determines various intrinsic factors and bonuses",
     );
 
-    my %sql = ( # temporary
-        race  => 'select name from theRace order by id asc',
-        class => "select name from charProperties where type = 'class' order by guiId asc",
-    );
-
     my $combo = Qt::ComboBox();
     $combo->addItem( this->tr( "Choose $type..." ) );
     $combo->setToolTip( this->tr( $toolTip{$type} ) );
 
     unless( @data ) {
         # get data from db
-        my( $res, $rows, $rv ) = Rogalik::DB->execute( $sql{$type} );
+        my( $res, $rows, $rv ) = Rogalik::DB->execute( "select name from the@{[ucfirst $type]} order by id asc" );
 
         foreach my $line( @$res ) {
             push @data, $line->{name}

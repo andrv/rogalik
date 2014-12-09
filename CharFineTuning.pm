@@ -80,7 +80,7 @@ sub basicsOne {
 
     my $table = Qt::GridLayout();
 
-    my( $res, $row, $rv ) = Rogalik::DB->execute( "select name, sex, race, class from theCharacter where id = $charId" );
+    my( $res, $row, $rv ) = Rogalik::DB->execute( "select ch.name, sex, r.name as race, c.name as class from theCharacter ch, theRace r, theClass c where ch.id = $charId and ch.race = r.id and ch.class = c.id" );
 
     $table->addWidget( Qt::Label( this->tr( 'Name' ) ),             0, 0 );
     $table->addWidget( Qt::Label( this->tr( 'Sex' ) ),              1, 0 );

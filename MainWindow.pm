@@ -61,8 +61,8 @@ sub nextStep {
                     my( $res, $rows, $rv ) = Rogalik::DB->execute(
                         "insert into theCharacter( sex, race, class, updated ) values( '" .
                         this->sex()->currentText() . "', '" .
-                        this->race()->currentText() . "', '" .
-                        this->class()->currentText() . "', " .
+                        this->race()->currentIndex() . "', '" .
+                        this->class()->currentIndex() . "', " .
                         "datetime( 'now' ) " .
                         ")"
                     );
