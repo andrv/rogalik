@@ -140,6 +140,7 @@ CREATE TABLE IF NOT EXISTS race2flag (
    race_id INTEGER,
    flag_id INTEGER,
    PRIMARY KEY( race_id, flag_id ),
+   --
    FOREIGN KEY( race_id ) REFERENCES theRace( id ),
    FOREIGN KEY( flag_id ) REFERENCES Flags( id )
 );
@@ -165,6 +166,7 @@ CREATE TABLE IF NOT EXISTS class2flag (
    class_id INTEGER,
    flag_id  INTEGER,
    PRIMARY KEY( class_id, flag_id ),
+   --
    FOREIGN KEY( class_id ) REFERENCES theClass( id ),
    FOREIGN KEY( flag_id ) REFERENCES Flags( id )
 );
@@ -200,3 +202,77 @@ CREATE TABLE IF NOT EXISTS theCharacter (
    FOREIGN KEY( class ) REFERENCES theClass( id )
 );
 
+CREATE TABLE IF NOT EXISTS Title (
+   id    INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+   name  TEXT NOT NULL,
+   idx INTEGER NOT NULL,
+   class INTEGER NOT NULL,
+   --
+   FOREIGN KEY( class ) REFERENCES theClass( id )
+);
+
+INSERT INTO Title( name, idx, class ) VALUES( 'Rookie', 1, ( SELECT id FROM theClass WHERE name = 'Warrior' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Soldier', 2, ( SELECT id FROM theClass WHERE name = 'Warrior' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Swordsman', 3, ( SELECT id FROM theClass WHERE name = 'Warrior' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Swashbuckler', 4, ( SELECT id FROM theClass WHERE name = 'Warrior' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Veteran', 5, ( SELECT id FROM theClass WHERE name = 'Warrior' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Myrmidon', 6, ( SELECT id FROM theClass WHERE name = 'Warrior' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Commando', 7, ( SELECT id FROM theClass WHERE name = 'Warrior' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Champion', 8, ( SELECT id FROM theClass WHERE name = 'Warrior' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Hero', 9, ( SELECT id FROM theClass WHERE name = 'Warrior' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Lord', 10, ( SELECT id FROM theClass WHERE name = 'Warrior' ) );
+
+INSERT INTO Title( name, idx, class ) VALUES( 'Novice', 1, ( SELECT id FROM theClass WHERE name = 'Mage' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Apprentice', 2, ( SELECT id FROM theClass WHERE name = 'Mage' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Trickster', 3, ( SELECT id FROM theClass WHERE name = 'Mage' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Illusionist', 4, ( SELECT id FROM theClass WHERE name = 'Mage' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Spellbinder', 5, ( SELECT id FROM theClass WHERE name = 'Mage' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Evoker', 6, ( SELECT id FROM theClass WHERE name = 'Mage' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Conjurer', 7, ( SELECT id FROM theClass WHERE name = 'Mage' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Warlock', 8, ( SELECT id FROM theClass WHERE name = 'Mage' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Sorcerer', 9, ( SELECT id FROM theClass WHERE name = 'Mage' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Arch-Mage', 10, ( SELECT id FROM theClass WHERE name = 'Mage' ) );
+
+INSERT INTO Title( name, idx, class ) VALUES( 'Believer', 1, ( SELECT id FROM theClass WHERE name = 'Priest' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Acolyte', 2, ( SELECT id FROM theClass WHERE name = 'Priest' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Adept', 3, ( SELECT id FROM theClass WHERE name = 'Priest' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Evangelist', 4, ( SELECT id FROM theClass WHERE name = 'Priest' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Priest', 5, ( SELECT id FROM theClass WHERE name = 'Priest' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Curate', 6, ( SELECT id FROM theClass WHERE name = 'Priest' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Canon', 7, ( SELECT id FROM theClass WHERE name = 'Priest' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Bishop', 8, ( SELECT id FROM theClass WHERE name = 'Priest' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Prophet', 9, ( SELECT id FROM theClass WHERE name = 'Priest' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Patriarch', 10, ( SELECT id FROM theClass WHERE name = 'Priest' ) );
+
+INSERT INTO Title( name, idx, class ) VALUES( 'Vagabond', 1, ( SELECT id FROM theClass WHERE name = 'Rogue' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Cutpurse', 2, ( SELECT id FROM theClass WHERE name = 'Rogue' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Footpad', 3, ( SELECT id FROM theClass WHERE name = 'Rogue' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Robber', 4, ( SELECT id FROM theClass WHERE name = 'Rogue' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Burglar', 5, ( SELECT id FROM theClass WHERE name = 'Rogue' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Filcher', 6, ( SELECT id FROM theClass WHERE name = 'Rogue' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Sharper', 7, ( SELECT id FROM theClass WHERE name = 'Rogue' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Rogue', 8, ( SELECT id FROM theClass WHERE name = 'Rogue' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Thief', 9, ( SELECT id FROM theClass WHERE name = 'Rogue' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Master Thief', 10, ( SELECT id FROM theClass WHERE name = 'Rogue' ) );
+
+INSERT INTO Title( name, idx, class ) VALUES( 'Runner', 1, ( SELECT id FROM theClass WHERE name = 'Ranger' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Strider', 2, ( SELECT id FROM theClass WHERE name = 'Ranger' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Scout', 3, ( SELECT id FROM theClass WHERE name = 'Ranger' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Courser', 4, ( SELECT id FROM theClass WHERE name = 'Ranger' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Tracker', 5, ( SELECT id FROM theClass WHERE name = 'Ranger' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Guide', 6, ( SELECT id FROM theClass WHERE name = 'Ranger' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Explorer', 7, ( SELECT id FROM theClass WHERE name = 'Ranger' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Pathfinder', 8, ( SELECT id FROM theClass WHERE name = 'Ranger' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Ranger', 9, ( SELECT id FROM theClass WHERE name = 'Ranger' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Ranger Lord', 10, ( SELECT id FROM theClass WHERE name = 'Ranger' ) );
+
+INSERT INTO Title( name, idx, class ) VALUES( 'Gallant', 1, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Keeper', 2, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Protector', 3, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Defender', 4, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Warder', 5, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Knight', 6, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Guardian', 7, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Chevalier', 8, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Paladin', 9, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
+INSERT INTO Title( name, idx, class ) VALUES( 'Paladin Lord', 10, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
