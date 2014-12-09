@@ -57,7 +57,7 @@ sub NEW {
     # space between top and middle
     $layout->setRowMinimumHeight( 3, 20 );
 
-    $layout->addWidget( this->detailedOne(),   4, 1 );
+    $layout->addWidget( this->detailedOne( $characterId ),   4, 1 );
     $layout->addWidget( this->detailedTwo(),   4, 3 );
     $layout->addWidget( this->detailedThree(), 4, 5 );
 
@@ -199,27 +199,29 @@ sub qualities {
 }
 
 sub detailedOne {
+    my $chId = shift;
+    my( $res, $row, $rv ) = Rogalik::DB->execute( "select lvl from theCharacter where id = $chId" );
     my $table = Qt::GridLayout();
 
     $table->addWidget( Qt::Label( this->tr( 'Level' ) ),         0, 0 );
     $table->addWidget( Qt::Label( this->tr( 'Cur Exp' ) ),       1, 0 );
     $table->addWidget( Qt::Label( this->tr( 'Max Exp' ) ),       2, 0 );
     $table->addWidget( Qt::Label( this->tr( 'Adv Exp' ) ),       3, 0 );
-    $table->addWidget( Qt::Label( this->tr( '' ) ),              4, 0 ); # spaser
+    $table->addWidget( Qt::Label( this->tr( '' ) ),              4, 0 ); # spacer
     $table->addWidget( Qt::Label( this->tr( 'Gold' ) ),          5, 0 );
     $table->addWidget( Qt::Label( this->tr( 'Burden' ) ),        6, 0 );
     $table->addWidget( Qt::Label( this->tr( 'Speed' ) ),         7, 0 );
     $table->addWidget( Qt::Label( this->tr( 'Max Depth' ) ),     8, 0 );
 
-    $table->addWidget( Qt::Label( this->tr( '1 (tbd)' ) ),       0, 1 );
-    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),       1, 1 );
-    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),       2, 1 );
-    $table->addWidget( Qt::Label( this->tr( '10 (tbd)' ) ),      3, 1 );
+    $table->addWidget( Qt::Label( this->tr( $res->[0]->{lvl} ) ), 0, 1 );
+    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),        1, 1 );
+    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),        2, 1 );
+    $table->addWidget( Qt::Label( this->tr( '10 (tbd)' ) ),       3, 1 );
     # spacer
-    $table->addWidget( Qt::Label( this->tr( '600 (tbd)' ) ),     5, 1 );
-    $table->addWidget( Qt::Label( this->tr( '0.0 lbs (tbd)' ) ), 6, 1 );
-    $table->addWidget( Qt::Label( this->tr( 'Normal (tbd)' ) ),  7, 1 );
-    $table->addWidget( Qt::Label( this->tr( 'Town (tbd)' ) ),    8, 1 );
+    $table->addWidget( Qt::Label( this->tr( '600 (tbd)' ) ),      5, 1 );
+    $table->addWidget( Qt::Label( this->tr( '0.0 lbs (tbd)' ) ),  6, 1 );
+    $table->addWidget( Qt::Label( this->tr( 'Normal (tbd)' ) ),   7, 1 );
+    $table->addWidget( Qt::Label( this->tr( 'Town (tbd)' ) ),     8, 1 );
 
     my $groupBox = Qt::GroupBox();
     $groupBox->setLayout( $table );

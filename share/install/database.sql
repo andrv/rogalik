@@ -195,6 +195,7 @@ CREATE TABLE IF NOT EXISTS theCharacter (
    sex     TEXT NOT NULL,
    race    INTEGER NOT NULL,
    class   INTEGER NOT NULL,
+   lvl     INTEGER,
    updated DATETIME NOT NULL,
    dead    DATETIME,
    --
