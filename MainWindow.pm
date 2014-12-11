@@ -101,9 +101,11 @@ sub nextStep {
         }
     }
     elsif( $centralWidget eq 'Fine tuning' ) {
-        this->centralWidget->char->name( this->centralWidget()->name()->text() );
-        this->centralWidget()->{charName}->setText( this->tr( this->centralWidget->char->name ) );
-        this->centralWidget()->name()->setDisabled( 1 );
+        unless( this->centralWidget->char->name ) {
+            this->centralWidget->char->name( this->centralWidget()->name()->text() );
+            this->centralWidget()->{charName}->setText( this->tr( this->centralWidget->char->name ) );
+            this->centralWidget()->name()->setDisabled( 1 );
+        }
     }
 }
 
