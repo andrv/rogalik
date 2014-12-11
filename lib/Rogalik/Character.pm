@@ -11,6 +11,7 @@ use warnings;
 
 use 5.010;
 use Moose;
+use Data::Dumper;
 #
 #use lib 'lib';
 use Rogalik::DB;
@@ -62,9 +63,39 @@ sub _race {
     return { id => $res->[0]->{id}, name => $res->[0]->{race} };
 }
 
+has class => (
+    is      => 'ro',
+    isa     => 'HashRef[Str|Int]',
+    lazy    => 1,
+    builder => '_class',
+);
+
+sub _class {
+    my $self = shift;
+    my( $res, $rows, $rv ) = Rogalik::DB->execute(
+        "select c.id, c.name as class from theClass c, theCharacter ch where ch.id = @{[$self->id]} and ch.class = c.id"
+    );
+    return { id => $res->[0]->{id}, name => $res->[0]->{class} };
+}
+
+has level => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_level',
+    trigger => \&_db_sync,
+);
+
+sub _level {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'lvl', $self->id );
+}
+
 sub _db_sync {
     my( $self, $new, $old ) = @_;
-    Rogalik::DB->set( 'theCharacter', 'name', "'$new'", $self->id );
+    my( undef, undef, undef, $caller ) = caller( 1 );
+    my( $field ) = $caller =~ m/Rogalik::Character::(\w+)$/;
+    Rogalik::DB->set( 'theCharacter', $field, "'$new'", $self->id );
     Rogalik::DB->set( 'theCharacter', 'updated', "datetime( 'now' )", $self->id );
 }
 

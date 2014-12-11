@@ -95,13 +95,13 @@ sub basicsOne {
     $table->addWidget( Qt::Label( this->tr( 'SP' ) ),               6, 0 );
 
     this->{charName} = Qt::Label( this->tr( this->char->name ) );
-    $table->addWidget( this->{charName},                                  0, 1 );
-    $table->addWidget( Qt::Label( this->tr( this->char->sex ) ),          1, 1 );
-    $table->addWidget( Qt::Label( this->tr( this->char->race->{name} ) ), 2, 1 );
-    $table->addWidget( Qt::Label( this->tr( $res->[0]->{class} ) ),       3, 1 );
-    $table->addWidget( Qt::Label( this->tr( 'Rookie (tbd)' ) ),           4, 1 );
-    $table->addWidget( Qt::Label( this->tr( '19/19 (tbd)' ) ),            5, 1 );
-    $table->addWidget( Qt::Label( this->tr( '0/0 (tbd)' ) ),              6, 1 );
+    $table->addWidget( this->{charName},                                   0, 1 );
+    $table->addWidget( Qt::Label( this->tr( this->char->sex ) ),           1, 1 );
+    $table->addWidget( Qt::Label( this->tr( this->char->race->{name} ) ),  2, 1 );
+    $table->addWidget( Qt::Label( this->tr( this->char->class->{name} ) ), 3, 1 );
+    $table->addWidget( Qt::Label( this->tr( 'Rookie (tbd)' ) ),            4, 1 );
+    $table->addWidget( Qt::Label( this->tr( '19/19 (tbd)' ) ),             5, 1 );
+    $table->addWidget( Qt::Label( this->tr( '0/0 (tbd)' ) ),               6, 1 );
 
     my $groupBox = Qt::GroupBox();
     $groupBox->setLayout( $table );
@@ -217,15 +217,15 @@ sub detailedOne {
     $table->addWidget( Qt::Label( this->tr( 'Speed' ) ),         7, 0 );
     $table->addWidget( Qt::Label( this->tr( 'Max Depth' ) ),     8, 0 );
 
-    $table->addWidget( Qt::Label( this->tr( $res->[0]->{lvl} ) ), 0, 1 );
-    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),        1, 1 );
-    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),        2, 1 );
-    $table->addWidget( Qt::Label( this->tr( '10 (tbd)' ) ),       3, 1 );
+    $table->addWidget( Qt::Label( this->tr( this->char->level ) ), 0, 1 );
+    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),         1, 1 );
+    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),         2, 1 );
+    $table->addWidget( Qt::Label( this->tr( '10 (tbd)' ) ),        3, 1 );
     # spacer
-    $table->addWidget( Qt::Label( this->tr( '600 (tbd)' ) ),      5, 1 );
-    $table->addWidget( Qt::Label( this->tr( '0.0 lbs (tbd)' ) ),  6, 1 );
-    $table->addWidget( Qt::Label( this->tr( 'Normal (tbd)' ) ),   7, 1 );
-    $table->addWidget( Qt::Label( this->tr( 'Town (tbd)' ) ),     8, 1 );
+    $table->addWidget( Qt::Label( this->tr( '600 (tbd)' ) ),       5, 1 );
+    $table->addWidget( Qt::Label( this->tr( '0.0 lbs (tbd)' ) ),   6, 1 );
+    $table->addWidget( Qt::Label( this->tr( 'Normal (tbd)' ) ),    7, 1 );
+    $table->addWidget( Qt::Label( this->tr( 'Town (tbd)' ) ),      8, 1 );
 
     my $groupBox = Qt::GroupBox();
     $groupBox->setLayout( $table );
