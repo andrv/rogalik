@@ -101,8 +101,8 @@ sub nextStep {
         }
     }
     elsif( $centralWidget eq 'Fine tuning' ) {
-        Rogalik::DB->set( 'theCharacter', 'name', "'".this->centralWidget()->name()->text()."'", this->currentCharId() );
-        this->centralWidget()->{charName}->setText( this->tr( this->centralWidget()->name()->text() ) );
+        this->centralWidget->char->name( this->centralWidget()->name()->text() );
+        this->centralWidget()->{charName}->setText( this->tr( this->centralWidget->char->name ) );
         this->centralWidget()->name()->setDisabled( 1 );
     }
 }

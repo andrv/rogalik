@@ -12,6 +12,7 @@ use QtCore4::isa qw( Qt::Widget );
 
 use lib 'lib';
 use Rogalik::DB;
+use Rogalik::Character;
 
 
 sub NEW {
@@ -41,6 +42,9 @@ sub NEW {
     # name input field
     this->setName( Qt::LineEdit() );
     $layout->addWidget( this->name(), 1, 2, 1, 2 );
+
+    # initiate char object
+    this->{character} = Rogalik::Character->new( id => $characterId );
 
     $layout->addWidget( this->basicsOne( $characterId ), 2, 1 );
 
@@ -90,7 +94,7 @@ sub basicsOne {
     $table->addWidget( Qt::Label( this->tr( 'HP' ) ),               5, 0 );
     $table->addWidget( Qt::Label( this->tr( 'SP' ) ),               6, 0 );
 
-    this->{charName} = Qt::Label( this->tr( $res->[0]->{name} ) );
+    this->{charName} = Qt::Label( this->tr( this->char->name ) );
     $table->addWidget( this->{charName},                            0, 1 );
     $table->addWidget( Qt::Label( this->tr( $res->[0]->{sex} ) ),   1, 1 );
     $table->addWidget( Qt::Label( this->tr( $res->[0]->{race} ) ),  2, 1 );
@@ -294,5 +298,7 @@ sub setNameLabel { this->{nameLabel} = shift }
 sub charTxtInfo { return this->{charTxtInfo} }
 
 sub setCharTxtInfo { this->{charTxtInfo} = shift }
+
+sub char { return this->{character} }
 
 1;

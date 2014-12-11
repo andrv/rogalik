@@ -101,7 +101,8 @@ sub set {
     my $value = shift;
     my $id    = shift;
 
-    my( $res, $row, $rv ) = $self->execute( "update $table set $field = $value, updated = datetime( 'now' ) where id = $id" );
+#    my( $res, $row, $rv ) = $self->execute( "update $table set $field = $value, updated = datetime( 'now' ) where id = $id" );
+    my( $res, $row, $rv ) = $self->execute( "update $table set $field = $value where id = $id" );
 }
 
 1;
