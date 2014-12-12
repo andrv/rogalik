@@ -129,7 +129,7 @@ sub _db_sync {
     my( undef, undef, undef, $caller ) = caller( 1 );
     my( $field ) = $caller =~ m/Rogalik::Character::(\w+)$/;
     Rogalik::DB->set( 'theCharacter', $field, "'$new'", $self->id );
-    Rogalik::DB->set( 'theCharacter', 'updated', "datetime( 'now' )", $self->id );
+    Rogalik::DB->set( 'theCharacter', 'updated', "datetime( 'now', 'localtime' )", $self->id );
 }
 
 #sub initialize {

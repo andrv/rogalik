@@ -64,7 +64,7 @@ sub nextStep {
                         this->race()->currentIndex() . "', '" .
                         this->class()->currentIndex() . "', " .
                         "1, " .
-                        "datetime( 'now' ) " .
+                        "datetime( 'now', 'localtime' ) " .
                         ")"
                     );
 
