@@ -202,9 +202,9 @@ CREATE TABLE IF NOT EXISTS theCharacter (
    sex     TEXT NOT NULL,
    race    INTEGER NOT NULL,
    class   INTEGER NOT NULL,
-   lvl     INTEGER NOT NULL DEFAULT 1,
-   chp     INTEGER NOT NULL DEFAULT 0,
-   mhp     INTEGER NOT NULL DEFAULT 0,
+   lvl     INTEGER,
+   chp     INTEGER,
+   mhp     INTEGER,
    updated DATETIME NOT NULL,
    dead    DATETIME,
    --
