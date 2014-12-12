@@ -12,6 +12,7 @@ use QtCore4::isa qw( Qt::Widget );
 
 use lib 'lib';
 use Rogalik::DB;
+use Rogalik::Character;
 
 
 sub NEW {
@@ -50,11 +51,11 @@ sub createCombo {
     my $combo = Qt::ComboBox();
 
     foreach my $id( @characterIds ) {
-        my( $res, $rows, $rv ) = Rogalik::DB->execute( "select id, name, sex, race, class, updated from theCharacter where id = $id" );
-        my $char = $res->[0];
-        my $name = $char->{name} || 'No name yet';
+        my $char = Rogalik::Character->new( id => $id );
+        my( $res, $rows, $rv ) = Rogalik::DB->execute( "select updated from theCharacter where id = $id" );
+        my $name = $char->name || 'No name yet';
 
-        $combo->addItem( this->tr( "$char->{id}: $name, $char->{sex}, $char->{race}, $char->{class}, $char->{updated}" ) );
+        $combo->addItem( this->tr( $char->id .": ". join(', ', $name, $char->sex, $char->race->{name}, $char->class->{name}, $res->[0]->{updated} ) ) );
     }
 
     $combo->addItem( this->tr( 'Add new one' ) );
