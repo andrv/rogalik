@@ -11,10 +11,10 @@ use warnings;
 
 use 5.010;
 use Moose;
+
 use Data::Dumper;
-#
-#use lib 'lib';
 use Rogalik::DB;
+use Rogalik::Basics;
 
 has id => (
     is       => 'ro',
@@ -22,6 +22,17 @@ has id => (
     required => 1,
 #    trigger  => \&initialize,
 );
+
+has basics => (
+    is      => 'ro',
+    isa     => 'Rogalik::Basics',
+    lazy    => 1,
+    builder => '_basics',
+);
+
+sub _basics {
+    return Rogalik::Basics->new;
+}
 
 has name => (
     is      => 'rw',
@@ -89,6 +100,28 @@ has level => (
 sub _level {
     my $self = shift;
     return Rogalik::DB->get( 'theCharacter', 'lvl', $self->id );
+}
+
+has title => (
+    is      => 'rw',
+    isa     => 'Str',
+    lazy    => 1,
+    builder => '_title',
+);
+
+sub _title {
+    my $self = shift;
+    if( $self->level > $self->basics->playerMaxLevel ) {
+        return '***WINNER***';
+    }
+    else {
+        my $titleIdx = int( ( $self->level - 1 ) / 5 ) + 1;
+        my( $res, $rows, $rv ) = Rogalik::DB->execute(
+            "select t.name from Title t, theClass c, theCharacter ch where t.idx = $titleIdx and t.class = c.id and c.id = ch.class and ch.id = @{[$self->id]}"
+        );
+
+        return $res->[0]->{name};
+    }
 }
 
 sub _db_sync {

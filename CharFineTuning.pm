@@ -99,7 +99,7 @@ sub basicsOne {
     $table->addWidget( Qt::Label( this->tr( this->char->sex ) ),           1, 1 );
     $table->addWidget( Qt::Label( this->tr( this->char->race->{name} ) ),  2, 1 );
     $table->addWidget( Qt::Label( this->tr( this->char->class->{name} ) ), 3, 1 );
-    $table->addWidget( Qt::Label( this->tr( 'Rookie (tbd)' ) ),            4, 1 );
+    $table->addWidget( Qt::Label( this->tr( this->char->title ) ),         4, 1 );
     $table->addWidget( Qt::Label( this->tr( '19/19 (tbd)' ) ),             5, 1 );
     $table->addWidget( Qt::Label( this->tr( '0/0 (tbd)' ) ),               6, 1 );
 
