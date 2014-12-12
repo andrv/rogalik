@@ -12,12 +12,11 @@
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS gameBasics (
-        id    INTEGER PRIMARY KEY ASC AUTOINCREMENT,
-        name  TEXT NOT NULL,
-        value TEXT NOT NULL
+        name  TEXT PRIMARY KEY,
+        value INTEGER NOT NULL
 );
 
-INSERT INTO gameBasics( name, value ) VALUES( 'PlayerMaxLevel', '50' );
+INSERT INTO gameBasics( name, value ) VALUES( 'PlayerMaxLevel', 50 );
 
 CREATE TABLE IF NOT EXISTS theRace (
    id                INTEGER PRIMARY KEY ASC AUTOINCREMENT,
