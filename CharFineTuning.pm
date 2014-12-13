@@ -100,7 +100,8 @@ sub basicsOne {
     $table->addWidget( Qt::Label( this->tr( this->char->race->{name} ) ),  2, 1 );
     $table->addWidget( Qt::Label( this->tr( this->char->class->{name} ) ), 3, 1 );
     $table->addWidget( Qt::Label( this->tr( this->char->title ) ),         4, 1 );
-    $table->addWidget( Qt::Label( this->tr( '19/19 (tbd)' ) ),             5, 1 );
+    my $hp = join '/', this->char->chp, this->char->mhp;
+    $table->addWidget( Qt::Label( this->tr( $hp ) ),                       5, 1 );
     $table->addWidget( Qt::Label( this->tr( '0/0 (tbd)' ) ),               6, 1 );
 
     my $groupBox = Qt::GroupBox();
@@ -203,8 +204,6 @@ sub qualities {
 }
 
 sub detailedOne {
-    my $chId = shift;
-    my( $res, $row, $rv ) = Rogalik::DB->execute( "select lvl from theCharacter where id = $chId" );
     my $table = Qt::GridLayout();
 
     $table->addWidget( Qt::Label( this->tr( 'Level' ) ),         0, 0 );
@@ -217,15 +216,15 @@ sub detailedOne {
     $table->addWidget( Qt::Label( this->tr( 'Speed' ) ),         7, 0 );
     $table->addWidget( Qt::Label( this->tr( 'Max Depth' ) ),     8, 0 );
 
-    $table->addWidget( Qt::Label( this->tr( this->char->level ) ), 0, 1 );
-    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),         1, 1 );
-    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),         2, 1 );
-    $table->addWidget( Qt::Label( this->tr( '10 (tbd)' ) ),        3, 1 );
+    $table->addWidget( Qt::Label( this->tr( this->char->lvl ) ), 0, 1 );
+    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),       1, 1 );
+    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),       2, 1 );
+    $table->addWidget( Qt::Label( this->tr( '10 (tbd)' ) ),      3, 1 );
     # spacer
-    $table->addWidget( Qt::Label( this->tr( '600 (tbd)' ) ),       5, 1 );
-    $table->addWidget( Qt::Label( this->tr( '0.0 lbs (tbd)' ) ),   6, 1 );
-    $table->addWidget( Qt::Label( this->tr( 'Normal (tbd)' ) ),    7, 1 );
-    $table->addWidget( Qt::Label( this->tr( 'Town (tbd)' ) ),      8, 1 );
+    $table->addWidget( Qt::Label( this->tr( '600 (tbd)' ) ),     5, 1 );
+    $table->addWidget( Qt::Label( this->tr( '0.0 lbs (tbd)' ) ), 6, 1 );
+    $table->addWidget( Qt::Label( this->tr( 'Normal (tbd)' ) ),  7, 1 );
+    $table->addWidget( Qt::Label( this->tr( 'Town (tbd)' ) ),    8, 1 );
 
     my $groupBox = Qt::GroupBox();
     $groupBox->setLayout( $table );

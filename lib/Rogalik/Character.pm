@@ -20,8 +20,22 @@ has id => (
     is       => 'ro',
     isa      => 'Int',
     required => 1,
-#    trigger  => \&initialize,
+    initializer => '_set_race_class_values',
 );
+
+sub _set_race_class_values {
+    my $self = shift;
+
+    # check lvl - it's my flag for fresh char
+    unless( Rogalik::DB->get( 'theCharacter', 'lvl', $self->id ) ) {
+        # populate lvl, chp, mhp with data depending on race, class
+        Rogalik::DB->set( 'theCharacter', 'lvl', 1, $self->id );
+        my $raceMhp  = Rogalik::DB->get( 'theRace',  'hp', $self->race->{id} );
+        my $classMhp = Rogalik::DB->get( 'theClass', 'hp', $self->class->{id} );
+        Rogalik::DB->set( 'theCharacter', 'mhp', ($raceMhp + $classMhp), $self->id );
+        Rogalik::DB->set( 'theCharacter', 'chp', ($raceMhp + $classMhp), $self->id );
+    }
+}
 
 has basics => (
     is      => 'ro',
@@ -89,12 +103,13 @@ sub _class {
     return { id => $res->[0]->{id}, name => $res->[0]->{class} };
 }
 
-has level => (
+has lvl => (
     is      => 'rw',
     isa     => 'Int',
     lazy    => 1,
     builder => '_level',
     trigger => \&_db_sync,
+    documentation => q(Player's level),
 );
 
 sub _level {
@@ -111,17 +126,45 @@ has title => (
 
 sub _title {
     my $self = shift;
-    if( $self->level > $self->basics->playerMaxLevel ) {
+    if( $self->lvl > $self->basics->playerMaxLevel ) {
         return '***WINNER***';
     }
     else {
-        my $titleIdx = int( ( $self->level - 1 ) / 5 ) + 1;
+        my $titleIdx = int( ( $self->lvl - 1 ) / 5 ) + 1;
         my( $res, $rows, $rv ) = Rogalik::DB->execute(
             "select t.name from Title t, theClass c, theCharacter ch where t.idx = $titleIdx and t.class = c.id and c.id = ch.class and ch.id = @{[$self->id]}"
         );
 
         return $res->[0]->{name};
     }
+}
+
+has chp => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_chp',
+#    trigger => \&_db_sync,
+    documentation => q[Current hit points],
+);
+
+sub _chp {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'chp', $self->id );
+}
+
+has mhp => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_mhp',
+    trigger => \&_db_sync,
+    documentation => q[Max hit points],
+);
+
+sub _mhp {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'mhp', $self->id );
 }
 
 sub _db_sync {
@@ -131,12 +174,6 @@ sub _db_sync {
     Rogalik::DB->set( 'theCharacter', $field, "'$new'", $self->id );
     Rogalik::DB->set( 'theCharacter', 'updated', "datetime( 'now', 'localtime' )", $self->id );
 }
-
-#sub initialize {
-#    my $self = shift;
-#
-#    $self->name( Rogalik::DB->get( 'theCharacter', 'name', $self->id ) );
-#}
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
