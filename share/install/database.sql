@@ -205,6 +205,8 @@ CREATE TABLE IF NOT EXISTS theCharacter (
    lvl     INTEGER,
    chp     INTEGER,
    mhp     INTEGER,
+   cmp     INTEGER,
+   mmp     INTEGER,
    updated DATETIME NOT NULL,
    dead    DATETIME,
    --

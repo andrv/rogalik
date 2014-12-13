@@ -92,7 +92,7 @@ sub basicsOne {
     $table->addWidget( Qt::Label( this->tr( 'Class' ) ),            3, 0 );
     $table->addWidget( Qt::Label( this->tr( 'Title' ) ),            4, 0 );
     $table->addWidget( Qt::Label( this->tr( 'HP' ) ),               5, 0 );
-    $table->addWidget( Qt::Label( this->tr( 'SP' ) ),               6, 0 );
+    $table->addWidget( Qt::Label( this->tr( 'Mana' ) ),             6, 0 );
 
     this->{charName} = Qt::Label( this->tr( this->char->name ) );
     $table->addWidget( this->{charName},                                   0, 1 );
