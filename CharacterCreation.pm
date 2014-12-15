@@ -405,24 +405,24 @@ sub showFlags {
     my $toFlag  = "${which}2flag";
     my $toColmn = "${which}_id";
 
-    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select Flags.id, Flags.abbr, Flags.desc from Flags, $toFlag, $table where Flags.hidden is null and Flags.id = $toFlag.flag_id and $toFlag.$toColmn = $table.id and $table.name = '$name' order by Flags.id" );
-    
     my @flags;
 
-    if( $which eq 'class' ) {
-        my $spellbook = Rogalik::DB->get(
-            'theClass',
-            'spellbook_tval',
-            this->class()->currentIndex(),
-        );
-        if( $spellbook == 90 ) {
-            push @flags, 'Learns arcane magic';
-        }
-        elsif( $spellbook == 91 ) {
-            push @flags, 'Learns divine magic';
-        }
-    }
+#    if( $which eq 'class' ) {
+#        my $spellbook = Rogalik::DB->get(
+#            'theClass',
+#            'spellbook_tval',
+#            this->class()->currentIndex(),
+#        );
+#        if( $spellbook == 90 ) {
+#            push @flags, 'Learns arcane magic';
+#        }
+#        elsif( $spellbook == 91 ) {
+#            push @flags, 'Learns divine magic';
+#        }
+#    }
 
+    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select Flags.id, Flags.abbr, Flags.desc from Flags, $toFlag, $table where Flags.hidden is null and Flags.id = $toFlag.flag_id and $toFlag.$toColmn = $table.id and $table.name = '$name' order by Flags.id" );
+    
     foreach my $flag( @$res ) {
         push @flags, $flag->{desc};
     }

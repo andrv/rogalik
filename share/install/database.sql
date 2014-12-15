@@ -142,6 +142,8 @@ INSERT INTO Flags( abbr, desc, hidden ) VALUES( 'PSEUDO_ID_IMPROV', 'Get better 
 INSERT INTO Flags( abbr, desc ) VALUES( 'KNOW_MUSHROOM',            'Identifies mushrooms' );
 INSERT INTO Flags( abbr, desc ) VALUES( 'KNOW_ZAPPER',              'Identifies magic devices' );
 INSERT INTO Flags( abbr, desc ) VALUES( 'SEE_ORE',                  'Senses ore/minerals' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'ARCANE_MAGIC',             'Learns arcane magic' );
+INSERT INTO Flags( abbr, desc ) VALUES( 'DIVINE_MAGIC',             'Learns divine magic' );
 
 CREATE TABLE IF NOT EXISTS race2flag (
    race_id INTEGER,
@@ -180,20 +182,25 @@ CREATE TABLE IF NOT EXISTS class2flag (
 
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Warrior' AND f.abbr = 'BRAVERY_30';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Warrior' AND f.abbr = 'PSEUDO_ID_IMPROV';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Mage' AND f.abbr = 'ARCANE_MAGIC';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Mage' AND f.abbr = 'CUMBER_GLOVE';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Mage' AND f.abbr = 'ZERO_FAIL';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Mage' AND f.abbr = 'BEAM';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Mage' AND f.abbr = 'CHOOSE_SPELLS';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Priest' AND f.abbr = 'DIVINE_MAGIC';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Priest' AND f.abbr = 'BLESS_WEAPON';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Priest' AND f.abbr = 'ZERO_FAIL';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Priest' AND f.abbr = 'PSEUDO_ID_IMPROV';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Rogue' AND f.abbr = 'ARCANE_MAGIC';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Rogue' AND f.abbr = 'CUMBER_GLOVE';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Rogue' AND f.abbr = 'CHOOSE_SPELLS';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Rogue' AND f.abbr = 'PSEUDO_ID_IMPROV';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Ranger' AND f.abbr = 'ARCANE_MAGIC';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Ranger' AND f.abbr = 'CUMBER_GLOVE';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Ranger' AND f.abbr = 'EXTRA_SHOT';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Ranger' AND f.abbr = 'CHOOSE_SPELLS';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Ranger' AND f.abbr = 'PSEUDO_ID_IMPROV';
+INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Paladin' AND f.abbr = 'ARCANE_MAGIC';
 INSERT INTO class2flag( class_id, flag_id ) SELECT c.id, f.id FROM theClass c, Flags f WHERE c.name = 'Paladin' AND f.abbr = 'PSEUDO_ID_IMPROV';
 
 CREATE TABLE IF NOT EXISTS theCharacter (
