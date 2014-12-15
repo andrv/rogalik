@@ -55,7 +55,7 @@ sub createCombo {
         my( $res, $rows, $rv ) = Rogalik::DB->execute( "select updated from theCharacter where id = $id" );
         my $name = $char->name || 'No name yet';
 
-        $combo->addItem( this->tr( $char->id .": ". join(', ', $name, $char->sex, $char->race->{name}, $char->class->{name}, $res->[0]->{updated} ) ) );
+        $combo->addItem( this->tr( $char->id .": ". join(', ', $name, $char->sex, $char->race->{name}, $char->class->name, $res->[0]->{updated} ) ) );
     }
 
     $combo->addItem( this->tr( 'Add new one' ) );

@@ -15,6 +15,7 @@ use Moose;
 use Data::Dumper;
 use Rogalik::DB;
 use Rogalik::Basics;
+use Rogalik::PClass;
 
 has id => (
     is       => 'ro',
@@ -33,7 +34,7 @@ sub _set_race_class_values {
 
         # chp, mhp with data depending on race, class
         my $raceMhp  = Rogalik::DB->get( 'theRace',  'hp', $self->race->{id} );
-        my $classMhp = Rogalik::DB->get( 'theClass', 'hp', $self->class->{id} );
+        my $classMhp = Rogalik::DB->get( 'theClass', 'hp', $self->class->id );
         Rogalik::DB->set( 'theCharacter', 'mhp', ($raceMhp + $classMhp), $self->id );
         Rogalik::DB->set( 'theCharacter', 'chp', ($raceMhp + $classMhp), $self->id );
 
@@ -94,17 +95,15 @@ sub _race {
 
 has class => (
     is      => 'ro',
-    isa     => 'HashRef[Str|Int]',
+    isa     => 'Rogalik::PClass',
     lazy    => 1,
     builder => '_class',
 );
 
 sub _class {
     my $self = shift;
-    my( $res, $rows, $rv ) = Rogalik::DB->execute(
-        "select c.id, c.name as class from theClass c, theCharacter ch where ch.id = @{[$self->id]} and ch.class = c.id"
-    );
-    return { id => $res->[0]->{id}, name => $res->[0]->{class} };
+    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select class from theCharacter where id = ". $self->id );
+    return Rogalik::PClass->new( id => $res->[0]->{class} );
 }
 
 has lvl => (
