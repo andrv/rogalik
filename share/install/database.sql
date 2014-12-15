@@ -100,18 +100,16 @@ CREATE TABLE IF NOT EXISTS theClass (
    max_attacks       INTEGER NOT NULL,
    min_weight        INTEGER NOT NULL,
    att_multiply      INTEGER NOT NULL,
-   spellbook_tval    INTEGER NOT NULL,
-   spell_stat        INTEGER NOT NULL,
-   first_lvl         INTEGER NOT NULL,
+   first_spell_lvl   INTEGER NOT NULL,
    max_weight        INTEGER NOT NULL
 );
 
-INSERT INTO theClass VALUES( 1, 'Warrior',  3, -2, -2,  2,  2, 25, 18, 18,  0, 14,  2, 70, 55, 55, 0, 10,  7, 10, 0, 0, 0, 45, 45, 45, 0, 9,  0,   7000, 40, 6, 30, 5,  0, 0, 0,   0 );
-INSERT INTO theClass VALUES( 2, 'Mage',    -3,  3,  0,  0, -2, 30, 36, 30,  2, 16, 20, 34, 20, 20, 0,  7, 13,  9, 0, 0, 0, 15, 15, 15, 0, 0, 30, 170000,  5, 4, 40, 2, 90, 1, 1, 300 );
-INSERT INTO theClass VALUES( 3, 'Priest',  -1, -3,  3, -1,  1, 25, 30, 32,  2, 16,  8, 48, 35, 35, 0,  7, 10, 12, 0, 0, 0, 20, 20, 20, 0, 2, 20,  15000, 40, 4, 35, 3, 91, 2, 1, 350 );
-INSERT INTO theClass VALUES( 4, 'Rogue',    0,  1, -3,  3, -1, 45, 32, 28,  3, 32, 24, 60, 66, 66, 0, 15, 10, 10, 1, 0, 0, 40, 30, 30, 0, 6, 25,  10000, 40, 5, 30, 4, 90, 1, 5, 350 );
-INSERT INTO theClass VALUES( 5, 'Ranger',   0,  2, -2,  1, -1, 30, 32, 28,  3, 24, 16, 56, 72, 72, 0,  8, 10, 10, 0, 0, 0, 30, 45, 45, 0, 4, 30,  20000, 40, 5, 35, 4, 90, 1, 3, 400 );
-INSERT INTO theClass VALUES( 6, 'Paladin',  1, -3,  1, -1,  2, 20, 24, 25,  0, 12,  2, 68, 40, 40, 0,  7, 10, 11, 0, 0, 0, 35, 30, 30, 0, 6, 35,  60000, 40, 5, 30, 5, 91, 2, 1, 400 );
+INSERT INTO theClass VALUES( 1, 'Warrior',  3, -2, -2,  2,  2, 25, 18, 18,  0, 14,  2, 70, 55, 55, 0, 10,  7, 10, 0, 0, 0, 45, 45, 45, 0, 9,  0,   7000, 40, 6, 30, 5, 0,   0 );
+INSERT INTO theClass VALUES( 2, 'Mage',    -3,  3,  0,  0, -2, 30, 36, 30,  2, 16, 20, 34, 20, 20, 0,  7, 13,  9, 0, 0, 0, 15, 15, 15, 0, 0, 30, 170000,  5, 4, 40, 2, 1, 300 );
+INSERT INTO theClass VALUES( 3, 'Priest',  -1, -3,  3, -1,  1, 25, 30, 32,  2, 16,  8, 48, 35, 35, 0,  7, 10, 12, 0, 0, 0, 20, 20, 20, 0, 2, 20,  15000, 40, 4, 35, 3, 1, 350 );
+INSERT INTO theClass VALUES( 4, 'Rogue',    0,  1, -3,  3, -1, 45, 32, 28,  3, 32, 24, 60, 66, 66, 0, 15, 10, 10, 1, 0, 0, 40, 30, 30, 0, 6, 25,  10000, 40, 5, 30, 4, 5, 350 );
+INSERT INTO theClass VALUES( 5, 'Ranger',   0,  2, -2,  1, -1, 30, 32, 28,  3, 24, 16, 56, 72, 72, 0,  8, 10, 10, 0, 0, 0, 30, 45, 45, 0, 4, 30,  20000, 40, 5, 35, 4, 3, 400 );
+INSERT INTO theClass VALUES( 6, 'Paladin',  1, -3,  1, -1,  2, 20, 24, 25,  0, 12,  2, 68, 40, 40, 0,  7, 10, 11, 0, 0, 0, 35, 30, 30, 0, 6, 35,  60000, 40, 5, 30, 5, 1, 400 );
 
 CREATE TABLE IF NOT EXISTS Flags (
    id     INTEGER PRIMARY KEY ASC AUTOINCREMENT,
