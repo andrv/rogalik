@@ -30,12 +30,14 @@ sub _set_race_class_values {
     unless( Rogalik::DB->get( 'theCharacter', 'lvl', $self->id ) ) {
         # populate lvl
         Rogalik::DB->set( 'theCharacter', 'lvl', 1, $self->id );
+
         # chp, mhp with data depending on race, class
         my $raceMhp  = Rogalik::DB->get( 'theRace',  'hp', $self->race->{id} );
         my $classMhp = Rogalik::DB->get( 'theClass', 'hp', $self->class->{id} );
         Rogalik::DB->set( 'theCharacter', 'mhp', ($raceMhp + $classMhp), $self->id );
         Rogalik::DB->set( 'theCharacter', 'chp', ($raceMhp + $classMhp), $self->id );
-        # cmp, mmp with data depending on race, class - no idea how to do this
+
+        # cmp, mmp with data depending on race, class
     }
 }
 

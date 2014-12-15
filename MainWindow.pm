@@ -72,7 +72,7 @@ sub nextStep {
                     this->setCurrentCharId( $res->[0]->{id} );
 
                     ### next screen
-                    this->setCentralWidget( CharFineTuning( this->currentCharId() ) );
+                    this->setCentralWidget( CharFineTuning( this ) );
                     this->centralWidget()->name()->setFocus();
                 }
             }
@@ -88,7 +88,7 @@ sub nextStep {
         else {
             my( $charId ) = $choosen =~ m/^(\d+):.*/;
             this->setCurrentCharId( int $charId );
-            this->setCentralWidget( CharFineTuning( this->currentCharId() ) );
+            this->setCentralWidget( CharFineTuning( this ) );
 
             if( Rogalik::DB->get( 'theCharacter', 'name', this->currentCharId() ) ) {
                 this->centralWidget()->nameLabel()->hide();

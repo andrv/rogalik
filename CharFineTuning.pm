@@ -16,9 +16,9 @@ use Rogalik::Character;
 
 
 sub NEW {
-    my ( $class, $characterId ) = @_;
+    my ( $class, $parent ) = @_;
 
-    $class->SUPER::NEW();
+    $class->SUPER::NEW( $parent );
 
     this->setWindowTitle( 'Fine tuning' );
 
@@ -44,9 +44,9 @@ sub NEW {
     $layout->addWidget( this->name(), 1, 2, 1, 2 );
 
     # initiate char object
-    this->{character} = Rogalik::Character->new( id => $characterId );
+    this->{character} = Rogalik::Character->new( id => $parent->currentCharId );
 
-    $layout->addWidget( this->basicsOne( $characterId ), 2, 1 );
+    $layout->addWidget( this->basicsOne(), 2, 1 );
 
     # spacer
     $layout->setColumnMinimumWidth( 2, 20 );
@@ -61,7 +61,7 @@ sub NEW {
     # space between top and middle
     $layout->setRowMinimumHeight( 3, 20 );
 
-    $layout->addWidget( this->detailedOne( $characterId ),   4, 1 );
+    $layout->addWidget( this->detailedOne(),   4, 1 );
     $layout->addWidget( this->detailedTwo(),   4, 3 );
     $layout->addWidget( this->detailedThree(), 4, 5 );
 
@@ -80,11 +80,7 @@ sub NEW {
 }
 
 sub basicsOne {
-    my $charId = shift;
-
     my $table = Qt::GridLayout();
-
-    my( $res, $row, $rv ) = Rogalik::DB->execute( "select ch.name, sex, r.name as race, c.name as class from theCharacter ch, theRace r, theClass c where ch.id = $charId and ch.race = r.id and ch.class = c.id" );
 
     $table->addWidget( Qt::Label( this->tr( 'Name' ) ),             0, 0 );
     $table->addWidget( Qt::Label( this->tr( 'Sex' ) ),              1, 0 );
