@@ -15,6 +15,7 @@ use Moose;
 use Data::Dumper;
 use Rogalik::DB;
 use Rogalik::Basics;
+use Rogalik::Race;
 use Rogalik::PClass;
 
 has id => (
@@ -92,17 +93,15 @@ sub _sex {
 
 has race => (
     is      => 'ro',
-    isa     => 'HashRef[Str|Int]',
+    isa     => 'Rogalik::Race',
     lazy    => 1,
     builder => '_race',
 );
 
 sub _race {
     my $self = shift;
-    my( $res, $rows, $rv ) = Rogalik::DB->execute(
-        "select r.id, r.name as race from theRace r, theCharacter ch where ch.id = @{[$self->id]} and ch.race = r.id"
-    );
-    return { id => $res->[0]->{id}, name => $res->[0]->{race} };
+    my( $res, $rows, $rv ) = Rogalik::DB->execute( "select race from theCharacter where id = ". $self->id );
+    return Rogalik::Race->new( id => $res->[0]->{race} );
 }
 
 has class => (

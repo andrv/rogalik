@@ -93,13 +93,13 @@ sub basicsOne {
     this->{charName} = Qt::Label( this->tr( this->char->name ) );
     my $hp   = join '/', this->char->chp, this->char->mhp;
     my $mana = join '/', this->char->cmp, this->char->mmp;
-    $table->addWidget( this->{charName},                                  0, 1 );
-    $table->addWidget( Qt::Label( this->tr( this->char->sex ) ),          1, 1 );
-    $table->addWidget( Qt::Label( this->tr( this->char->race->{name} ) ), 2, 1 );
-    $table->addWidget( Qt::Label( this->tr( this->char->class->name ) ),  3, 1 );
-    $table->addWidget( Qt::Label( this->tr( this->char->title ) ),        4, 1 );
-    $table->addWidget( Qt::Label( this->tr( $hp ) ),                      5, 1 );
-    $table->addWidget( Qt::Label( this->tr( $mana ) ),                    6, 1 );
+    $table->addWidget( this->{charName},                                 0, 1 );
+    $table->addWidget( Qt::Label( this->tr( this->char->sex ) ),         1, 1 );
+    $table->addWidget( Qt::Label( this->tr( this->char->race->name ) ),  2, 1 );
+    $table->addWidget( Qt::Label( this->tr( this->char->class->name ) ), 3, 1 );
+    $table->addWidget( Qt::Label( this->tr( this->char->title ) ),       4, 1 );
+    $table->addWidget( Qt::Label( this->tr( $hp ) ),                     5, 1 );
+    $table->addWidget( Qt::Label( this->tr( $mana ) ),                   6, 1 );
 
     my $groupBox = Qt::GroupBox();
     $groupBox->setLayout( $table );
