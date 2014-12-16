@@ -39,6 +39,18 @@ sub _set_race_class_values {
         Rogalik::DB->set( 'theCharacter', 'chp', ($raceMhp + $classMhp), $self->id );
 
         # cmp, mmp with data depending on race, class
+        if( $self->class->magicless or $self->class->first_spell_lvl > 1 ) {
+            Rogalik::DB->set( 'theCharacter', 'mmp', 0, $self->id );
+            Rogalik::DB->set( 'theCharacter', 'cmp', 0, $self->id );
+        }
+        else {
+            my $mmp = 1;
+            # TODO: calculate mana
+            # early at the moment
+
+            Rogalik::DB->set( 'theCharacter', 'mmp', $mmp, $self->id );
+            Rogalik::DB->set( 'theCharacter', 'cmp', $mmp, $self->id );
+        }
     }
 }
 
@@ -168,6 +180,34 @@ has mhp => (
 sub _mhp {
     my $self = shift;
     return Rogalik::DB->get( 'theCharacter', 'mhp', $self->id );
+}
+
+has cmp => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_cmp',
+#    trigger => \&_db_sync,
+    documentation => q[Current mana points],
+);
+
+sub _cmp {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'cmp', $self->id );
+}
+
+has mmp => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_mmp',
+    trigger => \&_db_sync,
+    documentation => q[Max mana points],
+);
+
+sub _mmp {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'mmp', $self->id );
 }
 
 sub _db_sync {
