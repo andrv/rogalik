@@ -212,6 +212,7 @@ CREATE TABLE IF NOT EXISTS theCharacter (
    mhp     INTEGER,
    cmp     INTEGER,
    mmp     INTEGER,
+   age     INTEGER,
    updated DATETIME NOT NULL,
    dead    DATETIME,
    --
