@@ -10,7 +10,6 @@ package Rogalik::Race;
 use strict;
 use warnings;
 
-
 use 5.010;
 use Moose;
 

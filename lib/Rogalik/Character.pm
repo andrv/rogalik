@@ -17,6 +17,7 @@ use Rogalik::DB;
 use Rogalik::Basics;
 use Rogalik::Race;
 use Rogalik::PClass;
+use Rogalik::Tools;
 
 has id => (
     is       => 'ro',
@@ -52,6 +53,10 @@ sub _set_race_class_values {
             Rogalik::DB->set( 'theCharacter', 'mmp', $mmp, $self->id );
             Rogalik::DB->set( 'theCharacter', 'cmp', $mmp, $self->id );
         }
+
+        # age
+        my $age = $self->race->age + Rogalik::Tools->randint1( $self->race->age_mod );
+        Rogalik::DB->set( 'theCharacter', 'age', $age, $self->id );
     }
 }
 
@@ -207,6 +212,19 @@ has mmp => (
 sub _mmp {
     my $self = shift;
     return Rogalik::DB->get( 'theCharacter', 'mmp', $self->id );
+}
+
+has age => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_age',
+    trigger => \&_db_sync,
+);
+
+sub _age {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'age', $self->id );
 }
 
 sub _db_sync {
