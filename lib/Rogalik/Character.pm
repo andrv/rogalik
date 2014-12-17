@@ -23,10 +23,10 @@ has id => (
     is       => 'ro',
     isa      => 'Int',
     required => 1,
-    initializer => '_set_race_class_values',
+    initializer => '_birth',
 );
 
-sub _set_race_class_values {
+sub _birth {
     my $self = shift;
 
     # check lvl - it's my flag for fresh char
@@ -57,6 +57,25 @@ sub _set_race_class_values {
         # age
         my $age = $self->race->age + Rogalik::Tools->randint1( $self->race->age_mod );
         Rogalik::DB->set( 'theCharacter', 'age', $age, $self->id );
+
+        my( $height, $weight ) = ( 0, 0 );
+        if( $self->sex eq 'Male' ) {
+            $height = $self->race->height_male + Rogalik::Tools->randint0( $self->race->height_male_mod );
+            $weight = $self->race->weight_male + Rogalik::Tools->randint0( $self->race->weight_male_mod );
+        }
+        elsif( $self->sex eq 'Female' ) {
+            $height = $self->race->height_female + Rogalik::Tools->randint0( $self->race->height_male_mod );
+            $weight = $self->race->weight_female + Rogalik::Tools->randint0( $self->race->weight_female_mod );
+        }
+        else {
+            # neuter - inbetween
+            $height = ( $self->race->height_male + $self->race->height_female ) / 2 + Rogalik::Tools->randint0(
+                ( $self->race->height_male_mod + $self->race->height_female_mod ) / 2 );
+            $weight = ( $self->race->weight_male + $self->race->weight_female ) / 2 + Rogalik::Tools->randint0(
+                ( $self->race->weight_male_mod + $self->race->weight_female_mod ) / 2 );
+        }
+        Rogalik::DB->set( 'theCharacter', 'height', $height, $self->id );
+        Rogalik::DB->set( 'theCharacter', 'weight', $weight, $self->id );
     }
 }
 
@@ -225,6 +244,32 @@ has age => (
 sub _age {
     my $self = shift;
     return Rogalik::DB->get( 'theCharacter', 'age', $self->id );
+}
+
+has height => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_height',
+    trigger => \&_db_sync,
+);
+
+sub _height {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'height', $self->id );
+}
+
+has weight => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_weight',
+    trigger => \&_db_sync,
+);
+
+sub _weight {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'weight', $self->id );
 }
 
 sub _db_sync {

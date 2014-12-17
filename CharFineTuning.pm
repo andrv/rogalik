@@ -118,8 +118,8 @@ sub basicsTwo {
     $table->addWidget( Qt::Label( this->tr( 'Resting' ) ),      6, 0, Qt::AlignRight() );
 
     $table->addWidget( Qt::Label( this->tr( this->char->age ) ), 0, 1 );
-    $table->addWidget( Qt::Label( this->tr( q/3'8" (tbd)/ ) ),   1, 1 );
-    $table->addWidget( Qt::Label( this->tr( '9st 8lb (tbd)' ) ), 2, 1 );
+    $table->addWidget( Qt::Label( this->tr( this->char->height ." cm" ) ), 1, 1 );
+    $table->addWidget( Qt::Label( this->tr( this->char->weight ." kg" ) ), 2, 1 );
     $table->addWidget( Qt::Label( this->tr( '1 (tbd)' ) ),       4, 1, Qt::AlignRight() );
     $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),       5, 1, Qt::AlignRight() );
     $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),       6, 1, Qt::AlignRight() );
