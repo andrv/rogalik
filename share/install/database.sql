@@ -208,8 +208,9 @@ CREATE TABLE IF NOT EXISTS theCharacter (
    age     INTEGER,
    height  INTEGER,
    weight  INTEGER,
-   game_turns    INTEGER,
-   resting_turns INTEGER,
+   turn    INTEGER,
+   played_turns INTEGER,
+   rested_turns INTEGER,
    updated DATETIME NOT NULL,
    dead    DATETIME,
    --
