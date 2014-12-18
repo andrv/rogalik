@@ -75,6 +75,11 @@ sub _birth {
         }
         Rogalik::DB->set( 'theCharacter', 'height', $height, $self->id );
         Rogalik::DB->set( 'theCharacter', 'weight', $weight, $self->id );
+
+        # turns
+        Rogalik::DB->set( 'theCharacter', 'turn', 1, $self->id );
+        Rogalik::DB->set( 'theCharacter', 'played_turns', 0, $self->id );
+        Rogalik::DB->set( 'theCharacter', 'rested_turns', 0, $self->id );
     }
 }
 
@@ -269,6 +274,45 @@ has weight => (
 sub _weight {
     my $self = shift;
     return Rogalik::DB->get( 'theCharacter', 'weight', $self->id );
+}
+
+has turn => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_turn',
+    trigger => \&_db_sync,
+);
+
+sub _turn {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'turn', $self->id );
+}
+
+has played_turns => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_played_turns',
+    trigger => \&_db_sync,
+);
+
+sub _played_turns {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'played_turns', $self->id );
+}
+
+has rested_turns => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_rested_turns',
+    trigger => \&_db_sync,
+);
+
+sub _rested_turns {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'rested_turns', $self->id );
 }
 
 sub _db_sync {
