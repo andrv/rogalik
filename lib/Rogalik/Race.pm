@@ -34,6 +34,18 @@ sub _name {
     return Rogalik::DB->get( 'theRace', 'name', $self->id );
 }
 
+has hp => (
+    is      => 'ro',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_hp',
+);
+
+sub _hp {
+    my $self = shift;
+    return Rogalik::DB->get( 'theRace', 'hp', $self->id );
+}
+
 has age => (
     is      => 'ro',
     isa     => 'Int',

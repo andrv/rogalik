@@ -35,24 +35,23 @@ sub _birth {
         Rogalik::DB->set( 'theCharacter', 'lvl', 1, $self->id );
 
         # chp, mhp with data depending on race, class
-        my $raceMhp  = Rogalik::DB->get( 'theRace',  'hp', $self->race->{id} );
-        my $classMhp = Rogalik::DB->get( 'theClass', 'hp', $self->class->id );
-        Rogalik::DB->set( 'theCharacter', 'mhp', ($raceMhp + $classMhp), $self->id );
-        Rogalik::DB->set( 'theCharacter', 'chp', ($raceMhp + $classMhp), $self->id );
+        my $hp = $self->race->hp + $self->class->hp;
+        Rogalik::DB->set( 'theCharacter', 'mhp', $hp, $self->id );
+        Rogalik::DB->set( 'theCharacter', 'chp', $hp, $self->id );
 
-        # cmp, mmp with data depending on race, class
+        # cmp, mmp with data depending on class
+        my $mana;
         if( $self->class->magicless or $self->class->first_spell_lvl > 1 ) {
-            Rogalik::DB->set( 'theCharacter', 'mmp', 0, $self->id );
-            Rogalik::DB->set( 'theCharacter', 'cmp', 0, $self->id );
+            $mana = 0;
         }
         else {
-            my $mmp = 1;
+            my $mana = 1;
             # TODO: calculate mana
             # early at the moment
 
-            Rogalik::DB->set( 'theCharacter', 'mmp', $mmp, $self->id );
-            Rogalik::DB->set( 'theCharacter', 'cmp', $mmp, $self->id );
         }
+        Rogalik::DB->set( 'theCharacter', 'mmp', $mana, $self->id );
+        Rogalik::DB->set( 'theCharacter', 'cmp', $mana, $self->id );
 
         # age
         my $age = $self->race->age + Rogalik::Tools->randint1( $self->race->age_mod );

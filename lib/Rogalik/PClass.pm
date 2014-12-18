@@ -46,9 +46,21 @@ sub _magicless {
     return ( Rogalik::DB->get( 'theClass', 'first_spell_lvl', $self->id ) ? 0 : 1 );
 }
 
+has hp => (
+    is      => 'ro',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_hp',
+);
+
+sub _hp {
+    my $self = shift;
+    return Rogalik::DB->get( 'theClass', 'hp', $self->id );
+}
+
 has first_spell_lvl => (
     is      => 'ro',
-    isa     => 'Str',
+    isa     => 'Int',
     lazy    => 1,
     builder => '_first_spell_lvl',
 );
