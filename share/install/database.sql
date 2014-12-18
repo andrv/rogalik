@@ -1,13 +1,7 @@
 -- commands: --
 -- - on the command line
 --   rm sqlite/db
---   sqlite3 sqlite/db
---
--- - on sqlite prompt
---   .read share/install/database.sql
---
-
-
+--   sqlite3 -init share/install/database.sql sqlite/db
 
 PRAGMA foreign_keys = ON;
 
@@ -295,3 +289,5 @@ INSERT INTO Title( name, idx, class ) VALUES( 'Guardian', 7, ( SELECT id FROM th
 INSERT INTO Title( name, idx, class ) VALUES( 'Chevalier', 8, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
 INSERT INTO Title( name, idx, class ) VALUES( 'Paladin', 9, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
 INSERT INTO Title( name, idx, class ) VALUES( 'Paladin Lord', 10, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
+
+.mode column
