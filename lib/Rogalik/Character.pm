@@ -45,7 +45,7 @@ sub _birth {
             $mana = 0;
         }
         else {
-            my $mana = 1;
+            $mana = 1;
             # TODO: calculate mana
             # early at the moment
 
