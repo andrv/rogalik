@@ -166,5 +166,65 @@ sub _weight_female_mod {
     return Rogalik::DB->get( 'theRace', 'weight_female_mod', $self->id );
 }
 
+has strength => (
+    is      => 'ro',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_strength',
+);
+
+sub _strength {
+    my $self = shift;
+    return Rogalik::DB->get( 'theRace', 'strength', $self->id );
+}
+
+has intelligence => (
+    is      => 'ro',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_intelligence',
+);
+
+sub _intelligence {
+    my $self = shift;
+    return Rogalik::DB->get( 'theRace', 'intelligence', $self->id );
+}
+
+has wisdom => (
+    is      => 'ro',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_wisdom',
+);
+
+sub _wisdom {
+    my $self = shift;
+    return Rogalik::DB->get( 'theRace', 'wisdom', $self->id );
+}
+
+has dexterity => (
+    is      => 'ro',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_dexterity',
+);
+
+sub _dexterity {
+    my $self = shift;
+    return Rogalik::DB->get( 'theRace', 'dexterity', $self->id );
+}
+
+has constitution => (
+    is      => 'ro',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_constitution',
+);
+
+sub _constitution {
+    my $self = shift;
+    return Rogalik::DB->get( 'theRace', 'constitution', $self->id );
+}
+
 no Moose;
 __PACKAGE__->meta->make_immutable;

@@ -150,11 +150,11 @@ sub qualities {
     # spacer
     $table->setColumnMinimumWidth( 3, 10 );
     $table->addWidget( Qt::Label( this->tr( 'RB' ) ),          0, 4 );
-    $table->addWidget( Qt::Label( this->tr( '+0 (tbd)' ) ),    1, 4 );
-    $table->addWidget( Qt::Label( this->tr( '+0 (tbd)' ) ),    2, 4 );
-    $table->addWidget( Qt::Label( this->tr( '+0 (tbd)' ) ),    3, 4 );
-    $table->addWidget( Qt::Label( this->tr( '+0 (tbd)' ) ),    4, 4 );
-    $table->addWidget( Qt::Label( this->tr( '+0 (tbd)' ) ),    5, 4 );
+    $table->addWidget( Qt::Label( this->tr( this->char->race->strength ) ), 1, 4 );
+    $table->addWidget( Qt::Label( this->tr( this->char->race->intelligence ) ), 2, 4 );
+    $table->addWidget( Qt::Label( this->tr( this->char->race->wisdom ) ), 3, 4 );
+    $table->addWidget( Qt::Label( this->tr( this->char->race->dexterity ) ), 4, 4 );
+    $table->addWidget( Qt::Label( this->tr( this->char->race->constitution ) ), 5, 4 );
 
     # spacer
     $table->setColumnMinimumWidth( 5, 10 );
