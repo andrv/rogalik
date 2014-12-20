@@ -17,7 +17,6 @@ use Rogalik::Character;
 
 sub NEW {
     my ( $class, $parent ) = @_;
-
     $class->SUPER::NEW( $parent );
 
     this->setWindowTitle( 'Fine tuning' );
@@ -44,7 +43,7 @@ sub NEW {
     $layout->addWidget( this->name(), 1, 2, 1, 2 );
 
     # initiate char object
-    this->{character} = Rogalik::Character->new( id => $parent->currentCharId );
+    this->{character} = Rogalik::Character->new( id => this->parent->currentCharId );
 
     $layout->addWidget( this->basicsOne(), 2, 1 );
 
@@ -150,20 +149,20 @@ sub qualities {
     # spacer
     $table->setColumnMinimumWidth( 3, 10 );
     $table->addWidget( Qt::Label( this->tr( 'RB' ) ),          0, 4 );
-    $table->addWidget( Qt::Label( this->tr( this->char->race->strength ) ), 1, 4 );
-    $table->addWidget( Qt::Label( this->tr( this->char->race->intelligence ) ), 2, 4 );
-    $table->addWidget( Qt::Label( this->tr( this->char->race->wisdom ) ), 3, 4 );
-    $table->addWidget( Qt::Label( this->tr( this->char->race->dexterity ) ), 4, 4 );
-    $table->addWidget( Qt::Label( this->tr( this->char->race->constitution ) ), 5, 4 );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->race->strength ) ) ),     1, 4, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->race->intelligence ) ) ), 2, 4, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->race->wisdom ) ) ),       3, 4, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->race->dexterity ) ) ),    4, 4, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->race->constitution ) ) ), 5, 4, Qt::AlignRight() );
 
     # spacer
     $table->setColumnMinimumWidth( 5, 10 );
     $table->addWidget( Qt::Label( this->tr( 'CB' ) ),          0, 6 );
-    $table->addWidget( Qt::Label( this->tr( this->char->class->strength ) ), 1, 6 );
-    $table->addWidget( Qt::Label( this->tr( this->char->class->intelligence ) ), 2, 6 );
-    $table->addWidget( Qt::Label( this->tr( this->char->class->wisdom ) ), 3, 6 );
-    $table->addWidget( Qt::Label( this->tr( this->char->class->dexterity ) ), 4, 6 );
-    $table->addWidget( Qt::Label( this->tr( this->char->class->constitution ) ), 5, 6 );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->class->strength ) ) ),     1, 6, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->class->intelligence ) ) ), 2, 6, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->class->wisdom ) ) ),       3, 6, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->class->dexterity ) ) ),    4, 6, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->class->constitution ) ) ), 5, 6, Qt::AlignRight() );
 
     # spacer
     $table->setColumnMinimumWidth( 7, 10 );
@@ -296,5 +295,8 @@ sub charTxtInfo { return this->{charTxtInfo} }
 sub setCharTxtInfo { this->{charTxtInfo} = shift }
 
 sub char { return this->{character} }
+
+# shortcuts
+sub addSign { return this->parent->addSign( shift ) }
 
 1;

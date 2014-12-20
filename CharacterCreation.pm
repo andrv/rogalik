@@ -20,8 +20,9 @@ use Rogalik::DB;
 
 # constructor
 sub NEW {
-    my ( $class ) = @_;
-    $class->SUPER::NEW();
+    my ( $class, $parent ) = @_;
+
+    $class->SUPER::NEW( $parent );
 
     this->{sexComboBox}   = this->createCombo( 'sex', qw/ Female Male Neuter / );
     this->{raceComboBox}  = this->createCombo( 'race' );
@@ -369,12 +370,12 @@ sub changeStats {
     $ret{Infravision} = ($dbdata{infravision} * 10) ." ft";
 
     # search
-    $dbdata{search_ability} = this->addSign( $dbdata{search_ability} );
+    $dbdata{search_ability} = this->parent->addSign( $dbdata{search_ability} );
     $ret{Search} = "$dbdata{search_ability}/$dbdata{search_freq}";
 
     while( my( $key, $value ) = each %ret ) {
         unless( grep( m/^$key$/, qw / HitDie XPmod Infravision Search / ) ) {
-            $ret{$key} = this->addSign( $value );
+            $ret{$key} = this->parent->addSign( $value );
         }
     }
 
@@ -390,12 +391,6 @@ sub changeStats {
     foreach my $stat( qw( HitDie XPmod Disarm Devices Save Stealth Infravision Digging Search ) ) {
         this->{$stat}->setText( this->tr( $ret{$stat} ) );
     }
-}
-
-sub addSign {
-    my $number = shift;
-    return sprintf '%+d', $number if $number >= 0;
-    return sprintf '%-d', $number if $number <  0;
 }
 
 sub showFlags {

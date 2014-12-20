@@ -82,7 +82,7 @@ sub nextStep {
         my $choosen = this->centralWidget()->{charactersComboBox}->currentText();
 
         if( $choosen eq 'Add new one' ) {
-            this->setCentralWidget( CharacterCreation() );
+            this->setCentralWidget( CharacterCreation( this ) );
             this->sex()->setFocus();
         }
         else {
@@ -108,6 +108,13 @@ sub nextStep {
     }
 }
 
+# methods
+
+sub addSign {
+    my $number = shift;
+    return sprintf '%+d', $number if $number >= 0;
+    return sprintf '%-d', $number if $number <  0;
+}
 
 # getters
 sub sex { return this->centralWidget()->{sexComboBox} }
