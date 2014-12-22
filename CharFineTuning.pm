@@ -166,12 +166,12 @@ sub qualities {
 
     # spacer
     $table->setColumnMinimumWidth( 7, 10 );
-    $table->addWidget( Qt::Label( this->tr( 'EB' ) ),          0, 8 );
-    $table->addWidget( Qt::Label( this->tr( '+0' ) ),    1, 8 );
-    $table->addWidget( Qt::Label( this->tr( '+0' ) ),    2, 8 );
-    $table->addWidget( Qt::Label( this->tr( '+0' ) ),    3, 8 );
-    $table->addWidget( Qt::Label( this->tr( '+0' ) ),    4, 8 );
-    $table->addWidget( Qt::Label( this->tr( '+0' ) ),    5, 8 );
+    $table->addWidget( Qt::Label( this->tr( 'EB' ) ), 0, 8, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( '+0' ) ), 1, 8, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( '+0' ) ), 2, 8, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( '+0' ) ), 3, 8, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( '+0' ) ), 4, 8, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( '+0' ) ), 5, 8, Qt::AlignRight() );
 
     # spacer
     $table->setColumnMinimumWidth( 9, 10 );
