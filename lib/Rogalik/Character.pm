@@ -151,7 +151,7 @@ has lvl => (
     lazy    => 1,
     builder => '_level',
     trigger => \&_db_sync,
-    documentation => q(Player's level),
+    documentation => q[Player's level],
 );
 
 sub _level {
@@ -186,7 +186,6 @@ has chp => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_chp',
-#    trigger => \&_db_sync,
     documentation => q[Current hit points],
 );
 
@@ -214,7 +213,6 @@ has cmp => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_cmp',
-#    trigger => \&_db_sync,
     documentation => q[Current mana points],
 );
 
@@ -281,7 +279,6 @@ has turn => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_turn',
-    trigger => \&_db_sync,
 );
 
 sub _turn {
@@ -294,7 +291,6 @@ has played_turns => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_played_turns',
-    trigger => \&_db_sync,
 );
 
 sub _played_turns {
@@ -307,7 +303,6 @@ has rested_turns => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_rested_turns',
-    trigger => \&_db_sync,
 );
 
 sub _rested_turns {
