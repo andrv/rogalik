@@ -148,7 +148,7 @@ sub qualities {
 
     # spacer
     $table->setColumnMinimumWidth( 3, 10 );
-    $table->addWidget( Qt::Label( this->tr( 'RB' ) ),          0, 4 );
+    $table->addWidget( Qt::Label( this->tr( 'Race Bonus' ) ), 0, 4 );
     $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->race->strength ) ) ),     1, 4, Qt::AlignRight() );
     $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->race->intelligence ) ) ), 2, 4, Qt::AlignRight() );
     $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->race->wisdom ) ) ),       3, 4, Qt::AlignRight() );
@@ -157,7 +157,7 @@ sub qualities {
 
     # spacer
     $table->setColumnMinimumWidth( 5, 10 );
-    $table->addWidget( Qt::Label( this->tr( 'CB' ) ),          0, 6 );
+    $table->addWidget( Qt::Label( this->tr( 'Class Bonus' ) ), 0, 6 );
     $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->class->strength ) ) ),     1, 6, Qt::AlignRight() );
     $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->class->intelligence ) ) ), 2, 6, Qt::AlignRight() );
     $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->class->wisdom ) ) ),       3, 6, Qt::AlignRight() );
@@ -166,7 +166,7 @@ sub qualities {
 
     # spacer
     $table->setColumnMinimumWidth( 7, 10 );
-    $table->addWidget( Qt::Label( this->tr( 'EB' ) ), 0, 8, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( 'Bottle Bonus' ) ), 0, 8, Qt::AlignRight() );
     $table->addWidget( Qt::Label( this->tr( '+0' ) ), 1, 8, Qt::AlignRight() );
     $table->addWidget( Qt::Label( this->tr( '+0' ) ), 2, 8, Qt::AlignRight() );
     $table->addWidget( Qt::Label( this->tr( '+0' ) ), 3, 8, Qt::AlignRight() );
