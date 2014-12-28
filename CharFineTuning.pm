@@ -131,11 +131,11 @@ sub basicsTwo {
 sub qualities {
     my $table = Qt::GridLayout();
 
-    $table->addWidget( Qt::Label( this->tr( 'STR:' ) ),        1, 0 );
-    $table->addWidget( Qt::Label( this->tr( 'INT:' ) ),        2, 0 );
-    $table->addWidget( Qt::Label( this->tr( 'WIS:' ) ),        3, 0 );
-    $table->addWidget( Qt::Label( this->tr( 'DEX:' ) ),        4, 0 );
-    $table->addWidget( Qt::Label( this->tr( 'CON:' ) ),        5, 0 );
+    $table->addWidget( Qt::Label( this->tr( 'Strength:' ) ),     1, 0 );
+    $table->addWidget( Qt::Label( this->tr( 'Intelligence:' ) ), 2, 0 );
+    $table->addWidget( Qt::Label( this->tr( 'Wisdom:' ) ),       3, 0 );
+    $table->addWidget( Qt::Label( this->tr( 'Dexterity:' ) ),    4, 0 );
+    $table->addWidget( Qt::Label( this->tr( 'Constitution:' ) ), 5, 0 );
 
     # spacer
     $table->setColumnMinimumWidth( 1, 10 );
