@@ -8,6 +8,7 @@ Dependencies
 
 - perl, at least v5.10
 - DBD::SQLite
+- Moose
 - qt
 - perlqt
 
