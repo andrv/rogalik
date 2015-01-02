@@ -211,6 +211,11 @@ CREATE TABLE IF NOT EXISTS theCharacter (
    turn    INTEGER,
    played_turns INTEGER,
    rested_turns INTEGER,
+   strength     INTEGER,
+   intelligence INTEGER,
+   wisdom       INTEGER,
+   dexterity    INTEGER,
+   constitution INTEGER,
    updated DATETIME NOT NULL,
    dead    DATETIME,
    --
