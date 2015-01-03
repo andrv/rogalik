@@ -166,7 +166,9 @@ sub qualities {
 
     # spacer
     $table->setColumnMinimumWidth( 7, 10 );
-    $table->addWidget( Qt::Label( this->tr( 'Potion Bonus' ) ), 0, 8, Qt::AlignRight() );
+    my $equiBonusLbl = Qt::Label( this->tr( 'Equi Bonus' ) );
+    $equiBonusLbl->setToolTip( this->tr( 'Equipment bonus, potions etc...' ) );
+    $table->addWidget( $equiBonusLbl,                 0, 8, Qt::AlignRight() );
     $table->addWidget( Qt::Label( this->tr( '+0' ) ), 1, 8, Qt::AlignRight() );
     $table->addWidget( Qt::Label( this->tr( '+0' ) ), 2, 8, Qt::AlignRight() );
     $table->addWidget( Qt::Label( this->tr( '+0' ) ), 3, 8, Qt::AlignRight() );
