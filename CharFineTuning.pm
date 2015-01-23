@@ -140,11 +140,11 @@ sub qualities {
     # spacer
     $table->setColumnMinimumWidth( 1, 10 );
     $table->addWidget( Qt::Label( this->tr( 'Self' ) ),        0, 2 );
-    $table->addWidget( Qt::Label( this->tr( '17 (tbd)' ) ),    1, 2 );
-    $table->addWidget( Qt::Label( this->tr( '10 (tbd)' ) ),    2, 2 );
-    $table->addWidget( Qt::Label( this->tr( '10 (tbd)' ) ),    3, 2 );
-    $table->addWidget( Qt::Label( this->tr( '18 (tbd)' ) ),    4, 2 );
-    $table->addWidget( Qt::Label( this->tr( '10 (tbd)' ) ),    5, 2 );
+    $table->addWidget( Qt::Label( this->tr( this->char->s_str ) ), 1, 2 );
+    $table->addWidget( Qt::Label( this->tr( this->char->s_int ) ), 2, 2 );
+    $table->addWidget( Qt::Label( this->tr( this->char->s_wis ) ), 3, 2 );
+    $table->addWidget( Qt::Label( this->tr( this->char->s_dex ) ), 4, 2 );
+    $table->addWidget( Qt::Label( this->tr( this->char->s_con ) ), 5, 2 );
 
     # spacer
     $table->setColumnMinimumWidth( 3, 10 );
@@ -168,21 +168,21 @@ sub qualities {
     $table->setColumnMinimumWidth( 7, 10 );
     my $equiBonusLbl = Qt::Label( this->tr( 'Equi Bonus' ) );
     $equiBonusLbl->setToolTip( this->tr( 'Equipment bonus, potions etc...' ) );
-    $table->addWidget( $equiBonusLbl,                 0, 8, Qt::AlignRight() );
-    $table->addWidget( Qt::Label( this->tr( '+0' ) ), 1, 8, Qt::AlignRight() );
-    $table->addWidget( Qt::Label( this->tr( '+0' ) ), 2, 8, Qt::AlignRight() );
-    $table->addWidget( Qt::Label( this->tr( '+0' ) ), 3, 8, Qt::AlignRight() );
-    $table->addWidget( Qt::Label( this->tr( '+0' ) ), 4, 8, Qt::AlignRight() );
-    $table->addWidget( Qt::Label( this->tr( '+0' ) ), 5, 8, Qt::AlignRight() );
+    $table->addWidget( $equiBonusLbl, 0, 8, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->e_str ) ) ), 1, 8, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->e_int ) ) ), 2, 8, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->e_wis ) ) ), 3, 8, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->e_dex ) ) ), 4, 8, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->addSign( this->char->e_con ) ) ), 5, 8, Qt::AlignRight() );
 
     # spacer
     $table->setColumnMinimumWidth( 9, 10 );
     $table->addWidget( Qt::Label( this->tr( 'Best' ) ),        0, 10 );
-    $table->addWidget( Qt::Label( this->tr( '18/20 (tbd)' ) ), 1, 10 );
-    $table->addWidget( Qt::Label( this->tr( '8 (tbd)' ) ),     2, 10 );
-    $table->addWidget( Qt::Label( this->tr( '8 (tbd)' ) ),     3, 10 );
-    $table->addWidget( Qt::Label( this->tr( '18/20 (tbd)' ) ), 4, 10 );
-    $table->addWidget( Qt::Label( this->tr( '12 (tbd)' ) ),    5, 10 );
+    $table->addWidget( Qt::Label( this->tr( this->char->strength ) ), 1, 10 );
+    $table->addWidget( Qt::Label( this->tr( this->char->intelligence ) ),2, 10 );
+    $table->addWidget( Qt::Label( this->tr( this->char->wisdom ) ), 3, 10 );
+    $table->addWidget( Qt::Label( this->tr( this->char->dexterity ) ), 4, 10 );
+    $table->addWidget( Qt::Label( this->tr( this->char->constitution ) ), 5, 10 );
 
     # spacer
     $table->setColumnMinimumWidth( 11, 10 );

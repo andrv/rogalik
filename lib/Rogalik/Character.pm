@@ -80,6 +80,18 @@ sub _birth {
         Rogalik::DB->set( 'theCharacter', 'turn', 1, $self->id );
         Rogalik::DB->set( 'theCharacter', 'played_turns', 0, $self->id );
         Rogalik::DB->set( 'theCharacter', 'rested_turns', 0, $self->id );
+
+        # strength, intelligence etc
+        Rogalik::DB->set( 'theCharacter', 's_str', 10, $self->id );
+        Rogalik::DB->set( 'theCharacter', 's_int', 10, $self->id );
+        Rogalik::DB->set( 'theCharacter', 's_wis', 10, $self->id );
+        Rogalik::DB->set( 'theCharacter', 's_dex', 10, $self->id );
+        Rogalik::DB->set( 'theCharacter', 's_con', 10, $self->id );
+        Rogalik::DB->set( 'theCharacter', 'e_str', 0, $self->id );
+        Rogalik::DB->set( 'theCharacter', 'e_int', 0, $self->id );
+        Rogalik::DB->set( 'theCharacter', 'e_wis', 0, $self->id );
+        Rogalik::DB->set( 'theCharacter', 'e_dex', 0, $self->id );
+        Rogalik::DB->set( 'theCharacter', 'e_con', 0, $self->id );
     }
 }
 
@@ -308,6 +320,151 @@ has rested_turns => (
 sub _rested_turns {
     my $self = shift;
     return Rogalik::DB->get( 'theCharacter', 'rested_turns', $self->id );
+}
+
+has s_str => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_s_str',
+);
+
+sub _s_str {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 's_str', $self->id );
+}
+
+has s_int => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_s_int',
+);
+
+sub _s_int {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 's_int', $self->id );
+}
+
+has s_wis => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_s_wis',
+);
+
+sub _s_wis {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 's_wis', $self->id );
+}
+
+has s_dex => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_s_dex',
+);
+
+sub _s_dex {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 's_dex', $self->id );
+}
+
+has s_con => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_s_con',
+);
+
+sub _s_con {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 's_con', $self->id );
+}
+
+has e_str => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_e_str',
+);
+
+sub _e_str {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'e_str', $self->id );
+}
+
+has e_int => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_e_int',
+);
+
+sub _e_int {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'e_int', $self->id );
+}
+
+has e_wis => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_e_wis',
+);
+
+sub _e_wis {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'e_wis', $self->id );
+}
+
+has e_dex => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_e_dex',
+);
+
+sub _e_dex {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'e_dex', $self->id );
+}
+
+has e_con => (
+    is      => 'rw',
+    isa     => 'Int',
+    lazy    => 1,
+    builder => '_e_con',
+);
+
+sub _e_con {
+    my $self = shift;
+    return Rogalik::DB->get( 'theCharacter', 'e_con', $self->id );
+}
+
+sub strength {
+    my $self = shift;
+    return $self->s_str + $self->race->strength + $self->class->strength + $self->e_str;
+}
+
+sub intelligence {
+    my $self = shift;
+    return $self->s_int + $self->race->intelligence + $self->class->intelligence + $self->e_int;
+}
+
+sub wisdom {
+    my $self = shift;
+    return $self->s_wis + $self->race->wisdom + $self->class->wisdom + $self->e_wis;
+}
+
+sub dexterity {
+    my $self = shift;
+    return $self->s_dex + $self->race->dexterity + $self->class->dexterity + $self->e_dex;
+}
+
+sub constitution {
+    my $self = shift;
+    return $self->s_con + $self->race->constitution + $self->class->constitution + $self->e_con;
 }
 
 sub _db_sync {
