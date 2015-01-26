@@ -187,7 +187,7 @@ sub qualities {
     # spacer
     $table->setColumnMinimumWidth( 11, 10 );
     $table->addWidget( Qt::Label( this->tr( 'Cost' ) ),        0, 12 );
-    $table->addWidget( Qt::Label( this->tr( '8 (tbd)' ) ),     1, 12 );
+    $table->addLayout( this->slider( 8 ),     1, 12 );
     $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),     2, 12 );
     $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),     3, 12 );
     $table->addWidget( Qt::Label( this->tr( '12 (tbd)' ) ),    4, 12 );
@@ -281,6 +281,26 @@ sub detailedThree {
     my $groupBox = Qt::GroupBox();
     $groupBox->setLayout( $table );
     return $groupBox;
+}
+
+sub slider {
+    my( $value ) = @_;
+
+    my $txt = Qt::Label( this->tr( $value || 0 ) );
+
+    my $slider = Qt::Slider( Qt::Horizontal() );
+    $slider->setRange( 0, 20 );
+    $slider->setValue( $value || 0 );
+
+    this->connect( $slider, SIGNAL "valueChanged(int)", $txt, SLOT "setNum(int)" );
+#    this->connect($slider, SIGNAL "valueChanged(int)", this, SIGNAL "valueChanged(int)");
+
+    my $paar = Qt::GridLayout();
+    $paar->addWidget( $txt, 0, 0 );
+    $paar->setColumnMinimumWidth( 0, 13 );
+    $paar->addWidget( $slider, 0, 1 );
+
+    return $paar;
 }
 
 # getters & setters
