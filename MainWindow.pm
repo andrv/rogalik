@@ -15,7 +15,7 @@ use CharFineTuning;
 use ChooseCharacter;
 
 use QtCore4::slots
-    nextStep     => [];
+    nextStep => [];
 
 use lib 'lib';
 use Rogalik::DB;
