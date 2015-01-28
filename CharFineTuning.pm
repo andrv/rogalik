@@ -10,6 +10,9 @@ use QtCore4;
 use QtGui4;
 use QtCore4::isa qw( Qt::Widget );
 
+use QtCore4::slots
+    sliderValue => [ 'int' ];
+
 use lib 'lib';
 use Rogalik::DB;
 use Rogalik::Character;
@@ -76,6 +79,43 @@ sub NEW {
 
     # spacer at right edge
     $layout->setColumnMinimumWidth( 6, 20 );
+}
+
+# slots
+sub sliderValue {
+    my $action = shift;
+#    say "Action: $action";
+
+    my @problematicActions = ( 1, 3, 6, 7 );
+
+    my $sliders = this->findChildren( 'Qt::Slider' );
+    my( $statValue, $sliderChanged, $sum, $newValue, $oldValue );
+
+    foreach my $slider( @$sliders ) {
+        my $sliderName = $slider->objectName;
+        my( $statName ) = $sliderName =~ m/slider(\w+)/;
+#        say "Slider '$sliderName', old value: ". $slider->value. ', new value: "'. $slider->sliderPosition. '"';
+        $sum += $slider->sliderPosition;
+
+        if( $slider->hasFocus ) {
+            $statValue = this->findChildren( 'Qt::Label', "slValue$statName" )->[0];
+            $sliderChanged = $slider;
+            $oldValue      = $slider->value;
+            $newValue      = $slider->sliderPosition;
+        }
+    }
+
+    if( grep {/$action/} @problematicActions ) {
+        say 'Problematic action '. $action. ', sum: '. $sum;
+        # check the sum
+        if( $sum > 20 ) {
+            $sliderChanged->setValue( $oldValue );
+            return;
+        }
+    }
+
+    $sliderChanged->setValue( $newValue );
+    $statValue->setNum( $newValue );
 }
 
 sub basicsOne {
@@ -186,12 +226,12 @@ sub qualities {
 
     # spacer
     $table->setColumnMinimumWidth( 11, 10 );
-    $table->addWidget( Qt::Label( this->tr( 'Cost' ) ),        0, 12 );
-    $table->addLayout( this->slider( 8 ),     1, 12 );
-    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),     2, 12 );
-    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),     3, 12 );
-    $table->addWidget( Qt::Label( this->tr( '12 (tbd)' ) ),    4, 12 );
-    $table->addWidget( Qt::Label( this->tr( '0 (tbd)' ) ),     5, 12 );
+    $table->addWidget( Qt::Label( this->tr( 'Cost' ) ), 0, 12 );
+    $table->addLayout( this->slider( 'Strength', 8 ), 1, 12 );
+    $table->addLayout( this->slider( 'Intelligence', 0 ), 2, 12 );
+    $table->addLayout( this->slider( 'Wisdom', 0 ), 3, 12 );
+    $table->addLayout( this->slider( 'Dexterity', 12 ), 4, 12 );
+    $table->addLayout( this->slider( 'Constitution', 0 ), 5, 12 );
 
     $table->addWidget( Qt::Label( this->tr( 'Total Cost:' ) ), 6, 6, 1, 5, Qt::AlignRight() );
     $table->addWidget( Qt::Label( this->tr( '20/20 (tbd)' ) ), 6, 12 );
@@ -284,16 +324,18 @@ sub detailedThree {
 }
 
 sub slider {
-    my( $value ) = @_;
+    my( $name, $value ) = @_;
 
     my $txt = Qt::Label( this->tr( $value || 0 ) );
+    $txt->setObjectName( "slValue$name" );
 
     my $slider = Qt::Slider( Qt::Horizontal() );
+    $slider->setObjectName( "slider$name" );
     $slider->setRange( 0, 20 );
     $slider->setValue( $value || 0 );
 
-    this->connect( $slider, SIGNAL "valueChanged(int)", $txt, SLOT "setNum(int)" );
-#    this->connect($slider, SIGNAL "valueChanged(int)", this, SIGNAL "valueChanged(int)");
+    this->connect( $slider, SIGNAL "actionTriggered(int)", this, SLOT "sliderValue(int)");
+#    this->connect( $slider, SIGNAL "valueChanged(int)", $txt, SLOT "setNum(int)" );
 
     my $paar = Qt::GridLayout();
     $paar->addWidget( $txt, 0, 0 );
