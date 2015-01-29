@@ -327,6 +327,7 @@ has s_str => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_s_str',
+    documentation => q[Value of own strength],
 );
 
 sub _s_str {
@@ -339,6 +340,7 @@ has s_int => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_s_int',
+    documentation => q[Value of own intelligence],
 );
 
 sub _s_int {
@@ -351,6 +353,7 @@ has s_wis => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_s_wis',
+    documentation => q[Value of own wisdom],
 );
 
 sub _s_wis {
@@ -363,6 +366,7 @@ has s_dex => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_s_dex',
+    documentation => q[Value of own dexterity],
 );
 
 sub _s_dex {
@@ -375,6 +379,7 @@ has s_con => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_s_con',
+    documentation => q[Value of own constitution],
 );
 
 sub _s_con {
@@ -387,6 +392,7 @@ has e_str => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_e_str',
+    documentation => q[Value of equipment bonus for strength],
 );
 
 sub _e_str {
@@ -399,6 +405,7 @@ has e_int => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_e_int',
+    documentation => q[Value of equipment bonus for intelligence],
 );
 
 sub _e_int {
@@ -411,6 +418,7 @@ has e_wis => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_e_wis',
+    documentation => q[Value of equipment bonus for wisdom],
 );
 
 sub _e_wis {
@@ -423,6 +431,7 @@ has e_dex => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_e_dex',
+    documentation => q[Value of equipment bonus for dexterity],
 );
 
 sub _e_dex {
@@ -435,6 +444,7 @@ has e_con => (
     isa     => 'Int',
     lazy    => 1,
     builder => '_e_con',
+    documentation => q[Value of equipment bonus for constitution],
 );
 
 sub _e_con {
