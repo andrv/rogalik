@@ -89,13 +89,12 @@ sub sliderValue {
     my @problematicActions = ( 1, 3, 6, 7 );
 
     my $sliders = this->findChildren( 'Qt::Slider' );
-    my( $statValue, $sliderChanged, $sum, $newValue, $oldValue );
+    my( $statValue, $sliderChanged, $newValue, $oldValue );
 
     foreach my $slider( @$sliders ) {
         my $sliderName = $slider->objectName;
         my( $statName ) = $sliderName =~ m/slider(\w+)/;
 #        say "Slider '$sliderName', old value: ". $slider->value. ', new value: "'. $slider->sliderPosition. '"';
-        $sum += $slider->sliderPosition;
 
         if( $slider->hasFocus ) {
             $statValue = this->findChildren( 'Qt::Label', "slValue$statName" )->[0];
@@ -105,8 +104,10 @@ sub sliderValue {
         }
     }
 
+    my $sum = this->sliderSum;
+
     if( grep {/$action/} @problematicActions ) {
-        say 'Problematic action '. $action. ', sum: '. $sum;
+#        say 'Problematic action '. $action. ', sum: '. $sum;
         # check the sum
         if( $sum > 20 ) {
             $sliderChanged->setValue( $oldValue );
@@ -116,8 +117,11 @@ sub sliderValue {
 
     $sliderChanged->setValue( $newValue );
     $statValue->setNum( $newValue );
+    my $totalCost = this->findChildren( 'Qt::Label', 'totalCost' )->[0];
+    $totalCost->setText( this->tr( "$sum/20" ) );
 }
 
+# not slots
 sub basicsOne {
     my $table = Qt::GridLayout();
 
@@ -226,6 +230,7 @@ sub qualities {
 
     # spacer
     $table->setColumnMinimumWidth( 11, 10 );
+    $table->setColumnMinimumWidth( 12, 80 );
     $table->addWidget( Qt::Label( this->tr( 'Cost' ) ), 0, 12 );
     $table->addLayout( this->slider( 'Strength', 8 ), 1, 12 );
     $table->addLayout( this->slider( 'Intelligence', 0 ), 2, 12 );
@@ -234,7 +239,9 @@ sub qualities {
     $table->addLayout( this->slider( 'Constitution', 0 ), 5, 12 );
 
     $table->addWidget( Qt::Label( this->tr( 'Total Cost:' ) ), 6, 6, 1, 5, Qt::AlignRight() );
-    $table->addWidget( Qt::Label( this->tr( '20/20 (tbd)' ) ), 6, 12 );
+    my $totalCost = Qt::Label( this->tr( '20/20' ) );
+    $totalCost->setObjectName( 'totalCost' );
+    $table->addWidget( $totalCost, 6, 12 );
 
     my $groupBox = Qt::GroupBox();
     $groupBox->setLayout( $table );
@@ -343,6 +350,17 @@ sub slider {
     $paar->addWidget( $slider, 0, 1 );
 
     return $paar;
+}
+
+sub sliderSum {
+    my $sliders = this->findChildren( 'Qt::Slider' );
+    my $sum = 0;
+
+    foreach my $slider( @$sliders ) {
+        $sum += $slider->sliderPosition;
+    }
+
+    return $sum;
 }
 
 # getters & setters
