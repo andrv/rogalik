@@ -1,4 +1,4 @@
-package CharFineTuning;
+package CharacterStats;
 
 use strict;
 use warnings;
