@@ -183,12 +183,12 @@ sub qualities {
 
     # spacer
     $table->setColumnMinimumWidth( 1, 10 );
-    $table->addWidget( Qt::Label( this->tr( 'Self' ) ),        0, 2 );
-    $table->addWidget( Qt::Label( this->tr( this->char->s_str ) ), 1, 2 );
-    $table->addWidget( Qt::Label( this->tr( this->char->s_int ) ), 2, 2 );
-    $table->addWidget( Qt::Label( this->tr( this->char->s_wis ) ), 3, 2 );
-    $table->addWidget( Qt::Label( this->tr( this->char->s_dex ) ), 4, 2 );
-    $table->addWidget( Qt::Label( this->tr( this->char->s_con ) ), 5, 2 );
+    $table->addWidget( Qt::Label( this->tr( 'Self' ) ), 0, 2, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->char->s_str ) ), 1, 2, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->char->s_int ) ), 2, 2, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->char->s_wis ) ), 3, 2, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->char->s_dex ) ), 4, 2, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->char->s_con ) ), 5, 2, Qt::AlignRight() );
 
     # spacer
     $table->setColumnMinimumWidth( 3, 10 );
@@ -221,17 +221,19 @@ sub qualities {
 
     # spacer
     $table->setColumnMinimumWidth( 9, 10 );
-    $table->addWidget( Qt::Label( this->tr( 'Best' ) ),        0, 10 );
-    $table->addWidget( Qt::Label( this->tr( this->char->strength ) ), 1, 10 );
-    $table->addWidget( Qt::Label( this->tr( this->char->intelligence ) ),2, 10 );
-    $table->addWidget( Qt::Label( this->tr( this->char->wisdom ) ), 3, 10 );
-    $table->addWidget( Qt::Label( this->tr( this->char->dexterity ) ), 4, 10 );
-    $table->addWidget( Qt::Label( this->tr( this->char->constitution ) ), 5, 10 );
+    $table->addWidget( Qt::Label( this->tr( 'Best' ) ), 0, 10, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->char->strength ) ), 1, 10, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->char->intelligence ) ),2, 10, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->char->wisdom ) ), 3, 10, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->char->dexterity ) ), 4, 10, Qt::AlignRight() );
+    $table->addWidget( Qt::Label( this->tr( this->char->constitution ) ), 5, 10, Qt::AlignRight() );
 
     # spacer
     $table->setColumnMinimumWidth( 11, 10 );
+    # acceptable slider width
     $table->setColumnMinimumWidth( 12, 80 );
-    $table->addWidget( Qt::Label( this->tr( 'Cost' ) ), 0, 12 );
+
+    $table->addWidget( Qt::Label( this->tr( 'Cost' ) ), 0, 12, Qt::AlignRight() );
     $table->addLayout( this->slider( 'Strength', 8 ), 1, 12 );
     $table->addLayout( this->slider( 'Intelligence', 0 ), 2, 12 );
     $table->addLayout( this->slider( 'Wisdom', 0 ), 3, 12 );
@@ -345,7 +347,7 @@ sub slider {
 #    this->connect( $slider, SIGNAL "valueChanged(int)", $txt, SLOT "setNum(int)" );
 
     my $paar = Qt::GridLayout();
-    $paar->addWidget( $txt, 0, 0 );
+    $paar->addWidget( $txt, 0, 0, Qt::AlignRight() );
     $paar->setColumnMinimumWidth( 0, 13 );
     $paar->addWidget( $slider, 0, 1 );
 
