@@ -306,11 +306,9 @@ INSERT INTO Title( name, idx, class ) VALUES( 'Paladin Lord', 10, ( SELECT id FR
 CREATE TABLE IF NOT EXISTS adjustAbilitiesSuggestion (
    -- Suggestion for point-based abilities adjustment
    id         INTEGER PRIMARY KEY ASC AUTOINCREMENT,
-   class      INTEGER NOT NULL,
+   class      TEXT NOT NULL,                         -- class name or 'default'
    name       TEXT NOT NULL,                         -- ability name
-   suggestion INTEGER NOT NULL,                      -- suggestion's value
-   --
-   FOREIGN KEY( class ) REFERENCES theClass( id )
+   suggestion INTEGER NOT NULL                       -- suggestion's value
 );
 
 .mode column
