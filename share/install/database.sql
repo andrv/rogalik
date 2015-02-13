@@ -303,4 +303,14 @@ INSERT INTO Title( name, idx, class ) VALUES( 'Chevalier', 8, ( SELECT id FROM t
 INSERT INTO Title( name, idx, class ) VALUES( 'Paladin', 9, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
 INSERT INTO Title( name, idx, class ) VALUES( 'Paladin Lord', 10, ( SELECT id FROM theClass WHERE name = 'Paladin' ) );
 
+CREATE TABLE IF NOT EXISTS adjustAbilitiesSuggestion (
+   -- Suggestion for point-based abilities adjustment
+   id         INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+   class      INTEGER NOT NULL,
+   name       TEXT NOT NULL,                         -- ability name
+   suggestion INTEGER NOT NULL,                      -- suggestion's value
+   --
+   FOREIGN KEY( class ) REFERENCES theClass( id )
+);
+
 .mode column
