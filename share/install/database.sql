@@ -311,4 +311,13 @@ CREATE TABLE IF NOT EXISTS adjustAbilitiesSuggestion (
    suggestion INTEGER NOT NULL                       -- suggestion's value
 );
 
+INSERT INTO adjustAbilitiesSuggestion( class, name, suggestion ) VALUES( 'default', 'strength', 8 );
+INSERT INTO adjustAbilitiesSuggestion( class, name, suggestion ) VALUES( 'default', 'dexterity', 12 );
+INSERT INTO adjustAbilitiesSuggestion( class, name, suggestion ) VALUES( 'Mage', 'strength', 8 );
+INSERT INTO adjustAbilitiesSuggestion( class, name, suggestion ) VALUES( 'Mage', 'intelligence', 6 );
+INSERT INTO adjustAbilitiesSuggestion( class, name, suggestion ) VALUES( 'Mage', 'dexterity', 6 );
+INSERT INTO adjustAbilitiesSuggestion( class, name, suggestion ) VALUES( 'Priest', 'strength', 8 );
+INSERT INTO adjustAbilitiesSuggestion( class, name, suggestion ) VALUES( 'Priest', 'wisdom', 6 );
+INSERT INTO adjustAbilitiesSuggestion( class, name, suggestion ) VALUES( 'Priest', 'dexterity', 6 );
+
 .mode column
